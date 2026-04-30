@@ -1,0 +1,20 @@
+id: epa-tri-ez-search
+version: '1.0'
+title: Toxics Release Inventory EZ Search
+provider:
+  name: U.S. Environmental Protection Agency (EPA)
+filters:
+  year: true
+  state: true
+  county: true
+  zipcode: true
+requires_account: false
+download:
+  description: After selecting topic, variables, and location filters the website
+    will provide a link to download the dataset.
+  file_size: varies by selection
+sensitive: false
+description_tags:
+- Energy & Environment
+- Government Administration
+- Population Data

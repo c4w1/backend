@@ -1,0 +1,25 @@
+id: epa-tri-basic-data
+version: '1.0'
+title: Toxic Release Inventory Basic Data Files
+provider:
+  name: U.S. Environmental Protection Agency (EPA)
+  url: https://www.epa.gov/toxics-release-inventory-tri-program/tri-basic-data-files-calendar-years-1987-present
+filters:
+  year: true
+  state: true
+  county: false
+  zipcode: false
+requires_account: false
+download:
+  description: After selecting year and geographic information, there is a button
+    to directly download the data file.
+  file_size: varies by selection
+sensitive: false
+description_tags:
+- Business & Finance
+- Children & Families
+- Energy & Environment
+- Government Administration
+- Health & Social Services
+- Law & Public Safety
+- Population Data

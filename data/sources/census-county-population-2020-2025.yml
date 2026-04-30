@@ -1,0 +1,39 @@
+id: census-county-population-2020-2025
+version: '1.0'
+title: County Population Totals and Components of Change 2020-2025
+provider:
+  name: U.S. Census Bureau
+  agency: U.S. Department of Commerce
+  url: https://www.census.gov/data/datasets/time-series/demo/popest/2020s-counties-total.html
+filters:
+  year: false
+  state: true
+  county: false
+  zipcode: false
+requires_account: false
+download:
+  description: Download will start once state is selected.
+  file_size: varies by selection
+variables:
+- County name
+- April 1 2020 census population
+- 2020 population estimate
+- 2021 population estimate
+- 2022 population estimate
+- 2023 population estimate
+- 2024 population estimate
+- 2025 population estimate
+sensitive: false
+description_tags:
+- Business & Finance
+- Children & Families
+- Economy
+- Election
+- Energy & Environment
+- Government Administration
+- Health & Social Services
+- Housing & Buildings
+- Labor & Workforce Development
+- Population Data
+- PreK-12 Education
+- Transportation

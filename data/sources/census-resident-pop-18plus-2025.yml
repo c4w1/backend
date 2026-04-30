@@ -1,0 +1,33 @@
+id: census-resident-pop-18plus-2025
+version: '1.0'
+title: Estimates of the Total Resident Population and Resident Population Age 18 Years
+  and Older for the United States, Regions, States, District of Columbia, and Puerto
+  Rico - July 1 2025
+provider:
+  name: U.S. Census Bureau
+  agency: U.S. Department of Commerce
+  url: https://www.census.gov/data/datasets/time-series/demo/popest/2020s-national-detail.html
+requires_account: false
+download:
+  url: https://www2.census.gov/programs-surveys/popest/tables/2020-2025/state/detail/SCPRC-EST2025-18+POP.xlsx
+  description: Link downloads an XLSX file.
+  file_size: 14.7 KB
+variables:
+- Geographic Area
+- Total Resident Population
+- Resident Population Age 18 Years and Older Number
+- Resident Population Age 18 Years and Older Percent
+sensitive: false
+description_tags:
+- Business & Finance
+- Children & Families
+- Economy
+- Election
+- Energy & Environment
+- Government Administration
+- Health & Social Services
+- Housing & Buildings
+- Labor & Workforce Development
+- Population Data
+- PreK-12 Education
+- Transportation

@@ -1,0 +1,13 @@
+In order to be successful, yml files need a website url and a download url
+
+1. use the tagdataset.py script with the website link to save description tags to the yml file
+usage:
+python tagdataset.py all (to add description tags to all of the yml files in sources)
+python tagdataset.py [filename] (to add description tags to a single yml file)
+
+2. Use the variable extraction script with the download link to save variables and variablereport to yml files
+variables: shown to the user on front page
+variablereport: not shown to user on frontend, used in backend for education analysis reasons
+usage:
+python variableextraction.py all (to add variable and variable reports to all of the yml files in sources)
+python variableextraction.py [filename] (to add variable and variable reports to a single yml file)

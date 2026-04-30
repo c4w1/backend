@@ -1,0 +1,32 @@
+id: fbi-state-agency-data
+version: '1.0'
+title: FBI State and Agency Crime Data
+provider:
+  name: Federal Bureau of Investigation (FBI)
+  agency: U.S. Department of Justice
+  url: https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+filters:
+  year: true
+  state: true
+  county: false
+  zipcode: false
+requires_account: false
+download:
+  description: Download links to multiple types of data available after selecting
+    filters. Each variable is available for download separately.
+  file_size: varies by selection
+variables:
+- Offender Age
+- Offender Sex
+- Offender Race
+- Offender Ethnicity
+- Location Type
+- Victims Relationship to Offender
+- Type of Weapon Involved
+- Offense Linked to Another Offense
+sensitive: true
+description_tags:
+- Energy & Environment
+- Government Administration
+- Law & Public Safety
+- Population Data

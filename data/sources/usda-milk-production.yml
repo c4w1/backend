@@ -1,0 +1,143 @@
+id: usda-milk-production
+version: '1.0'
+title: U.S. Milk Production and Related Data
+provider:
+  name: USDA Economic Research Service (ERS)
+  agency: U.S. Department of Agriculture
+  url: https://www.ers.usda.gov/data-products/dairy-data
+requires_account: false
+download:
+  url: https://www.ers.usda.gov/media/5503/us-milk-production-and-related-data-quarterly-and-annual.csv?v=38125
+  description: Link downloads a CSV file. Spreadsheet updates quarterly on website.
+  file_size: 56.7 KB
+sensitive: false
+description_tags:
+- Agriculture
+- Economy
+- Energy & Environment
+- Government Administration
+- Health & Social Services
+- Housing & Buildings
+- Population Data
+- Restaurant and Food Service
+variable_names:
+- Year
+- Period
+- Timeperiod_id
+- Timeperiod_name
+- Aggregation
+- Data_item
+- Value
+- Units
+variable_report:
+- name: Year
+  type: integer
+  total_rows: 700
+  non_empty_count: 700
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 28
+  sample_values:
+  - '1998'
+  - '1999'
+  - '2000'
+  - '2001'
+  - '2002'
+  min: 1998.0
+  max: 2025.0
+  mean: 2011.5
+- name: Period
+  type: string
+  total_rows: 700
+  non_empty_count: 700
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 5
+  sample_values:
+  - JAN-MAR
+  - APR-JUN
+  - JUL-SEP
+  - OCT-DEC
+  - ANNUAL
+- name: Timeperiod_id
+  type: integer
+  total_rows: 700
+  non_empty_count: 700
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 5
+  sample_values:
+  - '13'
+  - '14'
+  - '15'
+  - '16'
+  - '17'
+  min: 13.0
+  max: 17.0
+  mean: 15.0
+- name: Timeperiod_name
+  type: string
+  total_rows: 700
+  non_empty_count: 700
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 5
+  sample_values:
+  - Quarter 1
+  - Quarter 2
+  - Quarter 3
+  - Quarter 4
+  - Annual aggregation
+- name: Aggregation
+  type: string
+  total_rows: 700
+  non_empty_count: 700
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3
+  sample_values:
+  - Not applicable
+  - Quarterly average
+  - Quarterly sum
+- name: Data_item
+  type: string
+  total_rows: 700
+  non_empty_count: 700
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 5
+  sample_values:
+  - 16-percent protein feed value
+  - Milk cow
+  - Milk per cow
+  - Milk production
+  - Replacement cow price
+- name: Value
+  type: string
+  total_rows: 700
+  non_empty_count: 700
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 593
+  sample_values:
+  - '5.31'
+  - '9174'
+  - '4268'
+  - '39155'
+  - '1070'
+- name: Units
+  type: string
+  total_rows: 700
+  non_empty_count: 700
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 5
+  sample_values:
+  - Dollars per hundredweight
+  - 1,000 head
+  - Pounds
+  - Million pounds
+  - Dollars per head
+linear_regression: true
+value_scale_tags:
+- large-scale-values

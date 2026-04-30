@@ -1,0 +1,19 @@
+id: epa-tri-dioxin
+version: '1.0'
+title: 'TRI Dioxin and Dioxin-like Compounds and TEQ Data Files: 2008-Present'
+provider:
+  name: U.S. Environmental Protection Agency (EPA)
+filters:
+  year: true
+  state: false
+  county: false
+  zipcode: false
+requires_account: false
+download:
+  description: Download link will be provided after selecting year.
+  file_size: varies by selection
+sensitive: false
+description_tags:
+- Energy & Environment
+- Government Administration
+- Population Data

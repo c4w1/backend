@@ -1,0 +1,33 @@
+id: census-state-pop-change-2020-2025
+version: '1.0'
+title: National State Population Change 2020-2025
+provider:
+  name: U.S. Census Bureau
+  agency: U.S. Department of Commerce
+  url: https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/state/totals/
+requires_account: false
+download:
+  url: https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/state/totals/NST-EST2025-POPCHG2020-2025.csv
+  description: Link downloads a CSV file.
+  file_size: 16 KB
+variables:
+- SUMLEV
+- REGION
+- DIVISION
+- STATE
+- NAME
+- ESTIMATESBASE2020
+- POPESTIMATE2020 through POPESTIMATE2025
+- NPOPCHG_2020 through NPOPCHG_2025
+- PPOPCHG_2020 through PPOPCHG_2025
+- NRANK_ESTBASE2020
+- NRANK_POPEST2020 through NRANK_POPEST2025
+- NRANK_NPCHG2020 through NRANK_NPCHG2025
+- NRANK_PPCHG2020 through NRANK_PPCHG2025
+sensitive: false
+description_tags:
+- Economy
+- Energy & Environment
+- Government Administration
+- Housing & Buildings
+- Population Data

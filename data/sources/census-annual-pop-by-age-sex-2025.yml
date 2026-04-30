@@ -1,0 +1,39 @@
+id: census-annual-pop-by-age-sex-2025
+version: '1.0'
+title: 'Annual Estimates of the Resident Population by Single Year of Age and Sex
+  for the United States: April 1 2020 to July 1 2025'
+provider:
+  name: U.S. Census Bureau
+  agency: U.S. Department of Commerce
+  url: https://www.census.gov/data/datasets/time-series/demo/popest/2020s-national-detail.html
+requires_account: false
+download:
+  url: https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/national/asrh/nc-est2025-agesex-res.csv
+  description: Link downloads a CSV file.
+  file_size: 17.9 KB
+variables:
+- SEX
+- AGE
+- ESTIMATESBASE2020
+- POPESTIMATE2020
+- POPESTIMATE2021
+- POPESTIMATE2022
+- POPESTIMATE2023
+- POPESTIMATE2024
+- POPESTIMATE2025
+notes: 'SEX codes: 0 = Total, 1 = Male, 2 = Female. AGE 999 = total population across
+  all ages.'
+sensitive: false
+description_tags:
+- Business & Finance
+- Children & Families
+- Economy
+- Election
+- Energy & Environment
+- Government Administration
+- Health & Social Services
+- Housing & Buildings
+- Labor & Workforce Development
+- Population Data
+- PreK-12 Education
+- Transportation

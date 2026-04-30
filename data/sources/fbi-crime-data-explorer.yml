@@ -1,0 +1,31 @@
+id: fbi-crime-data-explorer
+version: '1.0'
+title: National FBI Crime Data Explorer
+provider:
+  name: Federal Bureau of Investigation (FBI)
+  agency: U.S. Department of Justice
+  url: https://cde.ucr.cjis.gov
+filters:
+  year: true
+  state: true
+  county: false
+  zipcode: false
+requires_account: false
+download:
+  description: Download links to multiple types of data available after selecting
+    filters. Each variable is available for download separately.
+  file_size: varies by selection
+variables:
+- Offender Age
+- Offender Sex
+- Offender Race
+- Offender Ethnicity
+- Location Type
+- Victims Relationship to Offender
+- Type of Weapon Involved
+- Offense Linked to Another Offense
+sensitive: true
+description_tags:
+- Energy & Environment
+- Government Administration
+- Law & Public Safety

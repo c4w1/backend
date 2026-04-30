@@ -1,0 +1,17 @@
+id: ebird-observation-dataset
+version: '1.0'
+title: eBird Observation Dataset
+provider:
+  name: Cornell Lab of Ornithology
+  url: https://ebird.org/data/download/ebd
+filters:
+  year: true
+  state: true
+  county: true
+  zipcode: false
+requires_account: true
+download:
+  description: Download link will be provided after selecting year and region.
+sensitive: false
+description_tags:
+- Population Data

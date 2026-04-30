@@ -1,0 +1,29 @@
+id: ebird-state-summaries
+version: '1.0'
+title: State-Level eBird Data Summaries
+provider:
+  name: Cornell Lab of Ornithology
+  url: https://www.birds.cornell.edu/home/us-state-level-conservation-data-summaries/
+filters:
+  year: false
+  state: true
+  county: false
+  zipcode: false
+requires_account: false
+download:
+  description: Download link for species-level summaries is available underneath the
+    state selection.
+  file_size: varies by selection
+variables:
+- Scientific name
+- Trend period
+- Season code
+- State trend median
+- State trend
+- State trend lower CI
+- State trend upper CI
+- Breeding habitat primary
+- Breeding habitat secondary
+sensitive: false
+description_tags:
+- Government Administration

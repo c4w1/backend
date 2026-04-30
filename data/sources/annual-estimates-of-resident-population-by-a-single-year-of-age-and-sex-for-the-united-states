@@ -1,0 +1,18 @@
+id: annual-estimates-of-resident-population-by-a-single-year-of-age-and-sex-for-the-united-states
+version: '1.0'
+title: Annual Estimates of Resident Population by a Single Year of Age and Sex for the United States
+
+
+provider:
+  name: U.S. Department of Agriculture (USDA)
+  agency: U.S. Department of Agriculture
+  url: https://www.nass.usda.gov/AgCensus
+  downloadurl: https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/national/asrh/nc-est2025-agesex-res.csv
+description_tags:
+- agriculture
+- census
+- demographics
+- economic
+- environment
+- geospatial
+- public-data

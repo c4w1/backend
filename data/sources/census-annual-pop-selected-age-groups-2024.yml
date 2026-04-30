@@ -1,0 +1,47 @@
+id: census-annual-pop-selected-age-groups-2024
+version: '1.0'
+title: Annual Estimates of the Resident Population for Selected Age Groups by Sex
+  for the United States
+provider:
+  name: U.S. Census Bureau
+  agency: U.S. Department of Commerce
+  url: https://www.census.gov/data/datasets/time-series/demo/popest/2020s-national-detail.html
+requires_account: false
+download:
+  url: https://www2.census.gov/programs-surveys/popest/tables/2020-2024/national/asrh/nc-est2024-agesex.xlsx
+  description: Link downloads an XLSX file.
+  file_size: 18.3 KB
+variables:
+- Age group
+- Estimates base (both sexes)
+- Estimates base (male)
+- Estimates base (female)
+- 2020 both sexes
+- 2020 male
+- 2020 female
+- 2021 both sexes
+- 2021 male
+- 2021 female
+- 2022 both sexes
+- 2022 male
+- 2022 female
+- 2023 both sexes
+- 2023 male
+- 2023 female
+- 2024 both sexes
+- 2024 male
+- 2024 female
+sensitive: false
+description_tags:
+- Business & Finance
+- Children & Families
+- Economy
+- Election
+- Energy & Environment
+- Government Administration
+- Health & Social Services
+- Housing & Buildings
+- Labor & Workforce Development
+- Population Data
+- PreK-12 Education
+- Transportation

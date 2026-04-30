@@ -1,0 +1,43 @@
+id: census-state-estimates-all-2025
+version: '1.0'
+title: National State Estimates All Data 2025
+provider:
+  name: U.S. Census Bureau
+  agency: U.S. Department of Commerce
+  url: https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/state/totals/
+requires_account: false
+download:
+  url: https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/state/totals/NST-EST2025-ALLDATA.csv
+  description: Link downloads a CSV file.
+  file_size: 52 KB
+variables:
+- SUMLEV
+- REGION
+- DIVISION
+- STATE
+- NAME
+- ESTIMATESBASE2020
+- POPESTIMATE2020 through POPESTIMATE2025
+- NPOPCHG2020 through NPOPCHG2025
+- BIRTHS2020 through BIRTHS2025
+- DEATHS2020 through DEATHS2025
+- NATURALCHG2020 through NATURALCHG2025
+- INTERNATIONALMIG2020 through INTERNATIONALMIG2025
+- DOMESTICMIG2020 through DOMESTICMIG2025
+- NETMIG2020 through NETMIG2025
+- RESIDUAL2020 through RESIDUAL2025
+- GQESTIMATESBASE2020
+- GQESTIMATES2020 through GQESTIMATES2025
+- RBIRTH2021 through RBIRTH2025
+- RDEATH2021 through RDEATH2025
+- RNATURALCHG2021 through RNATURALCHG2025
+- RINTERNATIONALMIG2021 through RINTERNATIONALMIG2025
+- RDOMESTICMIG2021 through RDOMESTICMIG2025
+- RNETMIG2021 through RNETMIG2025
+sensitive: false
+description_tags:
+- Economy
+- Energy & Environment
+- Government Administration
+- Housing & Buildings
+- Population Data

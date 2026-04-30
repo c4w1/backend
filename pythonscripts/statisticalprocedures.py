@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
 """
-Value Scale Tagger
+Statistical Procedures Tagger
+
+Tags:
+  * good-for-transformation: right-skewed-distribution AND large-scale-values
+      right-skewed-distribution: ANY numeric column has skewness > 0.5
+      large-scale-values:        max(abs(all numeric values)) >= 1000
 
 Usage:
-    python valuescale.py all
-    python valuescale.py usda-milk-production.yml
+    python statisticalprocedures.py all
+    python statisticalprocedures.py usda-milk-production.yml
 """
 
 from __future__ import annotations
@@ -17,6 +22,7 @@ from pathlib import Path
 import pandas as pd
 import requests
 import yaml
+from scipy.stats import skew
 
 
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -31,7 +37,6 @@ def find_yaml_files(sources_dir: Path, one_file: str | None) -> list[Path]:
 
 
 def download_file(url: str, timeout: int) -> bytes | None:
-    """Download file from URL and return raw bytes."""
     try:
         response = requests.get(url, timeout=timeout)
         response.raise_for_status()
@@ -42,32 +47,26 @@ def download_file(url: str, timeout: int) -> bytes | None:
 
 
 def extract_data_from_zip(zip_data: bytes) -> pd.DataFrame | None:
-    """Extract first data file (CSV, TSV, or XLSX) from ZIP and return as DataFrame."""
     try:
         with zipfile.ZipFile(io.BytesIO(zip_data)) as zf:
-            data_files = [
-                f for f in zf.namelist() if f.lower().endswith((".csv", ".tsv", ".xlsx"))
-            ]
+            data_files = [f for f in zf.namelist() if f.lower().endswith((".csv", ".tsv", ".xlsx"))]
             if not data_files:
                 print("  - No CSV, TSV, or XLSX files found in ZIP")
                 return None
-
             first_file = data_files[0]
             with zf.open(first_file) as f:
                 if first_file.lower().endswith(".csv"):
-                    df = pd.read_csv(f, low_memory=False)
+                    return pd.read_csv(f, low_memory=False)
                 elif first_file.lower().endswith(".tsv"):
-                    df = pd.read_csv(f, sep="\t", low_memory=False)
+                    return pd.read_csv(f, sep="\t", low_memory=False)
                 else:
-                    df = pd.read_excel(f)
-                return df
+                    return pd.read_excel(f)
     except Exception as exc:
         print(f"  - Could not extract data from ZIP: {exc}")
         return None
 
 
 def load_csv_file(data: bytes) -> pd.DataFrame | None:
-    """Load CSV data from bytes."""
     try:
         return pd.read_csv(io.BytesIO(data), low_memory=False)
     except Exception as exc:
@@ -76,7 +75,6 @@ def load_csv_file(data: bytes) -> pd.DataFrame | None:
 
 
 def load_tsv_file(data: bytes) -> pd.DataFrame | None:
-    """Load TSV data from bytes."""
     try:
         return pd.read_csv(io.BytesIO(data), sep="\t", low_memory=False)
     except Exception as exc:
@@ -85,7 +83,6 @@ def load_tsv_file(data: bytes) -> pd.DataFrame | None:
 
 
 def load_xlsx_file(data: bytes) -> pd.DataFrame | None:
-    """Load XLSX data from bytes."""
     try:
         return pd.read_excel(io.BytesIO(data))
     except Exception as exc:
@@ -94,13 +91,11 @@ def load_xlsx_file(data: bytes) -> pd.DataFrame | None:
 
 
 def download_and_parse_data(url: str, timeout: int) -> pd.DataFrame | None:
-    """Download and parse data from URL. Handles CSV, TSV, XLSX, and ZIP files."""
     file_data = download_file(url, timeout)
     if file_data is None:
         return None
 
     url_lower = url.lower()
-
     if url_lower.endswith(".csv"):
         df = load_csv_file(file_data)
         if df is not None:
@@ -127,20 +122,34 @@ def download_and_parse_data(url: str, timeout: int) -> pd.DataFrame | None:
 
 
 def infer_tags(df: pd.DataFrame) -> dict[str, bool]:
-    """Infer value scale tags from DataFrame."""
-    numeric_df = df.select_dtypes(include=["number"])
+    """Analyze ALL numeric columns to evaluate statistical procedure suitability."""
+    right_skewed = False
+    large_scale = False
 
-    max_abs: float | None = None
-    if not numeric_df.empty:
-        raw = numeric_df.abs().max().max()
-        if not pd.isna(raw):
-            max_abs = float(raw)
+    numeric_cols = df.select_dtypes(include=["number"]).columns
+
+    for col in numeric_cols:
+        values = df[col].dropna().to_numpy(dtype=float)
+        if len(values) == 0:
+            continue
+
+        # right-skewed-distribution: ANY numeric column has skewness > 0.5
+        try:
+            if skew(values) > 0.5:
+                right_skewed = True
+        except Exception:
+            pass
+
+        # large-scale-values: max(abs(all numeric values)) >= 1000
+        try:
+            if float(abs(df[col].dropna()).max()) >= 1000:
+                large_scale = True
+        except Exception:
+            pass
 
     return {
-        "single-digit-values": max_abs is None or max_abs < 10,
-        "double-digit-values": max_abs is not None and 10 <= max_abs < 100,
-        "three-digit-values": max_abs is not None and 100 <= max_abs < 1000,
-        "large-scale-values": max_abs is not None and max_abs >= 1000,
+        # good-for-transformation: right-skewed-distribution AND large-scale-values
+        "good-for-transformation": right_skewed and large_scale,
     }
 
 
@@ -166,6 +175,9 @@ def process_file(path: Path, timeout: int, dry_run: bool) -> None:
         print("  - Skipped (could not download or parse data)")
         return
 
+    numeric_cols = df.select_dtypes(include=["number"]).columns
+    print(f"  - Numeric columns: {len(numeric_cols)}, Rows: {len(df)}")
+
     tags = infer_tags(df)
     matched = [tag for tag, val in tags.items() if val]
     print(f"  - Tags matched: {matched}")
@@ -173,7 +185,7 @@ def process_file(path: Path, timeout: int, dry_run: bool) -> None:
     if dry_run:
         return
 
-    data["value_scale_tags"] = tags
+    data["statistical_procedures_tags"] = tags
 
     with path.open("w", encoding="utf-8") as file:
         yaml.safe_dump(data, file, sort_keys=False, allow_unicode=False)
@@ -184,8 +196,8 @@ def process_file(path: Path, timeout: int, dry_run: bool) -> None:
 def main() -> None:
     if len(sys.argv) < 2:
         print("Usage:")
-        print("  python valuescale.py all")
-        print("  python valuescale.py usda-milk-production.yml")
+        print("  python statisticalprocedures.py all")
+        print("  python statisticalprocedures.py usda-milk-production.yml")
         sys.exit(1)
 
     target = sys.argv[1]
@@ -204,6 +216,8 @@ def main() -> None:
 
     for path in files:
         process_file(path=path, timeout=30, dry_run=False)
+
+    print("\nDone.")
 
 
 if __name__ == "__main__":

@@ -3,8 +3,7 @@
 Structure and Complexity Tagger
 
 
-Reads in one or more YAML files from backend/data/sources, downloads the data from the downaload url
-write the tags back to the YAML file as structure_complexity_tags: [..]
+Tags: [..]
   * univariate: count of numeric columns == 1
   * bivariate: count of numeric columns == 2
   * multivariate: count of numeric columns >= 3
@@ -152,29 +151,18 @@ def count_numeric_columns(df: pd.DataFrame) -> int:
     return len(numeric_dtypes)
 
 
-def infer_tags(df: pd.DataFrame) -> list[str]:
+def infer_tags(df: pd.DataFrame) -> dict[str, bool]:
     """Infer structure and complexity tags from DataFrame."""
-    tags: set[str] = set()
-    
-    # Analyze numeric columns
     numeric_col_count = count_numeric_columns(df)
-    if numeric_col_count == 1:
-        tags.add("univariate")
-    elif numeric_col_count == 2:
-        tags.add("bivariate")
-    elif numeric_col_count >= 3:
-        tags.add("multivariate")
-    
-    # Analyze row count
     row_count = len(df)
-    if row_count < 20:
-        tags.add("small-dataset")
-    elif row_count < 100:
-        tags.add("medium-dataset")
-    else:
-        tags.add("large-dataset")
-    
-    return sorted(tags)
+    return {
+        "univariate": numeric_col_count == 1,
+        "bivariate": numeric_col_count == 2,
+        "multivariate": numeric_col_count >= 3,
+        "small-dataset": row_count < 20,
+        "medium-dataset": 20 <= row_count < 100,
+        "large-dataset": row_count >= 100,
+    }
 
 
 def process_file(path: Path, timeout: int, dry_run: bool) -> None:
@@ -207,7 +195,8 @@ def process_file(path: Path, timeout: int, dry_run: bool) -> None:
     # Infer tags
     tags = infer_tags(df)
     print(f"  - Numeric columns: {count_numeric_columns(df)}, Rows: {len(df)}")
-    print(f"  - Tags: {tags}")
+    matched = [tag for tag, val in tags.items() if val]
+    print(f"  - Tags matched: {matched}")
 
     if dry_run:
         return

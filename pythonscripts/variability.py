@@ -1,10 +1,17 @@
 #!/usr/bin/env python3
 """
-Value Scale Tagger
+Variability Tagger
+
+Tags:
+  * high-variability:     ANY numeric column has coefficient of variation (CV = SD/mean) > 0.3
+  * moderate-variability: ANY numeric column has 0.15 < CV <= 0.3
+  * low-variability:      ANY numeric column has CV <= 0.15
+  * restricted-range:     ANY numeric column has range < 2 * IQR
+  * wide-range:           ANY numeric column has range > 5 * IQR
 
 Usage:
-    python valuescale.py all
-    python valuescale.py usda-milk-production.yml
+    python variability.py all
+    python variability.py usda-milk-production.yml
 """
 
 from __future__ import annotations
@@ -31,7 +38,6 @@ def find_yaml_files(sources_dir: Path, one_file: str | None) -> list[Path]:
 
 
 def download_file(url: str, timeout: int) -> bytes | None:
-    """Download file from URL and return raw bytes."""
     try:
         response = requests.get(url, timeout=timeout)
         response.raise_for_status()
@@ -42,32 +48,26 @@ def download_file(url: str, timeout: int) -> bytes | None:
 
 
 def extract_data_from_zip(zip_data: bytes) -> pd.DataFrame | None:
-    """Extract first data file (CSV, TSV, or XLSX) from ZIP and return as DataFrame."""
     try:
         with zipfile.ZipFile(io.BytesIO(zip_data)) as zf:
-            data_files = [
-                f for f in zf.namelist() if f.lower().endswith((".csv", ".tsv", ".xlsx"))
-            ]
+            data_files = [f for f in zf.namelist() if f.lower().endswith((".csv", ".tsv", ".xlsx"))]
             if not data_files:
                 print("  - No CSV, TSV, or XLSX files found in ZIP")
                 return None
-
             first_file = data_files[0]
             with zf.open(first_file) as f:
                 if first_file.lower().endswith(".csv"):
-                    df = pd.read_csv(f, low_memory=False)
+                    return pd.read_csv(f, low_memory=False)
                 elif first_file.lower().endswith(".tsv"):
-                    df = pd.read_csv(f, sep="\t", low_memory=False)
+                    return pd.read_csv(f, sep="\t", low_memory=False)
                 else:
-                    df = pd.read_excel(f)
-                return df
+                    return pd.read_excel(f)
     except Exception as exc:
         print(f"  - Could not extract data from ZIP: {exc}")
         return None
 
 
 def load_csv_file(data: bytes) -> pd.DataFrame | None:
-    """Load CSV data from bytes."""
     try:
         return pd.read_csv(io.BytesIO(data), low_memory=False)
     except Exception as exc:
@@ -76,7 +76,6 @@ def load_csv_file(data: bytes) -> pd.DataFrame | None:
 
 
 def load_tsv_file(data: bytes) -> pd.DataFrame | None:
-    """Load TSV data from bytes."""
     try:
         return pd.read_csv(io.BytesIO(data), sep="\t", low_memory=False)
     except Exception as exc:
@@ -85,7 +84,6 @@ def load_tsv_file(data: bytes) -> pd.DataFrame | None:
 
 
 def load_xlsx_file(data: bytes) -> pd.DataFrame | None:
-    """Load XLSX data from bytes."""
     try:
         return pd.read_excel(io.BytesIO(data))
     except Exception as exc:
@@ -94,13 +92,11 @@ def load_xlsx_file(data: bytes) -> pd.DataFrame | None:
 
 
 def download_and_parse_data(url: str, timeout: int) -> pd.DataFrame | None:
-    """Download and parse data from URL. Handles CSV, TSV, XLSX, and ZIP files."""
     file_data = download_file(url, timeout)
     if file_data is None:
         return None
 
     url_lower = url.lower()
-
     if url_lower.endswith(".csv"):
         df = load_csv_file(file_data)
         if df is not None:
@@ -126,22 +122,92 @@ def download_and_parse_data(url: str, timeout: int) -> pd.DataFrame | None:
     return None
 
 
-def infer_tags(df: pd.DataFrame) -> dict[str, bool]:
-    """Infer value scale tags from DataFrame."""
-    numeric_df = df.select_dtypes(include=["number"])
+def check_column(series: pd.Series) -> dict[str, bool] | None:
+    """Compute variability results for a single numeric column."""
+    values = series.dropna()
+    if len(values) == 0:
+        return None
 
-    max_abs: float | None = None
-    if not numeric_df.empty:
-        raw = numeric_df.abs().max().max()
-        if not pd.isna(raw):
-            max_abs = float(raw)
+    high_variability = False
+    moderate_variability = False
+    low_variability = False
+    restricted_range = False
+    wide_range = False
+
+    # high-variability: CV = SD/mean > 0.3
+    # moderate-variability: 0.15 < CV <= 0.3
+    # low-variability: CV <= 0.15
+    try:
+        mean_val = float(values.mean())
+        sd_val = float(values.std())
+        cv = sd_val / mean_val
+        high_variability = cv > 0.3
+        moderate_variability = 0.15 < cv <= 0.3
+        low_variability = cv <= 0.15
+    except Exception:
+        pass
+
+    # restricted-range: range < 2 * IQR
+    # wide-range: range > 5 * IQR
+    try:
+        range_val = float(values.max() - values.min())
+        q1 = float(values.quantile(0.25))
+        q3 = float(values.quantile(0.75))
+        iqr = q3 - q1
+        restricted_range = range_val < 2 * iqr
+        wide_range = range_val > 5 * iqr
+    except Exception:
+        pass
 
     return {
-        "single-digit-values": max_abs is None or max_abs < 10,
-        "double-digit-values": max_abs is not None and 10 <= max_abs < 100,
-        "three-digit-values": max_abs is not None and 100 <= max_abs < 1000,
-        "large-scale-values": max_abs is not None and max_abs >= 1000,
+        "high_variability": high_variability,
+        "moderate_variability": moderate_variability,
+        "low_variability": low_variability,
+        "restricted_range": restricted_range,
+        "wide_range": wide_range,
     }
+
+
+def infer_tags(df: pd.DataFrame) -> dict[str, bool]:
+    """Analyze ALL numeric columns; a tag is true if ANY column meets the criteria."""
+    tags: dict[str, bool] = {
+        "high-variability": False,
+        "moderate-variability": False,
+        "low-variability": False,
+        "restricted-range": False,
+        "wide-range": False,
+    }
+
+    numeric_cols = df.select_dtypes(include=["number"]).columns
+    if len(numeric_cols) == 0:
+        return tags
+
+    for col in numeric_cols:
+        result = check_column(df[col])
+        if result is None:
+            continue
+
+        # high-variability: ANY numeric column has CV > 0.3
+        if result["high_variability"]:
+            tags["high-variability"] = True
+
+        # moderate-variability: ANY numeric column has 0.15 < CV <= 0.3
+        if result["moderate_variability"]:
+            tags["moderate-variability"] = True
+
+        # low-variability: ANY numeric column has CV <= 0.15
+        if result["low_variability"]:
+            tags["low-variability"] = True
+
+        # restricted-range: ANY numeric column has range < 2 * IQR
+        if result["restricted_range"]:
+            tags["restricted-range"] = True
+
+        # wide-range: ANY numeric column has range > 5 * IQR
+        if result["wide_range"]:
+            tags["wide-range"] = True
+
+    return tags
 
 
 def process_file(path: Path, timeout: int, dry_run: bool) -> None:
@@ -166,6 +232,9 @@ def process_file(path: Path, timeout: int, dry_run: bool) -> None:
         print("  - Skipped (could not download or parse data)")
         return
 
+    numeric_cols = df.select_dtypes(include=["number"]).columns
+    print(f"  - Numeric columns: {len(numeric_cols)}, Rows: {len(df)}")
+
     tags = infer_tags(df)
     matched = [tag for tag, val in tags.items() if val]
     print(f"  - Tags matched: {matched}")
@@ -173,7 +242,7 @@ def process_file(path: Path, timeout: int, dry_run: bool) -> None:
     if dry_run:
         return
 
-    data["value_scale_tags"] = tags
+    data["variability_tags"] = tags
 
     with path.open("w", encoding="utf-8") as file:
         yaml.safe_dump(data, file, sort_keys=False, allow_unicode=False)
@@ -184,8 +253,8 @@ def process_file(path: Path, timeout: int, dry_run: bool) -> None:
 def main() -> None:
     if len(sys.argv) < 2:
         print("Usage:")
-        print("  python valuescale.py all")
-        print("  python valuescale.py usda-milk-production.yml")
+        print("  python variability.py all")
+        print("  python variability.py usda-milk-production.yml")
         sys.exit(1)
 
     target = sys.argv[1]
@@ -204,6 +273,8 @@ def main() -> None:
 
     for path in files:
         process_file(path=path, timeout=30, dry_run=False)
+
+    print("\nDone.")
 
 
 if __name__ == "__main__":

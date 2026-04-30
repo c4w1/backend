@@ -155,37 +155,20 @@ def is_column_discrete(series: pd.Series) -> bool:
     return (non_null == non_null.astype("int64")).all()
 
 
-def infer_tags(df: pd.DataFrame) -> list[str]:
+def infer_tags(df: pd.DataFrame) -> dict[str, bool]:
     """Infer variable types tags from DataFrame."""
-    tags: set[str] = set()
-
-    # Get numeric columns
     numeric_cols = df.select_dtypes(include=["number"]).columns
     if len(numeric_cols) == 0:
-        return ["population-data"]  # Default fallback
+        return {"all-discrete": False, "all-continuous": False, "mixed-types": False}
 
-    # Check each numeric column for discreteness
-    discrete_count = 0
-    continuous_count = 0
+    discrete_count = sum(1 for col in numeric_cols if is_column_discrete(df[col]))
+    continuous_count = len(numeric_cols) - discrete_count
 
-    for col in numeric_cols:
-        if is_column_discrete(df[col]):
-            discrete_count += 1
-        else:
-            continuous_count += 1
-
-    # Assign tags based on counts
-    if continuous_count == 0:
-        # All columns are discrete
-        tags.add("all-discrete")
-    elif discrete_count == 0:
-        # All columns are continuous
-        tags.add("all-continuous")
-    else:
-        # Mixed types
-        tags.add("mixed-types")
-
-    return sorted(tags)
+    return {
+        "all-discrete": continuous_count == 0,
+        "all-continuous": discrete_count == 0,
+        "mixed-types": discrete_count > 0 and continuous_count > 0,
+    }
 
 
 def process_file(path: Path, timeout: int, dry_run: bool) -> None:
@@ -215,9 +198,9 @@ def process_file(path: Path, timeout: int, dry_run: bool) -> None:
         print("  - Skipped (could not download or parse data)")
         return
 
-    # Infer tags
     tags = infer_tags(df)
-    print(f"  - Tags: {tags}")
+    matched = [tag for tag, val in tags.items() if val]
+    print(f"  - Tags matched: {matched}")
 
     if dry_run:
         return

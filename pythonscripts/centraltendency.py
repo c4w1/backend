@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
 """
-Value Scale Tagger
+Central Tendency Tagger
+
+Tags:
+  * mean-median-similar:  ANY numeric column has |mean - median| / range < 0.05
+  * mean-median-different: ANY numeric column has |mean - median| / range >= 0.05
+  * has-mode:             ANY numeric column has mode appearing >= 2 times AND mode frequency / n >= 0.1
 
 Usage:
-    python valuescale.py all
-    python valuescale.py usda-milk-production.yml
+    python centraltendency.py all
+    python centraltendency.py usda-milk-production.yml
 """
 
 from __future__ import annotations
@@ -31,7 +36,6 @@ def find_yaml_files(sources_dir: Path, one_file: str | None) -> list[Path]:
 
 
 def download_file(url: str, timeout: int) -> bytes | None:
-    """Download file from URL and return raw bytes."""
     try:
         response = requests.get(url, timeout=timeout)
         response.raise_for_status()
@@ -42,32 +46,26 @@ def download_file(url: str, timeout: int) -> bytes | None:
 
 
 def extract_data_from_zip(zip_data: bytes) -> pd.DataFrame | None:
-    """Extract first data file (CSV, TSV, or XLSX) from ZIP and return as DataFrame."""
     try:
         with zipfile.ZipFile(io.BytesIO(zip_data)) as zf:
-            data_files = [
-                f for f in zf.namelist() if f.lower().endswith((".csv", ".tsv", ".xlsx"))
-            ]
+            data_files = [f for f in zf.namelist() if f.lower().endswith((".csv", ".tsv", ".xlsx"))]
             if not data_files:
                 print("  - No CSV, TSV, or XLSX files found in ZIP")
                 return None
-
             first_file = data_files[0]
             with zf.open(first_file) as f:
                 if first_file.lower().endswith(".csv"):
-                    df = pd.read_csv(f, low_memory=False)
+                    return pd.read_csv(f, low_memory=False)
                 elif first_file.lower().endswith(".tsv"):
-                    df = pd.read_csv(f, sep="\t", low_memory=False)
+                    return pd.read_csv(f, sep="\t", low_memory=False)
                 else:
-                    df = pd.read_excel(f)
-                return df
+                    return pd.read_excel(f)
     except Exception as exc:
         print(f"  - Could not extract data from ZIP: {exc}")
         return None
 
 
 def load_csv_file(data: bytes) -> pd.DataFrame | None:
-    """Load CSV data from bytes."""
     try:
         return pd.read_csv(io.BytesIO(data), low_memory=False)
     except Exception as exc:
@@ -76,7 +74,6 @@ def load_csv_file(data: bytes) -> pd.DataFrame | None:
 
 
 def load_tsv_file(data: bytes) -> pd.DataFrame | None:
-    """Load TSV data from bytes."""
     try:
         return pd.read_csv(io.BytesIO(data), sep="\t", low_memory=False)
     except Exception as exc:
@@ -85,7 +82,6 @@ def load_tsv_file(data: bytes) -> pd.DataFrame | None:
 
 
 def load_xlsx_file(data: bytes) -> pd.DataFrame | None:
-    """Load XLSX data from bytes."""
     try:
         return pd.read_excel(io.BytesIO(data))
     except Exception as exc:
@@ -94,13 +90,11 @@ def load_xlsx_file(data: bytes) -> pd.DataFrame | None:
 
 
 def download_and_parse_data(url: str, timeout: int) -> pd.DataFrame | None:
-    """Download and parse data from URL. Handles CSV, TSV, XLSX, and ZIP files."""
     file_data = download_file(url, timeout)
     if file_data is None:
         return None
 
     url_lower = url.lower()
-
     if url_lower.endswith(".csv"):
         df = load_csv_file(file_data)
         if df is not None:
@@ -126,22 +120,81 @@ def download_and_parse_data(url: str, timeout: int) -> pd.DataFrame | None:
     return None
 
 
-def infer_tags(df: pd.DataFrame) -> dict[str, bool]:
-    """Infer value scale tags from DataFrame."""
-    numeric_df = df.select_dtypes(include=["number"])
+def check_column(series: pd.Series) -> dict[str, bool] | None:
+    """Compute central tendency results for a single numeric column."""
+    values = series.dropna()
+    n = len(values)
+    if n == 0:
+        return None
 
-    max_abs: float | None = None
-    if not numeric_df.empty:
-        raw = numeric_df.abs().max().max()
-        if not pd.isna(raw):
-            max_abs = float(raw)
+    mean_median_similar = False
+    mean_median_different = False
+    has_mode = False
+
+    # mean-median-similar: |mean - median| / range < 0.05
+    # mean-median-different: |mean - median| / range >= 0.05
+    try:
+        mean_val = float(values.mean())
+        median_val = float(values.median())
+        range_val = float(values.max() - values.min())
+        if range_val == 0:
+            # all values identical: mean == median, unambiguously similar
+            mean_median_similar = True
+            mean_median_different = False
+        else:
+            ratio = abs(mean_val - median_val) / range_val
+            mean_median_similar = ratio < 0.05
+            mean_median_different = ratio >= 0.05
+    except Exception:
+        pass
+
+    # has-mode: mode appearing >= 2 times AND frequency of mode / n >= 0.1
+    try:
+        value_counts = values.value_counts()
+        if len(value_counts) > 0:
+            mode_count = int(value_counts.iloc[0])
+            mode_freq = mode_count / n
+            has_mode = mode_count >= 2 and mode_freq >= 0.1
+    except Exception:
+        pass
 
     return {
-        "single-digit-values": max_abs is None or max_abs < 10,
-        "double-digit-values": max_abs is not None and 10 <= max_abs < 100,
-        "three-digit-values": max_abs is not None and 100 <= max_abs < 1000,
-        "large-scale-values": max_abs is not None and max_abs >= 1000,
+        "mean_median_similar": mean_median_similar,
+        "mean_median_different": mean_median_different,
+        "has_mode": has_mode,
     }
+
+
+def infer_tags(df: pd.DataFrame) -> dict[str, bool]:
+    """Analyze ALL numeric columns; a tag is true if ANY column meets the criteria."""
+    tags: dict[str, bool] = {
+        "mean-median-similar": False,
+        "mean-median-different": False,
+        "has-mode": False,
+    }
+
+    numeric_cols = df.select_dtypes(include=["number"]).columns
+    if len(numeric_cols) == 0:
+        return tags
+
+    for col in numeric_cols:
+        result = check_column(df[col])
+        if result is None:
+            continue
+
+        # mean-median-similar: ANY numeric column has |mean - median| / range < 0.05
+        if result["mean_median_similar"]:
+            tags["mean-median-similar"] = True
+
+        # mean-median-different: ANY numeric column has |mean - median| / range >= 0.05
+        if result["mean_median_different"]:
+            tags["mean-median-different"] = True
+
+        # has-mode: ANY numeric column has mode >= 2 times AND mode frequency / n >= 0.1
+        if result["has_mode"]:
+            tags["has-mode"] = True
+
+    return tags
 
 
 def process_file(path: Path, timeout: int, dry_run: bool) -> None:
@@ -166,6 +219,9 @@ def process_file(path: Path, timeout: int, dry_run: bool) -> None:
         print("  - Skipped (could not download or parse data)")
         return
 
+    numeric_cols = df.select_dtypes(include=["number"]).columns
+    print(f"  - Numeric columns: {len(numeric_cols)}, Rows: {len(df)}")
+
     tags = infer_tags(df)
     matched = [tag for tag, val in tags.items() if val]
     print(f"  - Tags matched: {matched}")
@@ -173,7 +229,7 @@ def process_file(path: Path, timeout: int, dry_run: bool) -> None:
     if dry_run:
         return
 
-    data["value_scale_tags"] = tags
+    data["central_tendency_tags"] = tags
 
     with path.open("w", encoding="utf-8") as file:
         yaml.safe_dump(data, file, sort_keys=False, allow_unicode=False)
@@ -184,8 +240,8 @@ def process_file(path: Path, timeout: int, dry_run: bool) -> None:
 def main() -> None:
     if len(sys.argv) < 2:
         print("Usage:")
-        print("  python valuescale.py all")
-        print("  python valuescale.py usda-milk-production.yml")
+        print("  python centraltendency.py all")
+        print("  python centraltendency.py usda-milk-production.yml")
         sys.exit(1)
 
     target = sys.argv[1]
@@ -204,6 +260,8 @@ def main() -> None:
 
     for path in files:
         process_file(path=path, timeout=30, dry_run=False)
+
+    print("\nDone.")
 
 
 if __name__ == "__main__":

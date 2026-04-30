@@ -2,12 +2,7 @@
 """
 YML File Variable Extractor Script
 
-Reads a YML file from data/sources, and looks for the download.url field, downloads
-the data file, analyzes the columns are writes two new fields to the YML file:
-    variable_names - list of column names for frontend
-    variable_report - more in depth analysis of each column for backend analysis for additional labeling
-
-Usage:
+usage:
   python variableextraction.py all - processes all YML files in data/sources
   python variableextraction.py usda-milk-production.yml - processes one specific YML file
   you do not need to specify the full path unless the file is not in data/sources

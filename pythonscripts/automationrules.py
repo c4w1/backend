@@ -1,21 +1,5 @@
 #!/usr/bin/env python3
 """
-Automation Rules Tagger
-
-Reads in one or more YAML files from backend/data/sources, downloads the data from the
-download url, and records which pipeline automation rules apply to the dataset.
-Writes automation_rules_tags to the YAML file.
-
-These tags encode the structural prerequisites that govern which analysis scripts produce
-meaningful results for this dataset.
-
-Rules applied:
-  - Categorical variable = non-numeric dtype OR numeric with < 10 unique values
-  - Numeric variable     = numeric dtype AND >= 10 unique values
-  - Pair analysis requires 2+ numeric columns (all possible pairs are tested)
-  - Group comparisons test ALL numeric columns against ALL categorical variables
-  - Inference tests require both sample size AND distributional assumption checks
-  - Paired t-test uses differences between the two numeric columns, tests normality of diff
 
 Tags:
   * has-multiple-numeric-columns:    2+ numeric columns exist; ALL pairs will be tested for

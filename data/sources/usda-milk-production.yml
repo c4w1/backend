@@ -11,133 +11,112 @@ download:
   description: Link downloads a CSV file. Spreadsheet updates quarterly on website.
   file_size: 56.7 KB
 sensitive: false
+anova_tags:
+  good-for-one-way-anova: true
+  good-for-two-way-anova: false
+  good-for-chi-square-gof: false
+  good-for-chi-square-independence: true
+  good-for-paired-t-test: true
+association_tags:
+  positive-correlation: true
+  negative-correlation: false
+  no-correlation: false
+  strong-correlation: false
+  moderate-correlation: false
+  weak-correlation: true
+  linear-relationship: false
+  nonlinear-relationship: false
+  curved-relationship: false
+  exponential-pattern: false
+automation_rules_tags:
+  has-multiple-numeric-columns: true
+  has-categorical-variable: true
+  has-group-comparison-candidates: true
+  meets-minimum-sample-size: true
+  has-paired-test-candidates: true
+central_tendency_tags:
+  mean-median-similar: true
+  mean-median-different: true
+  has-mode: true
+comparison_capabilities_tags:
+  two-groups-present: false
+  multiple-groups-present: true
+  groups-have-different-centers: true
+  groups-have-different-spreads: true
+  groups-overlap-substantially: true
+distribution_shape_tags:
+  symmetric-distribution: true
+  right-skewed-distribution: true
+  left-skewed-distribution: false
+  approximately-normal: false
+  uniform-distribution: false
+  bimodal-distribution: false
+inference_procedures_tags:
+  good-for-one-sample-t-test: true
+  good-for-one-sample-z-test: true
+  good-for-one-proportion-z-test: false
+  good-for-two-sample-t-test: false
+  good-for-two-sample-z-test: false
+  good-for-two-proportion-z-test: false
+  meets-equal-variance-assumption: false
+  violates-equal-variance-assumption: false
+normality_tags:
+  passes-normality-test: false
+  fails-normality-test: true
+  large-enough-for-clt: true
+outlier_tags:
+  contains-outliers: true
+  no-outliers: false
+  extreme-outliers: true
+regression_quality_tags:
+  good-linear-fit: false
+  moderate-linear-fit: false
+  poor-linear-fit: true
+  has-influential-points: true
+  regression-appropriate: false
+statistical_procedures_tags:
+  good-for-transformation: true
+structure_complexity_tags:
+  univariate: false
+  bivariate: false
+  multivariate: true
+  small-dataset: false
+  medium-dataset: false
+  large-dataset: true
 description_tags:
-- Agriculture
-- Economy
-- Energy & Environment
-- Government Administration
-- Health & Social Services
-- Housing & Buildings
-- Population Data
-- Restaurant and Food Service
-variable_names:
-- Year
-- Period
-- Timeperiod_id
-- Timeperiod_name
-- Aggregation
-- Data_item
-- Value
-- Units
-variable_report:
-- name: Year
-  type: integer
-  total_rows: 700
-  non_empty_count: 700
-  missing_count: 0
-  missing_pct: 0.0
-  unique_count: 28
-  sample_values:
-  - '1998'
-  - '1999'
-  - '2000'
-  - '2001'
-  - '2002'
-  min: 1998.0
-  max: 2025.0
-  mean: 2011.5
-- name: Period
-  type: string
-  total_rows: 700
-  non_empty_count: 700
-  missing_count: 0
-  missing_pct: 0.0
-  unique_count: 5
-  sample_values:
-  - JAN-MAR
-  - APR-JUN
-  - JUL-SEP
-  - OCT-DEC
-  - ANNUAL
-- name: Timeperiod_id
-  type: integer
-  total_rows: 700
-  non_empty_count: 700
-  missing_count: 0
-  missing_pct: 0.0
-  unique_count: 5
-  sample_values:
-  - '13'
-  - '14'
-  - '15'
-  - '16'
-  - '17'
-  min: 13.0
-  max: 17.0
-  mean: 15.0
-- name: Timeperiod_name
-  type: string
-  total_rows: 700
-  non_empty_count: 700
-  missing_count: 0
-  missing_pct: 0.0
-  unique_count: 5
-  sample_values:
-  - Quarter 1
-  - Quarter 2
-  - Quarter 3
-  - Quarter 4
-  - Annual aggregation
-- name: Aggregation
-  type: string
-  total_rows: 700
-  non_empty_count: 700
-  missing_count: 0
-  missing_pct: 0.0
-  unique_count: 3
-  sample_values:
-  - Not applicable
-  - Quarterly average
-  - Quarterly sum
-- name: Data_item
-  type: string
-  total_rows: 700
-  non_empty_count: 700
-  missing_count: 0
-  missing_pct: 0.0
-  unique_count: 5
-  sample_values:
-  - 16-percent protein feed value
-  - Milk cow
-  - Milk per cow
-  - Milk production
-  - Replacement cow price
-- name: Value
-  type: string
-  total_rows: 700
-  non_empty_count: 700
-  missing_count: 0
-  missing_pct: 0.0
-  unique_count: 593
-  sample_values:
-  - '5.31'
-  - '9174'
-  - '4268'
-  - '39155'
-  - '1070'
-- name: Units
-  type: string
-  total_rows: 700
-  non_empty_count: 700
-  missing_count: 0
-  missing_pct: 0.0
-  unique_count: 5
-  sample_values:
-  - Dollars per hundredweight
-  - 1,000 head
-  - Pounds
-  - Million pounds
-  - Dollars per head
-linear_regression: true
+  Agriculture: true
+  Business & Finance: false
+  Children & Families: false
+  Economy: true
+  Election: false
+  PreK-12 Education: false
+  Energy & Environment: true
+  Government Administration: true
+  Health & Social Services: true
+  Higher Education: false
+  Historic Preservation: false
+  Housing & Buildings: true
+  Labor & Workforce Development: false
+  Law & Public Safety: false
+  Parks & Recreation: false
+  Population Data: true
+  Public Utilities: false
+  Restaurant and Food Service: true
+  Transportation: false
+two_way_table_tags:
+  two-way-table: false
 value_scale_tags:
-- large-scale-values
+  single-digit-values: false
+  double-digit-values: false
+  three-digit-values: false
+  large-scale-values: true
+variability_tags:
+  high-variability: true
+  moderate-variability: false
+  low-variability: true
+  restricted-range: false
+  wide-range: true
+variable_types_tags:
+  all-discrete: false
+  all-continuous: false
+  mixed-types: true

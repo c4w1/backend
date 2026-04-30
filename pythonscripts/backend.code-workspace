@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "backend",
+			"path": "../../github2/web/backend"
+		},
+		{
+			"name": "backend",
+			"path": ".."
+		}
+	],
+	"settings": {}
+}

@@ -1,6 +1,6 @@
 import http from "node:http";
 import { URL } from "node:url";
-import { loadAllSources, loadSourceById } from "./lib/sourceStore.mjs";
+import { getDataSource, loadAllSources, loadSourceById } from "./lib/sourceStore.mjs";
 
 const port = Number(process.env.BACKEND_PORT ?? 4322);
 
@@ -19,7 +19,12 @@ const server = http.createServer(async (req, res) => {
     const url = new URL(req.url ?? "/", `http://${req.headers.host ?? "localhost"}`);
 
     if (method === "GET" && url.pathname === "/api/health") {
-      return sendJson(res, 200, { ok: true, service: "backend", port });
+      return sendJson(res, 200, {
+        ok: true,
+        service: "backend",
+        port,
+        dataSource: getDataSource(),
+      });
     }
 
     if (method === "GET" && url.pathname === "/api/sources") {

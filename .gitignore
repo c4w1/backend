@@ -1,0 +1,5 @@
+database/*.db
+.vscode/
+pythonscripts/__pycache__/
+data/sources/__pycache__/
+lib/__pycache__/

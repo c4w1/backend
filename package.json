@@ -1,0 +1,9 @@
+{
+  "type": "module",
+  "scripts": {
+    "start": "node --experimental-sqlite server.mjs"
+  },
+  "dependencies": {
+    "yaml": "^2.9.0"
+  }
+}

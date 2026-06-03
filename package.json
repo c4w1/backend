@@ -1,0 +1,11 @@
+{
+  "name": "cdl-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "dependencies": {
+    "yaml": "^2.7.0"
+  }
+}

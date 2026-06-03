@@ -26,7 +26,35 @@ variables:
 - Offense Linked to Another Offense
 sensitive: true
 description_tags:
-- Energy & Environment
-- Government Administration
-- Law & Public Safety
-- Population Data
+  Agriculture: false
+  Business & Finance: false
+  Children & Families: false
+  Economy: false
+  Election: false
+  PreK-12 Education: false
+  Energy & Environment: true
+  Government Administration: true
+  Health & Social Services: false
+  Higher Education: false
+  Historic Preservation: false
+  Housing & Buildings: false
+  Labor & Workforce Development: false
+  Law & Public Safety: true
+  Parks & Recreation: false
+  Population Data: false
+  Public Utilities: false
+  Restaurant and Food Service: false
+  Transportation: false
+who: Federal Bureau of Investigation (FBI) (U.S. Department of Justice)
+how: null
+where: Filterable to state level
+why: null
+when: Multiple years; filterable by year
+geographic_coverage:
+  available_levels:
+    state_fips: true
+    fips_code: false
+    zip_code: false
+    school_district: false
+    tract: false
+    tribal_area: false

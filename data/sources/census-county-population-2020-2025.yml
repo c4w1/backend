@@ -25,15 +25,38 @@ variables:
 - 2025 population estimate
 sensitive: false
 description_tags:
-- Business & Finance
-- Children & Families
-- Economy
-- Election
-- Energy & Environment
-- Government Administration
-- Health & Social Services
-- Housing & Buildings
-- Labor & Workforce Development
-- Population Data
-- PreK-12 Education
-- Transportation
+  Agriculture: false
+  Business & Finance: true
+  Children & Families: true
+  Economy: true
+  Election: true
+  PreK-12 Education: true
+  Energy & Environment: true
+  Government Administration: true
+  Health & Social Services: true
+  Higher Education: false
+  Historic Preservation: false
+  Housing & Buildings: true
+  Labor & Workforce Development: true
+  Law & Public Safety: false
+  Parks & Recreation: false
+  Population Data: true
+  Public Utilities: false
+  Restaurant and Food Service: false
+  Transportation: false
+who: U.S. Census Bureau (U.S. Department of Commerce)
+how: null
+where: Filterable to state level
+why: null
+when: 2020-2025
+geographic_coverage:
+  available_levels:
+    state_fips: true
+    fips_code: false
+    zip_code: false
+    school_district: false
+    tract: true
+    tribal_area: false
+  url_template:
+    state: https://api.census.gov/data/{year}/{dataset}?get={variables}&for=state:{state_fips}&key={api_key}
+    tract: https://api.census.gov/data/{year}/{dataset}?get={variables}&for=tract:*&in=state:{state_fips}%20county:{county_fips}&key={api_key}

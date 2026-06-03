@@ -26,8 +26,129 @@ variables:
 - NRANK_PPCHG2020 through NRANK_PPCHG2025
 sensitive: false
 description_tags:
-- Economy
-- Energy & Environment
-- Government Administration
-- Housing & Buildings
-- Population Data
+  Agriculture: false
+  Business & Finance: false
+  Children & Families: false
+  Economy: true
+  Election: false
+  PreK-12 Education: false
+  Energy & Environment: true
+  Government Administration: true
+  Health & Social Services: false
+  Higher Education: false
+  Historic Preservation: false
+  Housing & Buildings: true
+  Labor & Workforce Development: false
+  Law & Public Safety: false
+  Parks & Recreation: false
+  Population Data: true
+  Public Utilities: false
+  Restaurant and Food Service: false
+  Transportation: false
+who: U.S. Census Bureau (U.S. Department of Commerce)
+how: null
+where: National
+why: null
+when: 2020-2025
+anova_tags:
+  good-for-one-way-anova: false
+  good-for-two-way-anova: false
+  good-for-chi-square-gof: false
+  good-for-chi-square-independence: false
+  good-for-paired-t-test: false
+association_tags:
+  positive-correlation: true
+  negative-correlation: true
+  no-correlation: false
+  strong-correlation: true
+  moderate-correlation: true
+  weak-correlation: true
+  linear-relationship: true
+  nonlinear-relationship: true
+  curved-relationship: true
+  exponential-pattern: false
+automation_rules_tags:
+  has-multiple-numeric-columns: true
+  has-categorical-variable: true
+  has-group-comparison-candidates: true
+  meets-minimum-sample-size: true
+  has-paired-test-candidates: false
+central_tendency_tags:
+  mean-median-similar: true
+  mean-median-different: true
+  has-mode: true
+comparison_capabilities_tags:
+  two-groups-present: false
+  multiple-groups-present: true
+  groups-have-different-centers: true
+  groups-have-different-spreads: true
+  groups-overlap-substantially: true
+distribution_shape_tags:
+  symmetric-distribution: true
+  right-skewed-distribution: true
+  left-skewed-distribution: true
+  approximately-normal: true
+  uniform-distribution: false
+  bimodal-distribution: true
+geographic_coverage:
+  available_levels:
+    state_fips: true
+    fips_code: true
+    zip_code: true
+    school_district: false
+    tract: true
+    tribal_area: false
+  url_template:
+    state: https://api.census.gov/data/{year}/{dataset}?get={variables}&for=state:{state_fips}&key={api_key}
+    county: https://api.census.gov/data/{year}/{dataset}?get={variables}&for=county:{county_fips}&in=state:{state_fips}&key={api_key}
+    zip: https://api.census.gov/data/{year}/{dataset}?get={variables}&for=zip%20code%20tabulation%20area:{zip_code}&key={api_key}
+    tract: https://api.census.gov/data/{year}/{dataset}?get={variables}&for=tract:*&in=state:{state_fips}%20county:{county_fips}&key={api_key}
+inference_procedures_tags:
+  good-for-one-sample-t-test: true
+  good-for-one-sample-z-test: true
+  good-for-one-proportion-z-test: false
+  good-for-two-sample-t-test: false
+  good-for-two-sample-z-test: false
+  good-for-two-proportion-z-test: false
+  meets-equal-variance-assumption: false
+  violates-equal-variance-assumption: false
+normality_tags:
+  passes-normality-test: true
+  fails-normality-test: true
+  large-enough-for-clt: true
+outlier_tags:
+  contains-outliers: true
+  no-outliers: false
+  extreme-outliers: true
+regression_quality_tags:
+  good-linear-fit: true
+  moderate-linear-fit: true
+  poor-linear-fit: false
+  has-influential-points: true
+  regression-appropriate: true
+statistical_procedures_tags:
+  good-for-transformation: true
+structure_complexity_tags:
+  univariate: false
+  bivariate: false
+  multivariate: true
+  small-dataset: false
+  medium-dataset: true
+  large-dataset: false
+two_way_table_tags:
+  two-way-table: false
+value_scale_tags:
+  single-digit-values: false
+  double-digit-values: false
+  three-digit-values: false
+  large-scale-values: true
+variability_tags:
+  high-variability: true
+  moderate-variability: true
+  low-variability: true
+  restricted-range: false
+  wide-range: true
+variable_types_tags:
+  all-discrete: false
+  all-continuous: false
+  mixed-types: true

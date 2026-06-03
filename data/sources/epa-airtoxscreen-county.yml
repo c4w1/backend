@@ -15,6 +15,35 @@ download:
   file_size: 108 MB
 sensitive: false
 description_tags:
-- Energy & Environment
-- Government Administration
-- Population Data
+  Agriculture: false
+  Business & Finance: false
+  Children & Families: false
+  Economy: false
+  Election: false
+  PreK-12 Education: false
+  Energy & Environment: true
+  Government Administration: true
+  Health & Social Services: false
+  Higher Education: false
+  Historic Preservation: false
+  Housing & Buildings: false
+  Labor & Workforce Development: false
+  Law & Public Safety: false
+  Parks & Recreation: false
+  Population Data: false
+  Public Utilities: false
+  Restaurant and Food Service: false
+  Transportation: false
+who: U.S. Environmental Protection Agency (EPA)
+how: null
+where: Filterable to county level
+why: null
+when: '2024'
+geographic_coverage:
+  available_levels:
+    state_fips: false
+    fips_code: true
+    zip_code: false
+    school_district: false
+    tract: false
+    tribal_area: false

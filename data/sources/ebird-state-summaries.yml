@@ -26,4 +26,35 @@ variables:
 - Breeding habitat secondary
 sensitive: false
 description_tags:
-- Government Administration
+  Agriculture: false
+  Business & Finance: false
+  Children & Families: false
+  Economy: false
+  Election: false
+  PreK-12 Education: false
+  Energy & Environment: false
+  Government Administration: false
+  Health & Social Services: false
+  Higher Education: false
+  Historic Preservation: false
+  Housing & Buildings: false
+  Labor & Workforce Development: false
+  Law & Public Safety: false
+  Parks & Recreation: false
+  Population Data: false
+  Public Utilities: false
+  Restaurant and Food Service: false
+  Transportation: false
+who: Cornell Lab of Ornithology
+how: null
+where: Filterable to state level
+why: null
+when: null
+geographic_coverage:
+  available_levels:
+    state_fips: true
+    fips_code: false
+    zip_code: false
+    tract: false
+    school_district: false
+    tribal_area: false

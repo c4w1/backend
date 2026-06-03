@@ -120,3 +120,16 @@ variable_types_tags:
   all-discrete: false
   all-continuous: false
   mixed-types: true
+who: USDA Economic Research Service (ERS) (U.S. Department of Agriculture)
+how: null
+where: National
+why: null
+when: null
+geographic_coverage:
+  available_levels:
+    state_fips: true
+    fips_code: false
+    zip_code: false
+    school_district: false
+    tract: false
+    tribal_area: false

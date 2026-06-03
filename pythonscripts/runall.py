@@ -14,7 +14,7 @@ from pathlib import Path
 
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-EXCLUDED_FILES = {"variableextraction.py", "runall.py"}
+EXCLUDED_FILES = {"variableextraction.py", "runall.py", "community_identifiers.py", "detect_five_ws.py"}
 DEFAULT_TARGET = "all"
 
 

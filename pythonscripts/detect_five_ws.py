@@ -1,22 +1,13 @@
 #!/usr/bin/env python3
 """
-detect_five_ws.py — Auto-detect Who / How / Where / Why / When fields
-for CDL backend source YAML files.
-
-Detection rules
----------------
+rules:
   who   — derived from provider.name + provider.agency
   how   — inferred from keywords in title/notes (collection method)
   where — inferred from filters + title keywords (geographic scope)
   why   — left blank (requires manual entry; too domain-specific to infer)
   when  — extracted from year patterns in title; enriched with filter.year info
 
-Existing non-null, non-empty values are NEVER overwritten.
-The five fields are appended to the end of the file in a labeled block.
-Re-running the script is safe — fields already present are skipped.
-
-Usage
------
+Usage:
   python detect_five_ws.py                  # process all source files
   python detect_five_ws.py --dry-run        # preview without saving
   python detect_five_ws.py --file <path>    # single file
@@ -37,7 +28,7 @@ SOURCES_DIR = Path(__file__).parent.parent / "data" / "sources"
 
 FIVE_WS = ["who", "how", "where", "why", "when"]
 
-# ── Detectors ─────────────────────────────────────────────────────────────────
+# Detectors 
 
 def detect_who(data: dict) -> str:
     provider = data.get("provider") or {}
@@ -56,7 +47,7 @@ def detect_how(data: dict) -> str:
     desc  = (data.get("download", {}) or {}).get("description", "").lower()
     combined = f"{title} {notes} {desc}"
 
-    # Title + notes take priority over download description text
+    
     title_notes = f"{title} {notes}"
 
     title_rules = [
@@ -74,7 +65,7 @@ def detect_how(data: dict) -> str:
         if re.search(pattern, title_notes):
             return label
 
-    # Fall back to download description only for clearly interactive tools
+    
     if re.search(r"\bexplorer|interactive", desc):
         return "Interactive web tool -- select filters then download"
 
@@ -134,7 +125,7 @@ def detect_when(data: dict) -> str:
 
 
 def detect_why(_data: dict) -> str:
-    # Requires domain knowledge — left for manual entry
+    #why will always be null, needs manual entry
     return ""
 
 
@@ -146,7 +137,6 @@ DETECTORS = {
     "when":  detect_when,
 }
 
-# ── File I/O ──────────────────────────────────────────────────────────────────
 
 def yaml_scalar(value: str) -> str:
     """Return a safe YAML scalar for a plain string value."""

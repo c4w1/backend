@@ -1,11 +1,9 @@
 {
-  "name": "cdl-backend",
-  "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "node server.mjs"
+    "start": "node --experimental-sqlite server.mjs"
   },
   "dependencies": {
-    "yaml": "^2.7.0"
+    "yaml": "^2.9.0"
   }
 }

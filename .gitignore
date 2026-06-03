@@ -3,3 +3,8 @@ node_modules/
 __pycache__/
 *.pyc
 .venv/
+database/*.db
+.vscode/
+pythonscripts/__pycache__/
+data/sources/__pycache__/
+lib/__pycache__/

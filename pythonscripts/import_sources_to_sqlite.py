@@ -43,8 +43,29 @@ def find_source_files(sources_dir: Path, one_file: str | None) -> list[Path]:
     return sorted(set(files))
 
 
+# Columns added to `sources` after the original schema. CREATE TABLE IF NOT EXISTS
+# does not alter an existing table, so older database files get them via ALTER TABLE.
+ADDED_SOURCE_COLUMNS = {
+    "description": "TEXT",
+    "about": "TEXT",
+    "published_date": "TEXT",
+    "geographic_granularity": "TEXT CHECK (geographic_granularity IN "
+    "('nation', 'state', 'county', 'zip', 'point'))",
+    "student_suitability": "TEXT NOT NULL DEFAULT 'unreviewed' CHECK (student_suitability IN "
+    "('suitable', 'not_suitable', 'unreviewed'))",
+}
+
+GRANULARITY_LEVELS = ("nation", "state", "county", "zip", "point")
+STUDENT_SUITABILITY_VALUES = ("suitable", "not_suitable", "unreviewed")
+COVERAGE_FIPS_LENGTH = {"state": 2, "county": 5}
+
+
 def apply_schema(conn: sqlite3.Connection, schema_path: Path) -> None:
     conn.executescript(schema_path.read_text(encoding="utf-8"))
+    existing = {row[1] for row in conn.execute("PRAGMA table_info(sources)")}
+    for column, definition in ADDED_SOURCE_COLUMNS.items():
+        if column not in existing:
+            conn.execute(f"ALTER TABLE sources ADD COLUMN {column} {definition}")
 
 
 def as_bool(value: Any) -> int | None:
@@ -117,6 +138,67 @@ def load_frontend_variables(doc: dict[str, Any]) -> list[str]:
     return names
 
 
+def load_granularity(doc: dict[str, Any]) -> str | None:
+    value = as_text(doc.get("geographic_granularity"))
+    if value is None:
+        return None
+    if value not in GRANULARITY_LEVELS:
+        raise ValueError(
+            f"geographic_granularity must be one of {', '.join(GRANULARITY_LEVELS)}; got {value!r}"
+        )
+    return value
+
+
+def load_student_suitability(doc: dict[str, Any]) -> str:
+    value = as_text(doc.get("student_suitability")) or "unreviewed"
+    if value not in STUDENT_SUITABILITY_VALUES:
+        raise ValueError(
+            f"student_suitability must be one of {', '.join(STUDENT_SUITABILITY_VALUES)}; got {value!r}"
+        )
+    return value
+
+
+def load_coverage(doc: dict[str, Any]) -> list[tuple[str, str]]:
+    """Return (level, geoid) rows. YAML: coverage: [{level: nation} | {level: state|county, fips: ".."}]."""
+    entries = doc.get("coverage")
+    if entries is None:
+        return []
+    if not isinstance(entries, list):
+        raise ValueError("coverage must be a list")
+    rows: list[tuple[str, str]] = []
+    for entry in entries:
+        if not isinstance(entry, dict):
+            raise ValueError("each coverage entry must be a mapping")
+        level = as_text(entry.get("level"))
+        if level == "nation":
+            rows.append(("nation", "US"))
+            continue
+        if level not in COVERAGE_FIPS_LENGTH:
+            raise ValueError(f"coverage level must be nation, state, or county; got {level!r}")
+        fips = as_text(entry.get("fips"))
+        expected = COVERAGE_FIPS_LENGTH[level]
+        if not fips or not fips.isdigit() or len(fips) != expected:
+            raise ValueError(f"{level} coverage needs a {expected}-digit FIPS code; got {fips!r}")
+        rows.append((level, fips))
+    return rows
+
+
+def load_location(doc: dict[str, Any]) -> tuple[float, float, str | None] | None:
+    location = doc.get("location")
+    if location is None:
+        return None
+    if not isinstance(location, dict):
+        raise ValueError("location must be a mapping with latitude and longitude")
+    try:
+        latitude = float(location["latitude"])
+        longitude = float(location["longitude"])
+    except (KeyError, TypeError, ValueError) as exc:
+        raise ValueError("location needs numeric latitude and longitude") from exc
+    if not (-90 <= latitude <= 90 and -180 <= longitude <= 180):
+        raise ValueError(f"location out of range: {latitude}, {longitude}")
+    return latitude, longitude, as_text(location.get("label"))
+
+
 def load_variable_report(doc: dict[str, Any]) -> list[dict[str, Any]]:
     report = doc.get("variable_report")
     if not isinstance(report, list):
@@ -131,6 +213,8 @@ def delete_source_children(conn: sqlite3.Connection, source_id: str) -> None:
         "variable_report",
         "description_tags",
         "analysis_tags",
+        "source_coverage",
+        "source_location",
     ):
         conn.execute(f"DELETE FROM {table} WHERE source_id = ?", (source_id,))
 
@@ -153,6 +237,12 @@ def import_source(
     download_url = as_text(download.get("url"))
     pipeline_ready = 1 if website_url and download_url else 0
 
+    # Validate new canonical fields before touching the database.
+    granularity = load_granularity(doc)
+    student_suitability = load_student_suitability(doc)
+    coverage = load_coverage(doc)
+    location = load_location(doc)
+
     delete_source_children(conn, source_id)
 
     conn.execute(
@@ -161,8 +251,9 @@ def import_source(
             id, yml_filename, version, title, notes,
             provider_name, provider_agency, website_url,
             download_url, download_description, download_file_size,
-            requires_account, sensitive, pipeline_ready, imported_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            requires_account, sensitive, pipeline_ready, imported_at,
+            description, about, published_date, geographic_granularity, student_suitability
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
         (
             source_id,
@@ -180,8 +271,25 @@ def import_source(
             1 if doc.get("sensitive") else 0,
             pipeline_ready,
             imported_at,
+            as_text(doc.get("description")),
+            as_text(doc.get("about")),
+            as_text(doc.get("published_date")),
+            granularity,
+            student_suitability,
         ),
     )
+
+    for level, geoid in coverage:
+        conn.execute(
+            "INSERT OR IGNORE INTO source_coverage (source_id, level, geoid) VALUES (?, ?, ?)",
+            (source_id, level, geoid),
+        )
+
+    if location:
+        conn.execute(
+            "INSERT INTO source_location (source_id, latitude, longitude, label) VALUES (?, ?, ?, ?)",
+            (source_id, *location),
+        )
 
     if filters:
         conn.execute(

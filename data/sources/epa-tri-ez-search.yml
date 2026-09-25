@@ -47,3 +47,13 @@ geographic_coverage:
     school_district: false
     tract: false
     tribal_area: false
+
+# Canonical geography and audience metadata (see database/schema.sql).
+coverage:
+- level: nation
+geographic_granularity: zip
+student_suitability: unreviewed
+location:
+  latitude: 38.8939
+  longitude: -77.0287
+  label: EPA headquarters, Washington, DC (approximate)

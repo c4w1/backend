@@ -58,3 +58,13 @@ geographic_coverage:
     school_district: false
     tract: false
     tribal_area: false
+
+# Canonical geography and audience metadata (see database/schema.sql).
+coverage:
+- level: nation
+geographic_granularity: state
+student_suitability: not_suitable
+location:
+  latitude: 38.8951
+  longitude: -77.0249
+  label: FBI headquarters, Washington, DC (approximate)

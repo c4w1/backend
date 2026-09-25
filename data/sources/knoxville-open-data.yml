@@ -1,0 +1,58 @@
+id: knoxville-open-data
+version: '1.0'
+title: City of Knoxville Open Data Portal
+provider:
+  name: City of Knoxville
+  url: https://knoxvilletn.gov/government/opendata
+requires_account: false
+sensitive: false
+description: City-operated open data portal publishing datasets on public safety, infrastructure, parks,
+  permits, and more for Knoxville, TN. Datasets are downloadable as CSV, GeoJSON, or accessible via the
+  Socrata API.
+published_date: '2024-07-01'
+description_tags:
+- civic
+- public-safety
+- infrastructure
+- land-use
+- open-data
+- government
+pedagogical_tags:
+  civic-education: true
+  data-literacy: true
+  quantitative-methods: true
+coverage:
+- level: county
+  fips: '47093'
+geographic_granularity: point
+student_suitability: unreviewed
+location:
+  latitude: 35.9612
+  longitude: -83.9187
+  label: City County Building, 400 Main St, Knoxville, TN (approximate)
+about: |
+  The City of Knoxville's Open Data Portal provides access to dozens of municipal datasets, updated on rolling schedules ranging from real-time to annual.
+
+  ## Featured Datasets
+
+  - **KPD Incident Reports**: Knoxville Police Department calls for service and incident records, geocoded to block level.
+  - **Building Permits**: Residential and commercial permits issued since 2010, with permit type, value, and address.
+  - **Parks & Greenways**: GIS layers for park boundaries, trail networks, and recreation facilities.
+  - **Street Centerlines**: Road network with classification, surface type, and maintenance district.
+  - **Blight & Code Enforcement**: Properties with active or resolved code violations.
+
+  ## Accessing the Data
+
+  All datasets are available for download at **knoxvilletn.gov/government/opendata** in CSV and GeoJSON formats. The Socrata API provides programmatic access for developers.
+
+  ## Community Use
+
+  - Map code enforcement complaints by neighborhood to identify blight concentration.
+  - Track new building permit activity to understand where development is occurring.
+  - Analyze KPD incident data to understand public safety patterns.
+
+  ## Classroom Use
+
+  - **GIS projects**: Use the parks and street layers in QGIS to analyze accessibility by neighborhood.
+  - **Data journalism**: Investigate permit trends across council districts.
+  - **Public safety analysis**: Are incident rates correlated with poverty indicators from census data?

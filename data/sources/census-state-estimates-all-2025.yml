@@ -162,3 +162,13 @@ variable_types_tags:
   all-discrete: false
   all-continuous: false
   mixed-types: true
+
+# Canonical geography and audience metadata (see database/schema.sql).
+coverage:
+- level: nation
+geographic_granularity: state
+student_suitability: unreviewed
+location:
+  latitude: 38.8468
+  longitude: -76.9296
+  label: U.S. Census Bureau headquarters, Suitland, MD (approximate)

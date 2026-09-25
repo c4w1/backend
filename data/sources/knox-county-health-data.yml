@@ -1,0 +1,58 @@
+id: knox-county-health-data
+version: '1.0'
+title: Knox County Community Health Data
+provider:
+  name: Tennessee Department of Health / County Health Rankings
+  url: https://www.countyhealthrankings.org/location/tennessee/knox-county
+requires_account: false
+sensitive: false
+description: County-level health indicators for Knox County, TN, including mortality rates, chronic disease
+  prevalence, mental health metrics, and social determinants of health. Compiled from the Tennessee Department
+  of Health and the Robert Wood Johnson County Health Rankings.
+published_date: '2024-09-15'
+description_tags:
+- public-health
+- demographics
+- inequality
+- community
+- government
+pedagogical_tags:
+  data-literacy: true
+  social-justice: true
+  policy-analysis: true
+  civic-education: true
+coverage:
+- level: county
+  fips: '47093'
+geographic_granularity: county
+student_suitability: unreviewed
+location:
+  latitude: 35.9931
+  longitude: -83.9375
+  label: Knox County, TN (approximate center)
+about: |
+  The County Health Rankings & Roadmaps program, a collaboration between the Robert Wood Johnson Foundation and the University of Wisconsin, ranks the health of nearly all counties in the nation. Knox County data is also available from the Tennessee Department of Health's County Health Profiles.
+
+  ## What's Included
+
+  - **Health outcomes**: Premature death, poor physical health days, poor mental health days, low birthweight
+  - **Health behaviors**: Adult smoking, obesity, physical inactivity, excessive drinking, uninsured rates
+  - **Clinical care**: Primary care and mental health provider ratios, preventable hospital stays
+  - **Social & economic factors**: High school graduation, unemployment, income inequality, child poverty
+  - **Physical environment**: Air quality index, access to healthy foods, access to parks
+
+  ## Accessing the Data
+
+  Data is downloadable at **countyhealthrankings.org** as Excel/CSV files. Tennessee DOH publishes Knox County-specific reports at **tn.gov/health**.
+
+  ## Community Use
+
+  - Identify the leading preventable causes of premature death in Knox County.
+  - Compare Knox County rankings to neighboring counties and state averages.
+  - Use social determinants data to target community health intervention areas.
+
+  ## Classroom Use
+
+  - **Health disparities**: How do outcomes differ across Knox County ZIP codes and income levels?
+  - **Policy analysis**: What interventions are associated with improved rankings over time?
+  - **Data visualization**: Build a dashboard of Knox County health metrics using publicly available indicators.

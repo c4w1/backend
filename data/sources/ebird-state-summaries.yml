@@ -58,3 +58,13 @@ geographic_coverage:
     tract: false
     school_district: false
     tribal_area: false
+
+# Canonical geography and audience metadata (see database/schema.sql).
+coverage:
+- level: nation
+geographic_granularity: state
+student_suitability: unreviewed
+location:
+  latitude: 42.4801
+  longitude: -76.451
+  label: Cornell Lab of Ornithology, Ithaca, NY (approximate)

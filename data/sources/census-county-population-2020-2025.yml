@@ -60,3 +60,13 @@ geographic_coverage:
   url_template:
     state: https://api.census.gov/data/{year}/{dataset}?get={variables}&for=state:{state_fips}&key={api_key}
     tract: https://api.census.gov/data/{year}/{dataset}?get={variables}&for=tract:*&in=state:{state_fips}%20county:{county_fips}&key={api_key}
+
+# Canonical geography and audience metadata (see database/schema.sql).
+coverage:
+- level: nation
+geographic_granularity: county
+student_suitability: unreviewed
+location:
+  latitude: 38.8468
+  longitude: -76.9296
+  label: U.S. Census Bureau headquarters, Suitland, MD (approximate)

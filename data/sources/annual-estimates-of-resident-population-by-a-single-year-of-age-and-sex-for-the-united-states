@@ -16,3 +16,9 @@ description_tags:
 - environment
 - geospatial
 - public-data
+
+# Canonical geography and audience metadata (see database/schema.sql).
+coverage:
+- level: nation
+geographic_granularity: nation
+student_suitability: unreviewed

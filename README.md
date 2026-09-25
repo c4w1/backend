@@ -28,6 +28,17 @@ node server.mjs
 
 Re-run the import after editing YAML or running pipeline scripts (`tagdataset.py`, `variableextraction.py`, etc.) so the API reflects changes.
 
+Then export the database for the website and commit the result:
+
+```bash
+python pythonscripts/export_catalog.py          # database/sources.db -> data/exports/catalog.json
+python pythonscripts/export_catalog.py --check  # fails if the committed export is stale
+```
+
+The website builds from `data/exports/catalog.json`, so SQLite is what the site shows.
+
+Tests: `python -m unittest discover -s pythonscripts/tests`
+
 ## Server
 
 On Node.js 22.5 through 22.12, SQLite requires the experimental flag:

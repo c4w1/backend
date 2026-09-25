@@ -1,0 +1,1638 @@
+{
+  "exportVersion": 1,
+  "sourceCount": 21,
+  "sources": [
+    {
+      "id": "annual-estimates-of-resident-population-by-a-single-year-of-age-and-sex-for-the-united-states",
+      "title": "Annual Estimates of Resident Population by a Single Year of Age and Sex for the United States",
+      "version": "1.0",
+      "provider": {
+        "name": "U.S. Department of Agriculture (USDA)",
+        "agency": "U.S. Department of Agriculture",
+        "url": "https://www.nass.usda.gov/AgCensus"
+      },
+      "requires_account": false,
+      "sensitive": false,
+      "pipeline_ready": false,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "nation",
+      "coverage": [
+        {
+          "level": "nation",
+          "geoid": "US"
+        }
+      ],
+      "description_tags": [
+        "agriculture",
+        "census",
+        "demographics",
+        "economic",
+        "environment",
+        "geospatial",
+        "public-data"
+      ]
+    },
+    {
+      "id": "census-annual-pop-by-age-sex-2025",
+      "title": "Annual Estimates of the Resident Population by Single Year of Age and Sex for the United States: April 1 2020 to July 1 2025",
+      "version": "1.0",
+      "notes": "SEX codes: 0 = Total, 1 = Male, 2 = Female. AGE 999 = total population across all ages.",
+      "provider": {
+        "name": "U.S. Census Bureau",
+        "agency": "U.S. Department of Commerce",
+        "url": "https://www.census.gov/data/datasets/time-series/demo/popest/2020s-national-detail.html"
+      },
+      "download": {
+        "url": "https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/national/asrh/nc-est2025-agesex-res.csv",
+        "description": "Link downloads a CSV file.",
+        "file_size": "17.9 KB"
+      },
+      "requires_account": false,
+      "sensitive": false,
+      "pipeline_ready": true,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "nation",
+      "coverage": [
+        {
+          "level": "nation",
+          "geoid": "US"
+        }
+      ],
+      "location": {
+        "latitude": 38.8468,
+        "longitude": -76.9296,
+        "label": "U.S. Census Bureau headquarters, Suitland, MD (approximate)"
+      },
+      "variables": [
+        "SEX",
+        "AGE",
+        "ESTIMATESBASE2020",
+        "POPESTIMATE2020",
+        "POPESTIMATE2021",
+        "POPESTIMATE2022",
+        "POPESTIMATE2023",
+        "POPESTIMATE2024",
+        "POPESTIMATE2025"
+      ],
+      "description_tags": [
+        "Business & Finance",
+        "Children & Families",
+        "Economy",
+        "Election",
+        "PreK-12 Education",
+        "Energy & Environment",
+        "Government Administration",
+        "Health & Social Services",
+        "Housing & Buildings",
+        "Labor & Workforce Development",
+        "Population Data"
+      ],
+      "analysis_tags": {
+        "anova_tags": {
+          "good-for-one-way-anova": true,
+          "good-for-two-way-anova": false,
+          "good-for-chi-square-gof": true,
+          "good-for-chi-square-independence": false,
+          "good-for-paired-t-test": false
+        },
+        "association_tags": {
+          "positive-correlation": true,
+          "negative-correlation": false,
+          "no-correlation": false,
+          "strong-correlation": true,
+          "moderate-correlation": false,
+          "weak-correlation": false,
+          "linear-relationship": true,
+          "nonlinear-relationship": false,
+          "curved-relationship": false,
+          "exponential-pattern": false
+        },
+        "automation_rules_tags": {
+          "has-multiple-numeric-columns": true,
+          "has-categorical-variable": true,
+          "has-group-comparison-candidates": true,
+          "meets-minimum-sample-size": true,
+          "has-paired-test-candidates": false
+        },
+        "central_tendency_tags": {
+          "mean-median-similar": true,
+          "mean-median-different": false,
+          "has-mode": true
+        },
+        "comparison_capabilities_tags": {
+          "two-groups-present": false,
+          "multiple-groups-present": true,
+          "groups-have-different-centers": false,
+          "groups-have-different-spreads": false,
+          "groups-overlap-substantially": true
+        },
+        "distribution_shape_tags": {
+          "symmetric-distribution": true,
+          "right-skewed-distribution": true,
+          "left-skewed-distribution": false,
+          "approximately-normal": false,
+          "uniform-distribution": false,
+          "bimodal-distribution": true
+        },
+        "inference_procedures_tags": {
+          "good-for-one-sample-t-test": true,
+          "good-for-one-sample-z-test": true,
+          "good-for-one-proportion-z-test": false,
+          "good-for-two-sample-t-test": false,
+          "good-for-two-sample-z-test": false,
+          "good-for-two-proportion-z-test": false,
+          "meets-equal-variance-assumption": false,
+          "violates-equal-variance-assumption": false
+        },
+        "normality_tags": {
+          "passes-normality-test": false,
+          "fails-normality-test": true,
+          "large-enough-for-clt": true
+        },
+        "outlier_tags": {
+          "contains-outliers": true,
+          "no-outliers": false,
+          "extreme-outliers": true
+        },
+        "regression_quality_tags": {
+          "good-linear-fit": true,
+          "moderate-linear-fit": false,
+          "poor-linear-fit": false,
+          "has-influential-points": true,
+          "regression-appropriate": true
+        },
+        "statistical_procedures_tags": {
+          "good-for-transformation": true
+        },
+        "structure_complexity_tags": {
+          "univariate": false,
+          "bivariate": false,
+          "multivariate": true,
+          "small-dataset": false,
+          "medium-dataset": false,
+          "large-dataset": true
+        },
+        "two_way_table_tags": {
+          "two-way-table": false
+        },
+        "value_scale_tags": {
+          "single-digit-values": false,
+          "double-digit-values": false,
+          "three-digit-values": false,
+          "large-scale-values": true
+        },
+        "variability_tags": {
+          "high-variability": true,
+          "moderate-variability": false,
+          "low-variability": false,
+          "restricted-range": true,
+          "wide-range": true
+        },
+        "variable_types_tags": {
+          "all-discrete": true,
+          "all-continuous": false,
+          "mixed-types": false
+        }
+      }
+    },
+    {
+      "id": "census-annual-pop-selected-age-groups-2024",
+      "title": "Annual Estimates of the Resident Population for Selected Age Groups by Sex for the United States",
+      "version": "1.0",
+      "provider": {
+        "name": "U.S. Census Bureau",
+        "agency": "U.S. Department of Commerce",
+        "url": "https://www.census.gov/data/datasets/time-series/demo/popest/2020s-national-detail.html"
+      },
+      "download": {
+        "url": "https://www2.census.gov/programs-surveys/popest/tables/2020-2024/national/asrh/nc-est2024-agesex.xlsx",
+        "description": "Link downloads an XLSX file.",
+        "file_size": "18.3 KB"
+      },
+      "requires_account": false,
+      "sensitive": false,
+      "pipeline_ready": true,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "nation",
+      "coverage": [
+        {
+          "level": "nation",
+          "geoid": "US"
+        }
+      ],
+      "location": {
+        "latitude": 38.8468,
+        "longitude": -76.9296,
+        "label": "U.S. Census Bureau headquarters, Suitland, MD (approximate)"
+      },
+      "variables": [
+        "Age group",
+        "Estimates base (both sexes)",
+        "Estimates base (male)",
+        "Estimates base (female)",
+        "2020 both sexes",
+        "2020 male",
+        "2020 female",
+        "2021 both sexes",
+        "2021 male",
+        "2021 female",
+        "2022 both sexes",
+        "2022 male",
+        "2022 female",
+        "2023 both sexes",
+        "2023 male",
+        "2023 female",
+        "2024 both sexes",
+        "2024 male",
+        "2024 female"
+      ],
+      "description_tags": [
+        "Business & Finance",
+        "Children & Families",
+        "Economy",
+        "Election",
+        "PreK-12 Education",
+        "Energy & Environment",
+        "Government Administration",
+        "Health & Social Services",
+        "Housing & Buildings",
+        "Labor & Workforce Development",
+        "Population Data"
+      ],
+      "analysis_tags": {
+        "anova_tags": {
+          "good-for-one-way-anova": false,
+          "good-for-two-way-anova": false,
+          "good-for-chi-square-gof": false,
+          "good-for-chi-square-independence": false,
+          "good-for-paired-t-test": false
+        },
+        "association_tags": {
+          "positive-correlation": false,
+          "negative-correlation": false,
+          "no-correlation": false,
+          "strong-correlation": false,
+          "moderate-correlation": false,
+          "weak-correlation": false,
+          "linear-relationship": false,
+          "nonlinear-relationship": false,
+          "curved-relationship": false,
+          "exponential-pattern": false
+        },
+        "automation_rules_tags": {
+          "has-multiple-numeric-columns": false,
+          "has-categorical-variable": true,
+          "has-group-comparison-candidates": false,
+          "meets-minimum-sample-size": true,
+          "has-paired-test-candidates": false
+        },
+        "central_tendency_tags": {
+          "mean-median-similar": false,
+          "mean-median-different": false,
+          "has-mode": false
+        },
+        "comparison_capabilities_tags": {
+          "two-groups-present": false,
+          "multiple-groups-present": false,
+          "groups-have-different-centers": false,
+          "groups-have-different-spreads": false,
+          "groups-overlap-substantially": false
+        },
+        "distribution_shape_tags": {
+          "symmetric-distribution": false,
+          "right-skewed-distribution": false,
+          "left-skewed-distribution": false,
+          "approximately-normal": false,
+          "uniform-distribution": false,
+          "bimodal-distribution": false
+        },
+        "inference_procedures_tags": {
+          "good-for-one-sample-t-test": false,
+          "good-for-one-sample-z-test": false,
+          "good-for-one-proportion-z-test": false,
+          "good-for-two-sample-t-test": false,
+          "good-for-two-sample-z-test": false,
+          "good-for-two-proportion-z-test": false,
+          "meets-equal-variance-assumption": false,
+          "violates-equal-variance-assumption": false
+        },
+        "normality_tags": {
+          "passes-normality-test": false,
+          "fails-normality-test": false,
+          "large-enough-for-clt": true
+        },
+        "outlier_tags": {
+          "contains-outliers": false,
+          "no-outliers": false,
+          "extreme-outliers": false
+        },
+        "regression_quality_tags": {
+          "good-linear-fit": false,
+          "moderate-linear-fit": false,
+          "poor-linear-fit": false,
+          "has-influential-points": false,
+          "regression-appropriate": false
+        },
+        "statistical_procedures_tags": {
+          "good-for-transformation": false
+        },
+        "structure_complexity_tags": {
+          "univariate": false,
+          "bivariate": false,
+          "multivariate": false,
+          "small-dataset": false,
+          "medium-dataset": true,
+          "large-dataset": false
+        },
+        "two_way_table_tags": {
+          "two-way-table": false
+        },
+        "value_scale_tags": {
+          "single-digit-values": true,
+          "double-digit-values": false,
+          "three-digit-values": false,
+          "large-scale-values": false
+        },
+        "variability_tags": {
+          "high-variability": false,
+          "moderate-variability": false,
+          "low-variability": false,
+          "restricted-range": false,
+          "wide-range": false
+        },
+        "variable_types_tags": {
+          "all-discrete": false,
+          "all-continuous": false,
+          "mixed-types": false
+        }
+      }
+    },
+    {
+      "id": "census-county-estimates-all-2025",
+      "title": "County Estimates All Data 2025",
+      "version": "1.0",
+      "notes": "SUMLEV: summary level (40 = state, 50 = county). NPOPCHG: net population change. NATURALCHG: births minus deaths. GQESTIMATES: population in group quarters (prisons, dorms, nursing homes, etc.). RBIRTH/RDEATH/RNETMIG: rates per 1,000 people.",
+      "provider": {
+        "name": "U.S. Census Bureau",
+        "agency": "U.S. Department of Commerce",
+        "url": "https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/counties/totals/"
+      },
+      "download": {
+        "url": "https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/counties/totals/co-est2025-alldata.csv",
+        "description": "Link downloads a CSV file.",
+        "file_size": "2023 KB"
+      },
+      "requires_account": false,
+      "sensitive": false,
+      "pipeline_ready": true,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "county",
+      "coverage": [
+        {
+          "level": "nation",
+          "geoid": "US"
+        }
+      ],
+      "location": {
+        "latitude": 38.8468,
+        "longitude": -76.9296,
+        "label": "U.S. Census Bureau headquarters, Suitland, MD (approximate)"
+      },
+      "variables": [
+        "SUMLEV",
+        "REGION",
+        "DIVISION",
+        "STATE",
+        "COUNTY",
+        "STNAME",
+        "CTYNAME",
+        "ESTIMATESBASE2020",
+        "POPESTIMATE2020 through POPESTIMATE2025",
+        "NPOPCHG2020 through NPOPCHG2025",
+        "BIRTHS2020 through BIRTHS2025",
+        "DEATHS2020 through DEATHS2025",
+        "NATURALCHG2020 through NATURALCHG2025",
+        "INTERNATIONALMIG2020 through INTERNATIONALMIG2025",
+        "DOMESTICMIG2020 through DOMESTICMIG2025",
+        "NETMIG2020 through NETMIG2025",
+        "RESIDUAL2020 through RESIDUAL2025",
+        "GQESTIMATESBASE2020",
+        "GQESTIMATES2020 through GQESTIMATES2025",
+        "RBIRTH2021 through RBIRTH2025",
+        "RDEATH2021 through RDEATH2025",
+        "RNATURALCHG2021 through RNATURALCHG2025",
+        "RINTERNATIONALMIG2021 through RINTERNATIONALMIG2025",
+        "RDOMESTICMIG2021 through RDOMESTICMIG2025",
+        "RNETMIG2021 through RNETMIG2025"
+      ],
+      "description_tags": [
+        "Energy & Environment",
+        "Population Data"
+      ]
+    },
+    {
+      "id": "census-county-population-2020-2025",
+      "title": "County Population Totals and Components of Change 2020-2025",
+      "version": "1.0",
+      "provider": {
+        "name": "U.S. Census Bureau",
+        "agency": "U.S. Department of Commerce",
+        "url": "https://www.census.gov/data/datasets/time-series/demo/popest/2020s-counties-total.html"
+      },
+      "download": {
+        "description": "Download will start once state is selected.",
+        "file_size": "varies by selection"
+      },
+      "requires_account": false,
+      "sensitive": false,
+      "pipeline_ready": false,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "county",
+      "coverage": [
+        {
+          "level": "nation",
+          "geoid": "US"
+        }
+      ],
+      "location": {
+        "latitude": 38.8468,
+        "longitude": -76.9296,
+        "label": "U.S. Census Bureau headquarters, Suitland, MD (approximate)"
+      },
+      "filters": {
+        "year": false,
+        "state": true,
+        "county": false,
+        "zipcode": false
+      },
+      "variables": [
+        "County name",
+        "April 1 2020 census population",
+        "2020 population estimate",
+        "2021 population estimate",
+        "2022 population estimate",
+        "2023 population estimate",
+        "2024 population estimate",
+        "2025 population estimate"
+      ],
+      "description_tags": [
+        "Business & Finance",
+        "Children & Families",
+        "Economy",
+        "Election",
+        "PreK-12 Education",
+        "Energy & Environment",
+        "Government Administration",
+        "Health & Social Services",
+        "Housing & Buildings",
+        "Labor & Workforce Development",
+        "Population Data"
+      ]
+    },
+    {
+      "id": "census-resident-pop-18plus-2025",
+      "title": "Estimates of the Total Resident Population and Resident Population Age 18 Years and Older for the United States, Regions, States, District of Columbia, and Puerto Rico - July 1 2025",
+      "version": "1.0",
+      "provider": {
+        "name": "U.S. Census Bureau",
+        "agency": "U.S. Department of Commerce",
+        "url": "https://www.census.gov/data/datasets/time-series/demo/popest/2020s-national-detail.html"
+      },
+      "download": {
+        "url": "https://www2.census.gov/programs-surveys/popest/tables/2020-2025/state/detail/SCPRC-EST2025-18+POP.xlsx",
+        "description": "Link downloads an XLSX file.",
+        "file_size": "14.7 KB"
+      },
+      "requires_account": false,
+      "sensitive": false,
+      "pipeline_ready": true,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "state",
+      "coverage": [
+        {
+          "level": "nation",
+          "geoid": "US"
+        }
+      ],
+      "location": {
+        "latitude": 38.8468,
+        "longitude": -76.9296,
+        "label": "U.S. Census Bureau headquarters, Suitland, MD (approximate)"
+      },
+      "variables": [
+        "Geographic Area",
+        "Total Resident Population",
+        "Resident Population Age 18 Years and Older Number",
+        "Resident Population Age 18 Years and Older Percent"
+      ],
+      "description_tags": [
+        "Business & Finance",
+        "Children & Families",
+        "Economy",
+        "Election",
+        "PreK-12 Education",
+        "Energy & Environment",
+        "Government Administration",
+        "Health & Social Services",
+        "Housing & Buildings",
+        "Labor & Workforce Development",
+        "Population Data"
+      ],
+      "analysis_tags": {
+        "anova_tags": {
+          "good-for-one-way-anova": false,
+          "good-for-two-way-anova": false,
+          "good-for-chi-square-gof": false,
+          "good-for-chi-square-independence": false,
+          "good-for-paired-t-test": false
+        },
+        "association_tags": {
+          "positive-correlation": false,
+          "negative-correlation": false,
+          "no-correlation": false,
+          "strong-correlation": false,
+          "moderate-correlation": false,
+          "weak-correlation": false,
+          "linear-relationship": false,
+          "nonlinear-relationship": false,
+          "curved-relationship": false,
+          "exponential-pattern": false
+        },
+        "automation_rules_tags": {
+          "has-multiple-numeric-columns": false,
+          "has-categorical-variable": true,
+          "has-group-comparison-candidates": false,
+          "meets-minimum-sample-size": true,
+          "has-paired-test-candidates": false
+        },
+        "central_tendency_tags": {
+          "mean-median-similar": false,
+          "mean-median-different": false,
+          "has-mode": false
+        },
+        "comparison_capabilities_tags": {
+          "two-groups-present": false,
+          "multiple-groups-present": false,
+          "groups-have-different-centers": false,
+          "groups-have-different-spreads": false,
+          "groups-overlap-substantially": false
+        },
+        "distribution_shape_tags": {
+          "symmetric-distribution": false,
+          "right-skewed-distribution": false,
+          "left-skewed-distribution": false,
+          "approximately-normal": false,
+          "uniform-distribution": false,
+          "bimodal-distribution": false
+        },
+        "inference_procedures_tags": {
+          "good-for-one-sample-t-test": false,
+          "good-for-one-sample-z-test": false,
+          "good-for-one-proportion-z-test": false,
+          "good-for-two-sample-t-test": false,
+          "good-for-two-sample-z-test": false,
+          "good-for-two-proportion-z-test": false,
+          "meets-equal-variance-assumption": false,
+          "violates-equal-variance-assumption": false
+        },
+        "normality_tags": {
+          "passes-normality-test": false,
+          "fails-normality-test": false,
+          "large-enough-for-clt": true
+        },
+        "outlier_tags": {
+          "contains-outliers": false,
+          "no-outliers": false,
+          "extreme-outliers": false
+        },
+        "regression_quality_tags": {
+          "good-linear-fit": false,
+          "moderate-linear-fit": false,
+          "poor-linear-fit": false,
+          "has-influential-points": false,
+          "regression-appropriate": false
+        },
+        "statistical_procedures_tags": {
+          "good-for-transformation": false
+        },
+        "structure_complexity_tags": {
+          "univariate": false,
+          "bivariate": false,
+          "multivariate": false,
+          "small-dataset": false,
+          "medium-dataset": true,
+          "large-dataset": false
+        },
+        "two_way_table_tags": {
+          "two-way-table": false
+        },
+        "value_scale_tags": {
+          "single-digit-values": true,
+          "double-digit-values": false,
+          "three-digit-values": false,
+          "large-scale-values": false
+        },
+        "variability_tags": {
+          "high-variability": false,
+          "moderate-variability": false,
+          "low-variability": false,
+          "restricted-range": false,
+          "wide-range": false
+        },
+        "variable_types_tags": {
+          "all-discrete": false,
+          "all-continuous": false,
+          "mixed-types": false
+        }
+      }
+    },
+    {
+      "id": "census-state-estimates-all-2025",
+      "title": "National State Estimates All Data 2025",
+      "version": "1.0",
+      "provider": {
+        "name": "U.S. Census Bureau",
+        "agency": "U.S. Department of Commerce",
+        "url": "https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/state/totals/"
+      },
+      "download": {
+        "url": "https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/state/totals/NST-EST2025-ALLDATA.csv",
+        "description": "Link downloads a CSV file.",
+        "file_size": "52 KB"
+      },
+      "requires_account": false,
+      "sensitive": false,
+      "pipeline_ready": true,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "state",
+      "coverage": [
+        {
+          "level": "nation",
+          "geoid": "US"
+        }
+      ],
+      "location": {
+        "latitude": 38.8468,
+        "longitude": -76.9296,
+        "label": "U.S. Census Bureau headquarters, Suitland, MD (approximate)"
+      },
+      "variables": [
+        "SUMLEV",
+        "REGION",
+        "DIVISION",
+        "STATE",
+        "NAME",
+        "ESTIMATESBASE2020",
+        "POPESTIMATE2020 through POPESTIMATE2025",
+        "NPOPCHG2020 through NPOPCHG2025",
+        "BIRTHS2020 through BIRTHS2025",
+        "DEATHS2020 through DEATHS2025",
+        "NATURALCHG2020 through NATURALCHG2025",
+        "INTERNATIONALMIG2020 through INTERNATIONALMIG2025",
+        "DOMESTICMIG2020 through DOMESTICMIG2025",
+        "NETMIG2020 through NETMIG2025",
+        "RESIDUAL2020 through RESIDUAL2025",
+        "GQESTIMATESBASE2020",
+        "GQESTIMATES2020 through GQESTIMATES2025",
+        "RBIRTH2021 through RBIRTH2025",
+        "RDEATH2021 through RDEATH2025",
+        "RNATURALCHG2021 through RNATURALCHG2025",
+        "RINTERNATIONALMIG2021 through RINTERNATIONALMIG2025",
+        "RDOMESTICMIG2021 through RDOMESTICMIG2025",
+        "RNETMIG2021 through RNETMIG2025"
+      ],
+      "description_tags": [
+        "Economy",
+        "Energy & Environment",
+        "Government Administration",
+        "Housing & Buildings",
+        "Population Data"
+      ],
+      "analysis_tags": {
+        "anova_tags": {
+          "good-for-one-way-anova": false,
+          "good-for-two-way-anova": false,
+          "good-for-chi-square-gof": false,
+          "good-for-chi-square-independence": false,
+          "good-for-paired-t-test": false
+        },
+        "association_tags": {
+          "positive-correlation": true,
+          "negative-correlation": true,
+          "no-correlation": false,
+          "strong-correlation": true,
+          "moderate-correlation": true,
+          "weak-correlation": true,
+          "linear-relationship": true,
+          "nonlinear-relationship": true,
+          "curved-relationship": true,
+          "exponential-pattern": true
+        },
+        "automation_rules_tags": {
+          "has-multiple-numeric-columns": true,
+          "has-categorical-variable": true,
+          "has-group-comparison-candidates": true,
+          "meets-minimum-sample-size": true,
+          "has-paired-test-candidates": false
+        },
+        "central_tendency_tags": {
+          "mean-median-similar": true,
+          "mean-median-different": true,
+          "has-mode": true
+        },
+        "comparison_capabilities_tags": {
+          "two-groups-present": false,
+          "multiple-groups-present": true,
+          "groups-have-different-centers": true,
+          "groups-have-different-spreads": true,
+          "groups-overlap-substantially": true
+        },
+        "distribution_shape_tags": {
+          "symmetric-distribution": true,
+          "right-skewed-distribution": true,
+          "left-skewed-distribution": true,
+          "approximately-normal": true,
+          "uniform-distribution": false,
+          "bimodal-distribution": true
+        },
+        "inference_procedures_tags": {
+          "good-for-one-sample-t-test": true,
+          "good-for-one-sample-z-test": true,
+          "good-for-one-proportion-z-test": false,
+          "good-for-two-sample-t-test": false,
+          "good-for-two-sample-z-test": false,
+          "good-for-two-proportion-z-test": false,
+          "meets-equal-variance-assumption": false,
+          "violates-equal-variance-assumption": false
+        },
+        "normality_tags": {
+          "passes-normality-test": true,
+          "fails-normality-test": true,
+          "large-enough-for-clt": true
+        },
+        "outlier_tags": {
+          "contains-outliers": true,
+          "no-outliers": false,
+          "extreme-outliers": true
+        },
+        "regression_quality_tags": {
+          "good-linear-fit": true,
+          "moderate-linear-fit": true,
+          "poor-linear-fit": false,
+          "has-influential-points": true,
+          "regression-appropriate": true
+        },
+        "statistical_procedures_tags": {
+          "good-for-transformation": true
+        },
+        "structure_complexity_tags": {
+          "univariate": false,
+          "bivariate": false,
+          "multivariate": true,
+          "small-dataset": false,
+          "medium-dataset": true,
+          "large-dataset": false
+        },
+        "two_way_table_tags": {
+          "two-way-table": false
+        },
+        "value_scale_tags": {
+          "single-digit-values": false,
+          "double-digit-values": false,
+          "three-digit-values": false,
+          "large-scale-values": true
+        },
+        "variability_tags": {
+          "high-variability": true,
+          "moderate-variability": true,
+          "low-variability": true,
+          "restricted-range": false,
+          "wide-range": true
+        },
+        "variable_types_tags": {
+          "all-discrete": false,
+          "all-continuous": false,
+          "mixed-types": true
+        }
+      }
+    },
+    {
+      "id": "census-state-pop-change-2020-2025",
+      "title": "National State Population Change 2020-2025",
+      "version": "1.0",
+      "provider": {
+        "name": "U.S. Census Bureau",
+        "agency": "U.S. Department of Commerce",
+        "url": "https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/state/totals/"
+      },
+      "download": {
+        "url": "https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/state/totals/NST-EST2025-POPCHG2020-2025.csv",
+        "description": "Link downloads a CSV file.",
+        "file_size": "16 KB"
+      },
+      "requires_account": false,
+      "sensitive": false,
+      "pipeline_ready": true,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "state",
+      "coverage": [
+        {
+          "level": "nation",
+          "geoid": "US"
+        }
+      ],
+      "location": {
+        "latitude": 38.8468,
+        "longitude": -76.9296,
+        "label": "U.S. Census Bureau headquarters, Suitland, MD (approximate)"
+      },
+      "variables": [
+        "SUMLEV",
+        "REGION",
+        "DIVISION",
+        "STATE",
+        "NAME",
+        "ESTIMATESBASE2020",
+        "POPESTIMATE2020 through POPESTIMATE2025",
+        "NPOPCHG_2020 through NPOPCHG_2025",
+        "PPOPCHG_2020 through PPOPCHG_2025",
+        "NRANK_ESTBASE2020",
+        "NRANK_POPEST2020 through NRANK_POPEST2025",
+        "NRANK_NPCHG2020 through NRANK_NPCHG2025",
+        "NRANK_PPCHG2020 through NRANK_PPCHG2025"
+      ],
+      "description_tags": [
+        "Economy",
+        "Energy & Environment",
+        "Government Administration",
+        "Housing & Buildings",
+        "Population Data"
+      ],
+      "analysis_tags": {
+        "anova_tags": {
+          "good-for-one-way-anova": false,
+          "good-for-two-way-anova": false,
+          "good-for-chi-square-gof": false,
+          "good-for-chi-square-independence": false,
+          "good-for-paired-t-test": false
+        },
+        "association_tags": {
+          "positive-correlation": true,
+          "negative-correlation": true,
+          "no-correlation": false,
+          "strong-correlation": true,
+          "moderate-correlation": true,
+          "weak-correlation": true,
+          "linear-relationship": true,
+          "nonlinear-relationship": true,
+          "curved-relationship": true,
+          "exponential-pattern": false
+        },
+        "automation_rules_tags": {
+          "has-multiple-numeric-columns": true,
+          "has-categorical-variable": true,
+          "has-group-comparison-candidates": true,
+          "meets-minimum-sample-size": true,
+          "has-paired-test-candidates": false
+        },
+        "central_tendency_tags": {
+          "mean-median-similar": true,
+          "mean-median-different": true,
+          "has-mode": true
+        },
+        "comparison_capabilities_tags": {
+          "two-groups-present": false,
+          "multiple-groups-present": true,
+          "groups-have-different-centers": true,
+          "groups-have-different-spreads": true,
+          "groups-overlap-substantially": true
+        },
+        "distribution_shape_tags": {
+          "symmetric-distribution": true,
+          "right-skewed-distribution": true,
+          "left-skewed-distribution": true,
+          "approximately-normal": true,
+          "uniform-distribution": false,
+          "bimodal-distribution": true
+        },
+        "inference_procedures_tags": {
+          "good-for-one-sample-t-test": true,
+          "good-for-one-sample-z-test": true,
+          "good-for-one-proportion-z-test": false,
+          "good-for-two-sample-t-test": false,
+          "good-for-two-sample-z-test": false,
+          "good-for-two-proportion-z-test": false,
+          "meets-equal-variance-assumption": false,
+          "violates-equal-variance-assumption": false
+        },
+        "normality_tags": {
+          "passes-normality-test": true,
+          "fails-normality-test": true,
+          "large-enough-for-clt": true
+        },
+        "outlier_tags": {
+          "contains-outliers": true,
+          "no-outliers": false,
+          "extreme-outliers": true
+        },
+        "regression_quality_tags": {
+          "good-linear-fit": true,
+          "moderate-linear-fit": true,
+          "poor-linear-fit": false,
+          "has-influential-points": true,
+          "regression-appropriate": true
+        },
+        "statistical_procedures_tags": {
+          "good-for-transformation": true
+        },
+        "structure_complexity_tags": {
+          "univariate": false,
+          "bivariate": false,
+          "multivariate": true,
+          "small-dataset": false,
+          "medium-dataset": true,
+          "large-dataset": false
+        },
+        "two_way_table_tags": {
+          "two-way-table": false
+        },
+        "value_scale_tags": {
+          "single-digit-values": false,
+          "double-digit-values": false,
+          "three-digit-values": false,
+          "large-scale-values": true
+        },
+        "variability_tags": {
+          "high-variability": true,
+          "moderate-variability": true,
+          "low-variability": true,
+          "restricted-range": false,
+          "wide-range": true
+        },
+        "variable_types_tags": {
+          "all-discrete": false,
+          "all-continuous": false,
+          "mixed-types": true
+        }
+      }
+    },
+    {
+      "id": "ebird-observation-dataset",
+      "title": "eBird Observation Dataset",
+      "version": "1.0",
+      "provider": {
+        "name": "Cornell Lab of Ornithology",
+        "url": "https://ebird.org/data/download/ebd"
+      },
+      "download": {
+        "description": "Download link will be provided after selecting year and region."
+      },
+      "requires_account": true,
+      "sensitive": false,
+      "pipeline_ready": false,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "county",
+      "coverage": [
+        {
+          "level": "nation",
+          "geoid": "US"
+        }
+      ],
+      "location": {
+        "latitude": 42.4801,
+        "longitude": -76.451,
+        "label": "Cornell Lab of Ornithology, Ithaca, NY (approximate)"
+      },
+      "filters": {
+        "year": true,
+        "state": true,
+        "county": true,
+        "zipcode": false
+      }
+    },
+    {
+      "id": "ebird-state-summaries",
+      "title": "State-Level eBird Data Summaries",
+      "version": "1.0",
+      "provider": {
+        "name": "Cornell Lab of Ornithology",
+        "url": "https://www.birds.cornell.edu/home/us-state-level-conservation-data-summaries/"
+      },
+      "download": {
+        "description": "Download link for species-level summaries is available underneath the state selection.",
+        "file_size": "varies by selection"
+      },
+      "requires_account": false,
+      "sensitive": false,
+      "pipeline_ready": false,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "state",
+      "coverage": [
+        {
+          "level": "nation",
+          "geoid": "US"
+        }
+      ],
+      "location": {
+        "latitude": 42.4801,
+        "longitude": -76.451,
+        "label": "Cornell Lab of Ornithology, Ithaca, NY (approximate)"
+      },
+      "filters": {
+        "year": false,
+        "state": true,
+        "county": false,
+        "zipcode": false
+      },
+      "variables": [
+        "Scientific name",
+        "Trend period",
+        "Season code",
+        "State trend median",
+        "State trend",
+        "State trend lower CI",
+        "State trend upper CI",
+        "Breeding habitat primary",
+        "Breeding habitat secondary"
+      ]
+    },
+    {
+      "id": "epa-airtoxscreen-county",
+      "title": "AirToxScreen Emissions by County",
+      "version": "1.0",
+      "provider": {
+        "name": "U.S. Environmental Protection Agency (EPA)"
+      },
+      "download": {
+        "url": "https://www.epa.gov/system/files/other-files/2024-05/airtoxscreen_2020_emissions_county_sourcegroup.zip",
+        "description": "Link downloads a ZIP file.",
+        "file_size": "108 MB"
+      },
+      "requires_account": false,
+      "sensitive": false,
+      "pipeline_ready": false,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "county",
+      "coverage": [
+        {
+          "level": "nation",
+          "geoid": "US"
+        }
+      ],
+      "location": {
+        "latitude": 38.8939,
+        "longitude": -77.0287,
+        "label": "EPA headquarters, Washington, DC (approximate)"
+      },
+      "filters": {
+        "year": false,
+        "state": false,
+        "county": true,
+        "zipcode": false
+      },
+      "description_tags": [
+        "Energy & Environment",
+        "Government Administration"
+      ]
+    },
+    {
+      "id": "epa-tri-basic-data",
+      "title": "Toxic Release Inventory Basic Data Files",
+      "version": "1.0",
+      "provider": {
+        "name": "U.S. Environmental Protection Agency (EPA)",
+        "url": "https://www.epa.gov/toxics-release-inventory-tri-program/tri-basic-data-files-calendar-years-1987-present"
+      },
+      "download": {
+        "description": "After selecting year and geographic information, there is a button to directly download the data file.",
+        "file_size": "varies by selection"
+      },
+      "requires_account": false,
+      "sensitive": false,
+      "pipeline_ready": false,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "state",
+      "coverage": [
+        {
+          "level": "nation",
+          "geoid": "US"
+        }
+      ],
+      "location": {
+        "latitude": 38.8939,
+        "longitude": -77.0287,
+        "label": "EPA headquarters, Washington, DC (approximate)"
+      },
+      "filters": {
+        "year": true,
+        "state": true,
+        "county": false,
+        "zipcode": false
+      },
+      "description_tags": [
+        "Business & Finance",
+        "Children & Families",
+        "Energy & Environment",
+        "Government Administration",
+        "Health & Social Services",
+        "Law & Public Safety"
+      ]
+    },
+    {
+      "id": "epa-tri-dioxin",
+      "title": "TRI Dioxin and Dioxin-like Compounds and TEQ Data Files: 2008-Present",
+      "version": "1.0",
+      "provider": {
+        "name": "U.S. Environmental Protection Agency (EPA)"
+      },
+      "download": {
+        "description": "Download link will be provided after selecting year.",
+        "file_size": "varies by selection"
+      },
+      "requires_account": false,
+      "sensitive": false,
+      "pipeline_ready": false,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "nation",
+      "coverage": [
+        {
+          "level": "nation",
+          "geoid": "US"
+        }
+      ],
+      "location": {
+        "latitude": 38.8939,
+        "longitude": -77.0287,
+        "label": "EPA headquarters, Washington, DC (approximate)"
+      },
+      "filters": {
+        "year": true,
+        "state": false,
+        "county": false,
+        "zipcode": false
+      },
+      "description_tags": [
+        "Energy & Environment",
+        "Government Administration"
+      ]
+    },
+    {
+      "id": "epa-tri-ez-search",
+      "title": "Toxics Release Inventory EZ Search",
+      "version": "1.0",
+      "provider": {
+        "name": "U.S. Environmental Protection Agency (EPA)"
+      },
+      "download": {
+        "description": "After selecting topic, variables, and location filters the website will provide a link to download the dataset.",
+        "file_size": "varies by selection"
+      },
+      "requires_account": false,
+      "sensitive": false,
+      "pipeline_ready": false,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "zip",
+      "coverage": [
+        {
+          "level": "nation",
+          "geoid": "US"
+        }
+      ],
+      "location": {
+        "latitude": 38.8939,
+        "longitude": -77.0287,
+        "label": "EPA headquarters, Washington, DC (approximate)"
+      },
+      "filters": {
+        "year": true,
+        "state": true,
+        "county": true,
+        "zipcode": true
+      },
+      "description_tags": [
+        "Energy & Environment",
+        "Government Administration"
+      ]
+    },
+    {
+      "id": "fbi-crime-data-explorer",
+      "title": "National FBI Crime Data Explorer",
+      "version": "1.0",
+      "provider": {
+        "name": "Federal Bureau of Investigation (FBI)",
+        "agency": "U.S. Department of Justice",
+        "url": "https://cde.ucr.cjis.gov"
+      },
+      "download": {
+        "description": "Download links to multiple types of data available after selecting filters. Each variable is available for download separately.",
+        "file_size": "varies by selection"
+      },
+      "requires_account": false,
+      "sensitive": true,
+      "pipeline_ready": false,
+      "student_suitability": "not_suitable",
+      "geographic_granularity": "state",
+      "coverage": [
+        {
+          "level": "nation",
+          "geoid": "US"
+        }
+      ],
+      "location": {
+        "latitude": 38.8951,
+        "longitude": -77.0249,
+        "label": "FBI headquarters, Washington, DC (approximate)"
+      },
+      "filters": {
+        "year": true,
+        "state": true,
+        "county": false,
+        "zipcode": false
+      },
+      "variables": [
+        "Offender Age",
+        "Offender Sex",
+        "Offender Race",
+        "Offender Ethnicity",
+        "Location Type",
+        "Victims Relationship to Offender",
+        "Type of Weapon Involved",
+        "Offense Linked to Another Offense"
+      ],
+      "description_tags": [
+        "Energy & Environment",
+        "Law & Public Safety"
+      ]
+    },
+    {
+      "id": "fbi-state-agency-data",
+      "title": "FBI State and Agency Crime Data",
+      "version": "1.0",
+      "provider": {
+        "name": "Federal Bureau of Investigation (FBI)",
+        "agency": "U.S. Department of Justice",
+        "url": "https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend"
+      },
+      "download": {
+        "description": "Download links to multiple types of data available after selecting filters. Each variable is available for download separately.",
+        "file_size": "varies by selection"
+      },
+      "requires_account": false,
+      "sensitive": true,
+      "pipeline_ready": false,
+      "student_suitability": "not_suitable",
+      "geographic_granularity": "state",
+      "coverage": [
+        {
+          "level": "nation",
+          "geoid": "US"
+        }
+      ],
+      "location": {
+        "latitude": 38.8951,
+        "longitude": -77.0249,
+        "label": "FBI headquarters, Washington, DC (approximate)"
+      },
+      "filters": {
+        "year": true,
+        "state": true,
+        "county": false,
+        "zipcode": false
+      },
+      "variables": [
+        "Offender Age",
+        "Offender Sex",
+        "Offender Race",
+        "Offender Ethnicity",
+        "Location Type",
+        "Victims Relationship to Offender",
+        "Type of Weapon Involved",
+        "Offense Linked to Another Offense"
+      ],
+      "description_tags": [
+        "Energy & Environment",
+        "Government Administration",
+        "Law & Public Safety"
+      ]
+    },
+    {
+      "id": "knox-county-health-data",
+      "title": "Knox County Community Health Data",
+      "version": "1.0",
+      "description": "County-level health indicators for Knox County, TN, including mortality rates, chronic disease prevalence, mental health metrics, and social determinants of health. Compiled from the Tennessee Department of Health and the Robert Wood Johnson County Health Rankings.",
+      "about": "The County Health Rankings & Roadmaps program, a collaboration between the Robert Wood Johnson Foundation and the University of Wisconsin, ranks the health of nearly all counties in the nation. Knox County data is also available from the Tennessee Department of Health's County Health Profiles.\n\n## What's Included\n\n- **Health outcomes**: Premature death, poor physical health days, poor mental health days, low birthweight\n- **Health behaviors**: Adult smoking, obesity, physical inactivity, excessive drinking, uninsured rates\n- **Clinical care**: Primary care and mental health provider ratios, preventable hospital stays\n- **Social & economic factors**: High school graduation, unemployment, income inequality, child poverty\n- **Physical environment**: Air quality index, access to healthy foods, access to parks\n\n## Accessing the Data\n\nData is downloadable at **countyhealthrankings.org** as Excel/CSV files. Tennessee DOH publishes Knox County-specific reports at **tn.gov/health**.\n\n## Community Use\n\n- Identify the leading preventable causes of premature death in Knox County.\n- Compare Knox County rankings to neighboring counties and state averages.\n- Use social determinants data to target community health intervention areas.\n\n## Classroom Use\n\n- **Health disparities**: How do outcomes differ across Knox County ZIP codes and income levels?\n- **Policy analysis**: What interventions are associated with improved rankings over time?\n- **Data visualization**: Build a dashboard of Knox County health metrics using publicly available indicators.",
+      "published_date": "2024-09-15",
+      "provider": {
+        "name": "Tennessee Department of Health / County Health Rankings",
+        "url": "https://www.countyhealthrankings.org/location/tennessee/knox-county"
+      },
+      "requires_account": false,
+      "sensitive": false,
+      "pipeline_ready": false,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "county",
+      "coverage": [
+        {
+          "level": "county",
+          "geoid": "47093"
+        }
+      ],
+      "location": {
+        "latitude": 35.9931,
+        "longitude": -83.9375,
+        "label": "Knox County, TN (approximate center)"
+      },
+      "description_tags": [
+        "public-health",
+        "demographics",
+        "inequality",
+        "community",
+        "government"
+      ],
+      "analysis_tags": {
+        "pedagogical_tags": {
+          "data-literacy": true,
+          "social-justice": true,
+          "policy-analysis": true,
+          "civic-education": true
+        }
+      }
+    },
+    {
+      "id": "knox-county-property-assessor",
+      "title": "Knox County Property Assessor Data",
+      "version": "1.0",
+      "description": "Parcel-level property records for Knox County, TN, including assessed values, ownership, land use codes, square footage, and sale history. Updated annually by the Knox County Property Assessor's Office and available as bulk CSV download or interactive map.",
+      "about": "The Knox County Property Assessor's Office maintains parcel-level records for all real property in Knox County, Tennessee.\n\n## What's Included\n\n- Parcel ID, address, and owner name\n- Assessed value (land + improvements) and tax classification\n- Land use code (residential, commercial, agricultural, etc.)\n- Building characteristics: square footage, year built, bedrooms/baths\n- Sale date and price history\n\n## Accessing the Data\n\nData can be explored via the online parcel search tool or requested as a bulk extract. The GIS office publishes shapefiles and CSV exports of the full parcel database.\n\n## Community Use\n\n- **Housing affordability**: Track assessed value trends by neighborhood to analyze displacement risk.\n- **Land use patterns**: Identify vacant lots, agricultural land, and commercial corridors.\n- **Civic research**: Cross-reference ownership records with public records on tax delinquency.\n\n## Classroom Use\n\n- Map property values across ZIP codes using QGIS or ArcGIS Online.\n- Compare land use distributions between urban and rural parts of Knox County.\n- Discuss the relationship between assessed value and local school funding.",
+      "published_date": "2024-08-01",
+      "provider": {
+        "name": "Knox County Property Assessor",
+        "url": "https://www.knoxcounty.org/property_assessor/"
+      },
+      "requires_account": false,
+      "sensitive": false,
+      "pipeline_ready": false,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "point",
+      "coverage": [
+        {
+          "level": "county",
+          "geoid": "47093"
+        }
+      ],
+      "location": {
+        "latitude": 35.9612,
+        "longitude": -83.9187,
+        "label": "City County Building, 400 Main St, Knoxville, TN (approximate)"
+      },
+      "description_tags": [
+        "housing",
+        "economics",
+        "land-use",
+        "property",
+        "government"
+      ],
+      "analysis_tags": {
+        "pedagogical_tags": {
+          "civic-education": true,
+          "data-literacy": true,
+          "quantitative-methods": true
+        }
+      }
+    },
+    {
+      "id": "knox-county-schools",
+      "title": "Knox County Schools — Enrollment & Performance Data",
+      "version": "1.0",
+      "description": "School-level enrollment, graduation rates, proficiency scores, and demographic breakdowns for all Knox County Schools (KCS) campuses. Published annually by the Tennessee Department of Education and supplemented by KCS's own data portal.",
+      "about": "The Tennessee Department of Education's annual Report Card provides school- and district-level data for every public school in the state, including Knox County's 88-school district.\n\n## What's Included\n\n- Enrollment counts by grade, race/ethnicity, and economically disadvantaged status\n- Graduation and dropout rates\n- TNReady proficiency scores by subject and grade band\n- Chronic absenteeism rates\n- Teacher experience and qualification metrics\n\n## Accessing the Data\n\nThe interactive report card is at **tn.gov/education/data/report-card**. Bulk CSV downloads are available under the \"Data Downloads\" section. Knox County Schools also publishes supplementary reports at **knoxschools.org**.\n\n## Community Use\n\n- Compare proficiency trends before and after school boundary changes.\n- Identify schools with high chronic absenteeism for community support targeting.\n- Track demographic shifts in enrollment over the past decade.\n\n## Classroom Use\n\n- **Statistics**: Calculate and compare graduation rate confidence intervals across schools.\n- **Equity analysis**: Visualize achievement gaps by income and race across KCS campuses.\n- **Civic research**: How does per-pupil spending correlate with test scores in Knox County?",
+      "published_date": "2024-10-01",
+      "provider": {
+        "name": "Tennessee Department of Education / Knox County Schools",
+        "url": "https://www.tn.gov/education/data/report-card.html"
+      },
+      "requires_account": false,
+      "sensitive": false,
+      "pipeline_ready": false,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "point",
+      "coverage": [
+        {
+          "level": "county",
+          "geoid": "47093"
+        }
+      ],
+      "location": {
+        "latitude": 35.9931,
+        "longitude": -83.9375,
+        "label": "Knox County, TN (approximate center)"
+      },
+      "description_tags": [
+        "education",
+        "demographics",
+        "inequality",
+        "schools",
+        "government"
+      ],
+      "analysis_tags": {
+        "pedagogical_tags": {
+          "civic-education": true,
+          "data-literacy": true,
+          "social-justice": true,
+          "policy-analysis": true
+        }
+      }
+    },
+    {
+      "id": "knoxville-open-data",
+      "title": "City of Knoxville Open Data Portal",
+      "version": "1.0",
+      "description": "City-operated open data portal publishing datasets on public safety, infrastructure, parks, permits, and more for Knoxville, TN. Datasets are downloadable as CSV, GeoJSON, or accessible via the Socrata API.",
+      "about": "The City of Knoxville's Open Data Portal provides access to dozens of municipal datasets, updated on rolling schedules ranging from real-time to annual.\n\n## Featured Datasets\n\n- **KPD Incident Reports**: Knoxville Police Department calls for service and incident records, geocoded to block level.\n- **Building Permits**: Residential and commercial permits issued since 2010, with permit type, value, and address.\n- **Parks & Greenways**: GIS layers for park boundaries, trail networks, and recreation facilities.\n- **Street Centerlines**: Road network with classification, surface type, and maintenance district.\n- **Blight & Code Enforcement**: Properties with active or resolved code violations.\n\n## Accessing the Data\n\nAll datasets are available for download at **knoxvilletn.gov/government/opendata** in CSV and GeoJSON formats. The Socrata API provides programmatic access for developers.\n\n## Community Use\n\n- Map code enforcement complaints by neighborhood to identify blight concentration.\n- Track new building permit activity to understand where development is occurring.\n- Analyze KPD incident data to understand public safety patterns.\n\n## Classroom Use\n\n- **GIS projects**: Use the parks and street layers in QGIS to analyze accessibility by neighborhood.\n- **Data journalism**: Investigate permit trends across council districts.\n- **Public safety analysis**: Are incident rates correlated with poverty indicators from census data?",
+      "published_date": "2024-07-01",
+      "provider": {
+        "name": "City of Knoxville",
+        "url": "https://knoxvilletn.gov/government/opendata"
+      },
+      "requires_account": false,
+      "sensitive": false,
+      "pipeline_ready": false,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "point",
+      "coverage": [
+        {
+          "level": "county",
+          "geoid": "47093"
+        }
+      ],
+      "location": {
+        "latitude": 35.9612,
+        "longitude": -83.9187,
+        "label": "City County Building, 400 Main St, Knoxville, TN (approximate)"
+      },
+      "description_tags": [
+        "civic",
+        "public-safety",
+        "infrastructure",
+        "land-use",
+        "open-data",
+        "government"
+      ],
+      "analysis_tags": {
+        "pedagogical_tags": {
+          "civic-education": true,
+          "data-literacy": true,
+          "quantitative-methods": true
+        }
+      }
+    },
+    {
+      "id": "usda-milk-production",
+      "title": "U.S. Milk Production and Related Data",
+      "version": "1.0",
+      "provider": {
+        "name": "USDA Economic Research Service (ERS)",
+        "agency": "U.S. Department of Agriculture",
+        "url": "https://www.ers.usda.gov/data-products/dairy-data"
+      },
+      "download": {
+        "url": "https://www.ers.usda.gov/media/5503/us-milk-production-and-related-data-quarterly-and-annual.csv?v=38125",
+        "description": "Link downloads a CSV file. Spreadsheet updates quarterly on website.",
+        "file_size": "56.7 KB"
+      },
+      "requires_account": false,
+      "sensitive": false,
+      "pipeline_ready": true,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "nation",
+      "coverage": [
+        {
+          "level": "nation",
+          "geoid": "US"
+        }
+      ],
+      "location": {
+        "latitude": 38.8882,
+        "longitude": -77.0303,
+        "label": "USDA headquarters, Washington, DC (approximate)"
+      },
+      "description_tags": [
+        "Agriculture",
+        "Economy",
+        "Energy & Environment",
+        "Government Administration",
+        "Health & Social Services",
+        "Housing & Buildings",
+        "Population Data",
+        "Restaurant and Food Service"
+      ],
+      "analysis_tags": {
+        "anova_tags": {
+          "good-for-one-way-anova": true,
+          "good-for-two-way-anova": false,
+          "good-for-chi-square-gof": false,
+          "good-for-chi-square-independence": true,
+          "good-for-paired-t-test": true
+        },
+        "association_tags": {
+          "positive-correlation": true,
+          "negative-correlation": false,
+          "no-correlation": false,
+          "strong-correlation": false,
+          "moderate-correlation": false,
+          "weak-correlation": true,
+          "linear-relationship": false,
+          "nonlinear-relationship": false,
+          "curved-relationship": false,
+          "exponential-pattern": false
+        },
+        "automation_rules_tags": {
+          "has-multiple-numeric-columns": true,
+          "has-categorical-variable": true,
+          "has-group-comparison-candidates": true,
+          "meets-minimum-sample-size": true,
+          "has-paired-test-candidates": true
+        },
+        "central_tendency_tags": {
+          "mean-median-similar": true,
+          "mean-median-different": true,
+          "has-mode": true
+        },
+        "comparison_capabilities_tags": {
+          "two-groups-present": false,
+          "multiple-groups-present": true,
+          "groups-have-different-centers": true,
+          "groups-have-different-spreads": true,
+          "groups-overlap-substantially": true
+        },
+        "distribution_shape_tags": {
+          "symmetric-distribution": true,
+          "right-skewed-distribution": true,
+          "left-skewed-distribution": false,
+          "approximately-normal": false,
+          "uniform-distribution": false,
+          "bimodal-distribution": false
+        },
+        "inference_procedures_tags": {
+          "good-for-one-sample-t-test": true,
+          "good-for-one-sample-z-test": true,
+          "good-for-one-proportion-z-test": false,
+          "good-for-two-sample-t-test": false,
+          "good-for-two-sample-z-test": false,
+          "good-for-two-proportion-z-test": false,
+          "meets-equal-variance-assumption": false,
+          "violates-equal-variance-assumption": false
+        },
+        "normality_tags": {
+          "passes-normality-test": false,
+          "fails-normality-test": true,
+          "large-enough-for-clt": true
+        },
+        "outlier_tags": {
+          "contains-outliers": true,
+          "no-outliers": false,
+          "extreme-outliers": true
+        },
+        "regression_quality_tags": {
+          "good-linear-fit": false,
+          "moderate-linear-fit": false,
+          "poor-linear-fit": true,
+          "has-influential-points": true,
+          "regression-appropriate": false
+        },
+        "statistical_procedures_tags": {
+          "good-for-transformation": true
+        },
+        "structure_complexity_tags": {
+          "univariate": false,
+          "bivariate": false,
+          "multivariate": true,
+          "small-dataset": false,
+          "medium-dataset": false,
+          "large-dataset": true
+        },
+        "two_way_table_tags": {
+          "two-way-table": false
+        },
+        "value_scale_tags": {
+          "single-digit-values": false,
+          "double-digit-values": false,
+          "three-digit-values": false,
+          "large-scale-values": true
+        },
+        "variability_tags": {
+          "high-variability": true,
+          "moderate-variability": false,
+          "low-variability": true,
+          "restricted-range": false,
+          "wide-range": true
+        },
+        "variable_types_tags": {
+          "all-discrete": false,
+          "all-continuous": false,
+          "mixed-types": true
+        }
+      }
+    }
+  ]
+}

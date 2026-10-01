@@ -1324,7 +1324,7 @@
       "published_date": "2024-09-15",
       "provider": {
         "name": "Tennessee Department of Health / County Health Rankings",
-        "url": "https://www.countyhealthrankings.org/location/tennessee/knox-county"
+        "url": "https://www.countyhealthrankings.org/health-data/tennessee/knox"
       },
       "requires_account": false,
       "sensitive": false,

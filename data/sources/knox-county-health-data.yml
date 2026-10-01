@@ -3,7 +3,7 @@ version: '1.0'
 title: Knox County Community Health Data
 provider:
   name: Tennessee Department of Health / County Health Rankings
-  url: https://www.countyhealthrankings.org/location/tennessee/knox-county
+  url: https://www.countyhealthrankings.org/health-data/tennessee/knox
 requires_account: false
 sensitive: false
 description: County-level health indicators for Knox County, TN, including mortality rates, chronic disease

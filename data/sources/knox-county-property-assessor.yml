@@ -3,7 +3,7 @@ version: '1.0'
 title: Knox County Property Assessor Data
 provider:
   name: Knox County Property Assessor
-  url: https://www.knoxcounty.org/property_assessor/
+  url: https://property.knoxcounty.org/
 requires_account: false
 sensitive: false
 description: Parcel-level property records for Knox County, TN, including assessed values, ownership,

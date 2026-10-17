@@ -144,3 +144,156 @@ location:
   latitude: 38.8468
   longitude: -76.9296
   label: U.S. Census Bureau headquarters, Suitland, MD (approximate)
+variable_names:
+- SEX
+- AGE
+- ESTIMATESBASE2020
+- POPESTIMATE2020
+- POPESTIMATE2021
+- POPESTIMATE2022
+- POPESTIMATE2023
+- POPESTIMATE2024
+- POPESTIMATE2025
+variable_report:
+- name: SEX
+  type: integer
+  total_rows: 306
+  non_empty_count: 306
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3
+  sample_values:
+  - '0'
+  - '1'
+  - '2'
+  min: 0.0
+  max: 2.0
+  mean: 1.0
+- name: AGE
+  type: integer
+  total_rows: 306
+  non_empty_count: 306
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 102
+  sample_values:
+  - '0'
+  - '1'
+  - '2'
+  - '3'
+  - '4'
+  min: 0.0
+  max: 999.0
+  mean: 59.3039
+- name: ESTIMATESBASE2020
+  type: integer
+  total_rows: 306
+  non_empty_count: 306
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 306
+  sample_values:
+  - '3719470'
+  - '3764281'
+  - '3841150'
+  - '3916585'
+  - '3984785'
+  min: 11944.0
+  max: 331516113.0
+  mean: 4333543.9608
+- name: POPESTIMATE2020
+  type: integer
+  total_rows: 306
+  non_empty_count: 306
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 306
+  sample_values:
+  - '3691723'
+  - '3750601'
+  - '3826776'
+  - '3888055'
+  - '3976772'
+  min: 12189.0
+  max: 331578104.0
+  mean: 4334354.3007
+- name: POPESTIMATE2021
+  type: integer
+  total_rows: 306
+  non_empty_count: 306
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 306
+  sample_values:
+  - '3572165'
+  - '3697247'
+  - '3756935'
+  - '3832978'
+  - '3894042'
+  min: 12093.0
+  max: 332100166.0
+  mean: 4341178.6405
+- name: POPESTIMATE2022
+  type: integer
+  total_rows: 306
+  non_empty_count: 306
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 306
+  sample_values:
+  - '3680529'
+  - '3602579'
+  - '3727216'
+  - '3786311'
+  - '3861295'
+  min: 14147.0
+  max: 333996304.0
+  mean: 4365964.7582
+- name: POPESTIMATE2023
+  type: integer
+  total_rows: 306
+  non_empty_count: 306
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 306
+  sample_values:
+  - '3653453'
+  - '3719819'
+  - '3642279'
+  - '3766965'
+  - '3824021'
+  min: 15269.0
+  max: 336755052.0
+  mean: 4402026.8235
+- name: POPESTIMATE2024
+  type: integer
+  total_rows: 306
+  non_empty_count: 306
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 306
+  sample_values:
+  - '3617221'
+  - '3700305'
+  - '3766783'
+  - '3689270'
+  - '3811156'
+  min: 17256.0
+  max: 340003797.0
+  mean: 4444494.0784
+- name: POPESTIMATE2025
+  type: integer
+  total_rows: 306
+  non_empty_count: 306
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 306
+  sample_values:
+  - '3618898'
+  - '3642657'
+  - '3725891'
+  - '3791993'
+  - '3712428'
+  min: 18663.0
+  max: 341784857.0
+  mean: 4467775.9085

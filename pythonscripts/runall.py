@@ -12,9 +12,13 @@ import subprocess
 import sys
 from pathlib import Path
 
+import manual_tags
+
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-EXCLUDED_FILES = {"variableextraction.py", "runall.py", "community_identifiers.py", "detect_five_ws.py"}
+SOURCES_DIR = SCRIPT_DIR.parent / "data" / "sources"
+EXCLUDED_FILES = {"variableextraction.py", "runall.py", "community_identifiers.py", "detect_five_ws.py",
+                   "test_tagdataset.py", "tag_vocabulary.py", "manual_tags.py"}
 DEFAULT_TARGET = "all"
 
 
@@ -30,12 +34,17 @@ def main() -> None:
         print(f"No Python scripts found in {SCRIPT_DIR}")
         return
 
+    preserved = manual_tags.snapshot(SOURCES_DIR)
+
     for script_path in scripts:
         print(f"\n=== Running {script_path.name} on {target} ===")
         result = subprocess.run(
             [sys.executable, str(script_path), target],
             cwd=SCRIPT_DIR,
         )
+        restored = manual_tags.restore(SOURCES_DIR, preserved)
+        if restored:
+            print(f"  (restored hand-set tags in {', '.join(restored)})")
         if result.returncode != 0:
             raise SystemExit(result.returncode)
 

@@ -1,3 +1,4 @@
+import inspect
 import sys
 from pathlib import Path
 
@@ -34,9 +35,6 @@ def test_infer_tags_keeps_stem_prefix_matches(monkeypatch):
 def test_infer_tags_no_match_returns_empty_list(monkeypatch):
     monkeypatch.setattr(tagdataset, "TAG_RULES", {"Alpha": ["apple"]})
     assert tagdataset.infer_tags("nothing relevant here") == []
-
-
-import inspect
 
 
 def test_build_text_blob_uses_only_local_fields():
@@ -107,3 +105,29 @@ def test_generic_keywords_were_removed():
     for keywords in tagdataset.TAG_RULES.values():
         for keyword in keywords:
             assert keyword.strip() not in removed
+
+
+def test_build_text_blob_ignores_non_dict_download():
+    blob = tagdataset.build_text_blob({
+        "title": "Test Title",
+        "download": "a string value",
+    })
+    assert "test title" in blob
+    assert "a string value" not in blob
+
+
+# Keywords intentionally allowed to carry a trailing space, as a guard against
+# matching inflected/unrelated forms of a shorter substring (e.g. "job " so it
+# doesn't match "jobsite"). Every other keyword must have no leading/trailing
+# whitespace.
+KEYWORDS_ALLOWED_PADDING = {"produce ", "job ", "zoo "}
+
+
+def test_no_keyword_padding_except_documented_exceptions():
+    for tag, keywords in tagdataset.TAG_RULES.items():
+        for keyword in keywords:
+            if keyword in KEYWORDS_ALLOWED_PADDING:
+                continue
+            assert keyword == keyword.strip(), (
+                f"keyword {keyword!r} in {tag!r} has unexpected padding"
+            )

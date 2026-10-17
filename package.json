@@ -4,6 +4,8 @@
     "start": "node --experimental-sqlite server.mjs"
   },
   "dependencies": {
+    "adm-zip": "^0.5.16",
+    "csv-parse": "^5.6.0",
     "yaml": "^2.9.0"
   }
 }

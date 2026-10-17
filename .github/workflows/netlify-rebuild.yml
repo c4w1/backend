@@ -1,0 +1,21 @@
+name: Rebuild website
+
+on:
+  push:
+    branches: ["main"]
+    paths: ["data/**"]
+  workflow_dispatch:
+
+jobs:
+  trigger-netlify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Netlify build hook
+        env:
+          HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "NETLIFY_BUILD_HOOK secret is not set; skipping." >&2
+            exit 0
+          fi
+          curl --fail --silent --show-error -X POST -d '{}' "$HOOK"

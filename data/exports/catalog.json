@@ -573,6 +573,16 @@
         "longitude": -77.0303,
         "label": "USDA headquarters, Washington, DC (approximate)"
       },
+      "variables": [
+        "Year",
+        "Period",
+        "Timeperiod_id",
+        "Timeperiod_name",
+        "Aggregation",
+        "Data_item",
+        "Value",
+        "Units"
+      ],
       "description_tags": [
         "Agriculture",
         "Business & Economy"

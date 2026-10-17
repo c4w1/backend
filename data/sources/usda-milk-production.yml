@@ -126,3 +126,121 @@ location:
   latitude: 38.8882
   longitude: -77.0303
   label: USDA headquarters, Washington, DC (approximate)
+variable_names:
+- Year
+- Period
+- Timeperiod_id
+- Timeperiod_name
+- Aggregation
+- Data_item
+- Value
+- Units
+variable_report:
+- name: Year
+  type: integer
+  total_rows: 705
+  non_empty_count: 705
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 29
+  sample_values:
+  - '1998'
+  - '1999'
+  - '2000'
+  - '2001'
+  - '2002'
+  min: 1998.0
+  max: 2026.0
+  mean: 2011.6028
+- name: Period
+  type: string
+  total_rows: 705
+  non_empty_count: 705
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 5
+  sample_values:
+  - JAN-MAR
+  - APR-JUN
+  - JUL-SEP
+  - OCT-DEC
+  - ANNUAL
+- name: Timeperiod_id
+  type: integer
+  total_rows: 705
+  non_empty_count: 705
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 5
+  sample_values:
+  - '13'
+  - '14'
+  - '15'
+  - '16'
+  - '17'
+  min: 13.0
+  max: 17.0
+  mean: 14.9858
+- name: Timeperiod_name
+  type: string
+  total_rows: 705
+  non_empty_count: 705
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 5
+  sample_values:
+  - Quarter 1
+  - Quarter 2
+  - Quarter 3
+  - Quarter 4
+  - Annual aggregation
+- name: Aggregation
+  type: string
+  total_rows: 705
+  non_empty_count: 705
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3
+  sample_values:
+  - Not applicable
+  - Quarterly average
+  - Quarterly sum
+- name: Data_item
+  type: string
+  total_rows: 705
+  non_empty_count: 705
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 5
+  sample_values:
+  - 16-percent protein feed value
+  - Milk cow
+  - Milk per cow
+  - Milk production
+  - Replacement cow price
+- name: Value
+  type: string
+  total_rows: 705
+  non_empty_count: 705
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 598
+  sample_values:
+  - '5.31'
+  - '9174'
+  - '4268'
+  - '39155'
+  - '1070'
+- name: Units
+  type: string
+  total_rows: 705
+  non_empty_count: 705
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 5
+  sample_values:
+  - Dollars per hundredweight
+  - 1,000 head
+  - Pounds
+  - Million pounds
+  - Dollars per head

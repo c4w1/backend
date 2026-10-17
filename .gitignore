@@ -4,6 +4,8 @@ __pycache__/
 *.pyc
 .venv/
 database/*.db
+.venv/
+node_modules/
 .vscode/
 pythonscripts/__pycache__/
 data/sources/__pycache__/

@@ -71,3 +71,1678 @@ location:
   latitude: 38.8468
   longitude: -76.9296
   label: U.S. Census Bureau headquarters, Suitland, MD (approximate)
+variable_names:
+- SUMLEV
+- REGION
+- DIVISION
+- STATE
+- COUNTY
+- STNAME
+- CTYNAME
+- ESTIMATESBASE2020
+- POPESTIMATE2020
+- POPESTIMATE2021
+- POPESTIMATE2022
+- POPESTIMATE2023
+- POPESTIMATE2024
+- POPESTIMATE2025
+- NPOPCHG2020
+- NPOPCHG2021
+- NPOPCHG2022
+- NPOPCHG2023
+- NPOPCHG2024
+- NPOPCHG2025
+- BIRTHS2020
+- BIRTHS2021
+- BIRTHS2022
+- BIRTHS2023
+- BIRTHS2024
+- BIRTHS2025
+- DEATHS2020
+- DEATHS2021
+- DEATHS2022
+- DEATHS2023
+- DEATHS2024
+- DEATHS2025
+- NATURALCHG2020
+- NATURALCHG2021
+- NATURALCHG2022
+- NATURALCHG2023
+- NATURALCHG2024
+- NATURALCHG2025
+- INTERNATIONALMIG2020
+- INTERNATIONALMIG2021
+- INTERNATIONALMIG2022
+- INTERNATIONALMIG2023
+- INTERNATIONALMIG2024
+- INTERNATIONALMIG2025
+- DOMESTICMIG2020
+- DOMESTICMIG2021
+- DOMESTICMIG2022
+- DOMESTICMIG2023
+- DOMESTICMIG2024
+- DOMESTICMIG2025
+- NETMIG2020
+- NETMIG2021
+- NETMIG2022
+- NETMIG2023
+- NETMIG2024
+- NETMIG2025
+- RESIDUAL2020
+- RESIDUAL2021
+- RESIDUAL2022
+- RESIDUAL2023
+- RESIDUAL2024
+- RESIDUAL2025
+- GQESTIMATESBASE2020
+- GQESTIMATES2020
+- GQESTIMATES2021
+- GQESTIMATES2022
+- GQESTIMATES2023
+- GQESTIMATES2024
+- GQESTIMATES2025
+- RBIRTH2021
+- RBIRTH2022
+- RBIRTH2023
+- RBIRTH2024
+- RBIRTH2025
+- RDEATH2021
+- RDEATH2022
+- RDEATH2023
+- RDEATH2024
+- RDEATH2025
+- RNATURALCHG2021
+- RNATURALCHG2022
+- RNATURALCHG2023
+- RNATURALCHG2024
+- RNATURALCHG2025
+- RINTERNATIONALMIG2021
+- RINTERNATIONALMIG2022
+- RINTERNATIONALMIG2023
+- RINTERNATIONALMIG2024
+- RINTERNATIONALMIG2025
+- RDOMESTICMIG2021
+- RDOMESTICMIG2022
+- RDOMESTICMIG2023
+- RDOMESTICMIG2024
+- RDOMESTICMIG2025
+- RNETMIG2021
+- RNETMIG2022
+- RNETMIG2023
+- RNETMIG2024
+- RNETMIG2025
+variable_report:
+- name: SUMLEV
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 2
+  sample_values:
+  - '040'
+  - '050'
+  min: 40.0
+  max: 50.0
+  mean: 49.8404
+- name: REGION
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 4
+  sample_values:
+  - '3'
+  - '4'
+  - '1'
+  - '2'
+  min: 1.0
+  max: 4.0
+  mean: 2.6685
+- name: DIVISION
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 9
+  sample_values:
+  - '6'
+  - '9'
+  - '8'
+  - '7'
+  - '1'
+  min: 1.0
+  max: 9.0
+  mean: 5.1912
+- name: STATE
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 51
+  sample_values:
+  - '01'
+  - '02'
+  - '04'
+  - '05'
+  - '06'
+  min: 1.0
+  max: 56.0
+  mean: 30.2435
+- name: COUNTY
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 330
+  sample_values:
+  - '000'
+  - '001'
+  - '003'
+  - '005'
+  - '007'
+  min: 0.0
+  max: 840.0
+  mean: 102.216
+- name: STNAME
+  type: string
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 51
+  sample_values:
+  - Alabama
+  - Alaska
+  - Arizona
+  - Arkansas
+  - California
+- name: CTYNAME
+  type: string
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1932
+  sample_values:
+  - Alabama
+  - Autauga County
+  - Baldwin County
+  - Barbour County
+  - Bibb County
+- name: ESTIMATESBASE2020
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3139
+  sample_values:
+  - '5025437'
+  - '58805'
+  - '231778'
+  - '25225'
+  - '22285'
+  min: 62.0
+  max: 39555703.0
+  mean: 207521.8235
+- name: POPESTIMATE2020
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3136
+  sample_values:
+  - '5032962'
+  - '58914'
+  - '233252'
+  - '24958'
+  - '22181'
+  min: 63.0
+  max: 39527808.0
+  mean: 207560.6285
+- name: POPESTIMATE2021
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3133
+  sample_values:
+  - '5050058'
+  - '59207'
+  - '239450'
+  - '24510'
+  - '22346'
+  min: 57.0
+  max: 39152927.0
+  mean: 207887.4279
+- name: POPESTIMATE2022
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3148
+  sample_values:
+  - '5076868'
+  - '59755'
+  - '246703'
+  - '24744'
+  - '21976'
+  min: 46.0
+  max: 39125347.0
+  mean: 209074.3687
+- name: POPESTIMATE2023
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3134
+  sample_values:
+  - '5117850'
+  - '60502'
+  - '254193'
+  - '24681'
+  - '21881'
+  min: 46.0
+  max: 39181667.0
+  mean: 210801.2845
+- name: POPESTIMATE2024
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3143
+  sample_values:
+  - '5163055'
+  - '61476'
+  - '261652'
+  - '24520'
+  - '22225'
+  min: 47.0
+  max: 39364774.0
+  mean: 212834.9277
+- name: POPESTIMATE2025
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3142
+  sample_values:
+  - '5193088'
+  - '61920'
+  - '267761'
+  - '24607'
+  - '22262'
+  min: 52.0
+  max: 39355309.0
+  mean: 213949.8322
+- name: NPOPCHG2020
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 919
+  sample_values:
+  - '7525'
+  - '109'
+  - '1474'
+  - '-267'
+  - '-104'
+  min: -81434.0
+  max: 88397.0
+  mean: 38.805
+- name: NPOPCHG2021
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1584
+  sample_values:
+  - '17096'
+  - '293'
+  - '6198'
+  - '-448'
+  - '165'
+  min: -374881.0
+  max: 334777.0
+  mean: 326.7994
+- name: NPOPCHG2022
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1580
+  sample_values:
+  - '26810'
+  - '548'
+  - '7253'
+  - '234'
+  - '-370'
+  min: -122320.0
+  max: 577291.0
+  mean: 1186.9408
+- name: NPOPCHG2023
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1501
+  sample_values:
+  - '40982'
+  - '747'
+  - '7490'
+  - '-63'
+  - '-95'
+  min: -15956.0
+  max: 601245.0
+  mean: 1726.9158
+- name: NPOPCHG2024
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1434
+  sample_values:
+  - '45205'
+  - '974'
+  - '7459'
+  - '-161'
+  - '344'
+  min: -5346.0
+  max: 599331.0
+  mean: 2033.6432
+- name: NPOPCHG2025
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1356
+  sample_values:
+  - '30033'
+  - '444'
+  - '6109'
+  - '87'
+  - '37'
+  min: -53934.0
+  max: 391243.0
+  mean: 1114.9045
+- name: BIRTHS2020
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 772
+  sample_values:
+  - '13899'
+  - '165'
+  - '558'
+  - '59'
+  - '55'
+  min: 0.0
+  max: 103116.0
+  mean: 559.7014
+- name: BIRTHS2021
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1390
+  sample_values:
+  - '57327'
+  - '702'
+  - '2327'
+  - '268'
+  - '242'
+  min: 0.0
+  max: 412508.0
+  mean: 2243.7928
+- name: BIRTHS2022
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1378
+  sample_values:
+  - '58251'
+  - '732'
+  - '2449'
+  - '268'
+  - '261'
+  min: 0.0
+  max: 424110.0
+  mean: 2303.8372
+- name: BIRTHS2023
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1386
+  sample_values:
+  - '58640'
+  - '725'
+  - '2622'
+  - '275'
+  - '236'
+  min: 0.0
+  max: 410395.0
+  mean: 2284.129
+- name: BIRTHS2024
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1383
+  sample_values:
+  - '57648'
+  - '727'
+  - '2467'
+  - '266'
+  - '240'
+  min: 0.0
+  max: 400854.0
+  mean: 2258.6648
+- name: BIRTHS2025
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1395
+  sample_values:
+  - '57680'
+  - '730'
+  - '2477'
+  - '267'
+  - '239'
+  min: 0.0
+  max: 398632.0
+  mean: 2266.3293
+- name: DEATHS2020
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 777
+  sample_values:
+  - '15121'
+  - '177'
+  - '585'
+  - '93'
+  - '54'
+  min: 0.0
+  max: 74350.0
+  mean: 533.3484
+- name: DEATHS2021
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1480
+  sample_values:
+  - '69137'
+  - '700'
+  - '2934'
+  - '392'
+  - '324'
+  min: 0.0
+  max: 344771.0
+  mean: 2152.3775
+- name: DEATHS2022
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1507
+  sample_values:
+  - '67263'
+  - '710'
+  - '3051'
+  - '352'
+  - '331'
+  min: 0.0
+  max: 318097.0
+  mean: 2163.6019
+- name: DEATHS2023
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1458
+  sample_values:
+  - '60111'
+  - '570'
+  - '2772'
+  - '320'
+  - '264'
+  min: 0.0
+  max: 303116.0
+  mean: 1974.5133
+- name: DEATHS2024
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1407
+  sample_values:
+  - '59508'
+  - '604'
+  - '2735'
+  - '315'
+  - '296'
+  min: 0.0
+  max: 289060.0
+  mean: 1936.7387
+- name: DEATHS2025
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1440
+  sample_values:
+  - '59868'
+  - '599'
+  - '2749'
+  - '319'
+  - '298'
+  min: 0.0
+  max: 288917.0
+  mean: 1941.5355
+- name: NATURALCHG2020
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 582
+  sample_values:
+  - '-1222'
+  - '-12'
+  - '-27'
+  - '-34'
+  - '1'
+  min: -19737.0
+  max: 32416.0
+  mean: 26.3531
+- name: NATURALCHG2021
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1018
+  sample_values:
+  - '-11810'
+  - '2'
+  - '-607'
+  - '-124'
+  - '-82'
+  min: -42010.0
+  max: 94381.0
+  mean: 91.4153
+- name: NATURALCHG2022
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1031
+  sample_values:
+  - '-9012'
+  - '22'
+  - '-602'
+  - '-84'
+  - '-70'
+  min: -38062.0
+  max: 123136.0
+  mean: 140.2354
+- name: NATURALCHG2023
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1007
+  sample_values:
+  - '-1471'
+  - '155'
+  - '-150'
+  - '-45'
+  - '-28'
+  min: -12178.0
+  max: 158683.0
+  mean: 309.6156
+- name: NATURALCHG2024
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 994
+  sample_values:
+  - '-1860'
+  - '123'
+  - '-268'
+  - '-49'
+  - '-56'
+  min: -9653.0
+  max: 157366.0
+  mean: 321.9261
+- name: NATURALCHG2025
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1011
+  sample_values:
+  - '-2188'
+  - '131'
+  - '-272'
+  - '-52'
+  - '-59'
+  min: -10708.0
+  max: 157711.0
+  mean: 324.7937
+- name: INTERNATIONALMIG2020
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 167
+  sample_values:
+  - '134'
+  - '0'
+  - '13'
+  - '1'
+  - '2'
+  min: -17.0
+  max: 2838.0
+  mean: 12.452
+- name: INTERNATIONALMIG2021
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 479
+  sample_values:
+  - '1808'
+  - '15'
+  - '104'
+  - '0'
+  - '1'
+  min: -171.0
+  max: 46857.0
+  mean: 235.384
+- name: INTERNATIONALMIG2022
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 740
+  sample_values:
+  - '8391'
+  - '41'
+  - '592'
+  - '46'
+  - '4'
+  min: -27.0
+  max: 287845.0
+  mean: 1046.7055
+- name: INTERNATIONALMIG2023
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 814
+  sample_values:
+  - '12621'
+  - '102'
+  - '904'
+  - '32'
+  - '6'
+  min: -11.0
+  max: 333449.0
+  mean: 1417.3002
+- name: INTERNATIONALMIG2024
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 896
+  sample_values:
+  - '22102'
+  - '135'
+  - '1228'
+  - '124'
+  - '39'
+  min: -20.0
+  max: 354864.0
+  mean: 1711.7171
+- name: INTERNATIONALMIG2025
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 706
+  sample_values:
+  - '8946'
+  - '66'
+  - '404'
+  - '23'
+  - '-12'
+  min: -208.0
+  max: 178674.0
+  mean: 790.1108
+- name: DOMESTICMIG2020
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 897
+  sample_values:
+  - '9450'
+  - '102'
+  - '1614'
+  - '-190'
+  - '-95'
+  min: -62399.0
+  max: 61662.0
+  mean: 0.0
+- name: DOMESTICMIG2021
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1595
+  sample_values:
+  - '25795'
+  - '218'
+  - '7039'
+  - '-317'
+  - '241'
+  min: -470759.0
+  max: 253220.0
+  mean: 0.0
+- name: DOMESTICMIG2022
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1578
+  sample_values:
+  - '27718'
+  - '511'
+  - '6880'
+  - '254'
+  - '-315'
+  min: -344130.0
+  max: 310892.0
+  mean: 0.0
+- name: DOMESTICMIG2023
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1500
+  sample_values:
+  - '29774'
+  - '492'
+  - '6581'
+  - '-42'
+  - '-69'
+  min: -343891.0
+  max: 188667.0
+  mean: 0.0
+- name: DOMESTICMIG2024
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1385
+  sample_values:
+  - '24953'
+  - '717'
+  - '6397'
+  - '-236'
+  - '361'
+  min: -241611.0
+  max: 86067.0
+  mean: 0.0
+- name: DOMESTICMIG2025
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1336
+  sample_values:
+  - '23358'
+  - '245'
+  - '6012'
+  - '73'
+  - '72'
+  min: -229077.0
+  max: 84064.0
+  mean: 0.0
+- name: NETMIG2020
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 876
+  sample_values:
+  - '9584'
+  - '102'
+  - '1627'
+  - '-190'
+  - '-95'
+  min: -61011.0
+  max: 64500.0
+  mean: 12.452
+- name: NETMIG2021
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1585
+  sample_values:
+  - '27603'
+  - '233'
+  - '7143'
+  - '-317'
+  - '242'
+  min: -426637.0
+  max: 300077.0
+  mean: 235.384
+- name: NETMIG2022
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1556
+  sample_values:
+  - '36109'
+  - '552'
+  - '7472'
+  - '300'
+  - '-311'
+  min: -163340.0
+  max: 598737.0
+  mean: 1046.7055
+- name: NETMIG2023
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1490
+  sample_values:
+  - '42395'
+  - '594'
+  - '7485'
+  - '-10'
+  - '-63'
+  min: -51778.0
+  max: 517095.0
+  mean: 1417.3002
+- name: NETMIG2024
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1431
+  sample_values:
+  - '47055'
+  - '852'
+  - '7625'
+  - '-112'
+  - '400'
+  min: -7370.0
+  max: 440931.0
+  mean: 1711.7171
+- name: NETMIG2025
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1350
+  sample_values:
+  - '32304'
+  - '311'
+  - '6416'
+  - '139'
+  - '95'
+  min: -119799.0
+  max: 234774.0
+  mean: 790.1108
+- name: RESIDUAL2020
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 385
+  sample_values:
+  - '-837'
+  - '19'
+  - '-126'
+  - '-43'
+  - '-10'
+  min: -6794.0
+  max: 4350.0
+  mean: 0.0
+- name: RESIDUAL2021
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 568
+  sample_values:
+  - '1303'
+  - '58'
+  - '-338'
+  - '-7'
+  - '5'
+  min: -17801.0
+  max: 7938.0
+  mean: 0.0
+- name: RESIDUAL2022
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 520
+  sample_values:
+  - '-287'
+  - '-26'
+  - '383'
+  - '18'
+  - '11'
+  min: -4913.0
+  max: 16616.0
+  mean: 0.0
+- name: RESIDUAL2023
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 303
+  sample_values:
+  - '58'
+  - '-2'
+  - '155'
+  - '-8'
+  - '-4'
+  min: -1865.0
+  max: 5735.0
+  mean: 0.0
+- name: RESIDUAL2024
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 225
+  sample_values:
+  - '10'
+  - '-1'
+  - '102'
+  - '0'
+  - '-6'
+  min: -1117.0
+  max: 2554.0
+  mean: 0.0
+- name: RESIDUAL2025
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 198
+  sample_values:
+  - '-83'
+  - '2'
+  - '-35'
+  - '0'
+  - '1'
+  min: -3178.0
+  max: 619.0
+  mean: 0.0
+- name: GQESTIMATESBASE2020
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1921
+  sample_values:
+  - '129053'
+  - '484'
+  - '3555'
+  - '2718'
+  - '2143'
+  min: 0.0
+  max: 935458.0
+  mean: 5199.0491
+- name: GQESTIMATES2020
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1916
+  sample_values:
+  - '132345'
+  - '484'
+  - '3452'
+  - '2475'
+  - '2072'
+  min: 0.0
+  max: 922058.0
+  mean: 5113.6188
+- name: GQESTIMATES2021
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1896
+  sample_values:
+  - '132684'
+  - '459'
+  - '3296'
+  - '2223'
+  - '1989'
+  min: 0.0
+  max: 767691.0
+  mean: 4932.1064
+- name: GQESTIMATES2022
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1900
+  sample_values:
+  - '139735'
+  - '467'
+  - '3388'
+  - '2697'
+  - '2019'
+  min: 0.0
+  max: 878703.0
+  mean: 5125.1962
+- name: GQESTIMATES2023
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1920
+  sample_values:
+  - '142803'
+  - '484'
+  - '3449'
+  - '2701'
+  - '1892'
+  min: 0.0
+  max: 892034.0
+  mean: 5221.6225
+- name: GQESTIMATES2024
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1915
+  sample_values:
+  - '145212'
+  - '502'
+  - '3508'
+  - '2661'
+  - '2089'
+  min: 0.0
+  max: 895386.0
+  mean: 5279.1806
+- name: GQESTIMATES2025
+  type: integer
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1912
+  sample_values:
+  - '145596'
+  - '489'
+  - '3547'
+  - '2788'
+  - '2117'
+  min: 0.0
+  max: 898968.0
+  mean: 5282.79
+- name: RBIRTH2021
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3190
+  sample_values:
+  - '11.37099798'
+  - '11.88611678'
+  - '9.845526357'
+  - '10.83528746'
+  - '10.86980933'
+  min: 0.0
+  max: 30.03003003
+  mean: 10.6637
+- name: RBIRTH2022
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3191
+  sample_values:
+  - '11.50418202'
+  - '12.3064508'
+  - '10.07501754'
+  - '10.88236488'
+  - '11.77744687'
+  min: 0.0
+  max: 26.1682243
+  mean: 10.787
+- name: RBIRTH2023
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3186
+  sample_values:
+  - '11.50399648'
+  - '12.05751017'
+  - '10.46923912'
+  - '11.12797167'
+  - '10.76225004'
+  min: 0.0
+  max: 57.05562446
+  mean: 10.7734
+- name: RBIRTH2024
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3187
+  sample_values:
+  - '11.21457693'
+  - '11.92018233'
+  - '9.564888678'
+  - '10.81278836'
+  - '10.88287308'
+  min: 0.0
+  max: 83.77491799
+  mean: 10.5928
+- name: RBIRTH2025
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3183
+  sample_values:
+  - '11.13928226'
+  - '11.83182599'
+  - '9.357533721'
+  - '10.86978647'
+  - '10.74471194'
+  min: 0.0
+  max: 77.8786431
+  mean: 10.6047
+- name: RDEATH2021
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3190
+  sample_values:
+  - '13.71355011'
+  - '11.8522532'
+  - '12.41374058'
+  - '15.84862942'
+  - '14.55296786'
+  min: 0.0
+  max: 50.0
+  mean: 13.5568
+- name: RDEATH2022
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3188
+  sample_values:
+  - '13.28399161'
+  - '11.93658479'
+  - '12.55160413'
+  - '14.29325537'
+  - '14.93614909'
+  min: 0.0
+  max: 58.25242718
+  mean: 13.7885
+- name: RDEATH2023
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3188
+  sample_values:
+  - '11.79257729'
+  - '9.479697648'
+  - '11.06816585'
+  - '12.94891249'
+  - '12.03912716'
+  min: 0.0
+  max: 43.47826087
+  mean: 12.197
+- name: RDEATH2024
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3186
+  sample_values:
+  - '11.57641278'
+  - '9.903425208'
+  - '10.60396049'
+  - '12.80461779'
+  - '13.42221013'
+  min: 0.0
+  max: 43.01075269
+  mean: 12.0062
+- name: RDEATH2025
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3189
+  sample_values:
+  - '11.5618334'
+  - '9.708580505'
+  - '10.38508688'
+  - '12.98674863'
+  - '13.39717221'
+  min: 0.0
+  max: 40.4040404
+  mean: 12.1003
+- name: RNATURALCHG2021
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3184
+  sample_values:
+  - '-2.342552132'
+  - '0.033863581'
+  - '-2.568214224'
+  - '-5.013341958'
+  - '-3.683158533'
+  min: -50.0
+  max: 21.22466888
+  mean: -2.8932
+- name: RNATURALCHG2022
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3173
+  sample_values:
+  - '-1.779809589'
+  - '0.369866008'
+  - '-2.476586589'
+  - '-3.410890486'
+  - '-3.158702225'
+  min: -58.25242718
+  max: 17.45848033
+  mean: -3.0015
+- name: RNATURALCHG2023
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3167
+  sample_values:
+  - '-0.288580812'
+  - '2.577812518'
+  - '-0.598926723'
+  - '-1.820940819'
+  - '-1.276877123'
+  min: -21.73913043
+  max: 45.03387081
+  mean: -1.4236
+- name: RNATURALCHG2024
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3179
+  sample_values:
+  - '-0.36183585'
+  - '2.01675712'
+  - '-1.039071814'
+  - '-1.991829434'
+  - '-2.539337052'
+  min: -21.50537634
+  max: 70.65354529
+  mean: -1.4134
+- name: RNATURALCHG2025
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3170
+  sample_values:
+  - '-0.422551137'
+  - '2.123245486'
+  - '-1.027553158'
+  - '-2.116962159'
+  - '-2.652460269'
+  min: -20.2020202
+  max: 65.93406593
+  mean: -1.4957
+- name: RINTERNATIONALMIG2021
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 2570
+  sample_values:
+  - '0.358622714'
+  - '0.253976854'
+  - '0.440023524'
+  - '0'
+  - '0.044916568'
+  min: -1.839528215
+  max: 15.77970297
+  mean: 0.4741
+- name: RINTERNATIONALMIG2022
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 2889
+  sample_values:
+  - '1.657166252'
+  - '0.689295742'
+  - '2.435447277'
+  - '1.8678686'
+  - '0.18049727'
+  min: -1.495886313
+  max: 36.63024811
+  mean: 1.8835
+- name: RINTERNATIONALMIG2023
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 2896
+  sample_values:
+  - '2.475988056'
+  - '1.696366948'
+  - '3.609531719'
+  - '1.294891249'
+  - '0.273616526'
+  min: -2.068252327
+  max: 45.14143339
+  mean: 2.4478
+- name: RINTERNATIONALMIG2024
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 2947
+  sample_values:
+  - '4.299621483'
+  - '2.213513912'
+  - '4.761120104'
+  - '5.040547956'
+  - '1.768466875'
+  min: -2.757099531
+  max: 65.54079828
+  mean: 3.2986
+- name: RINTERNATIONALMIG2025
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 2961
+  sample_values:
+  - '1.727670234'
+  - '1.069726733'
+  - '1.526218661'
+  - '2.68691351'
+  - '1.034009936'
+  min: -8.174386921
+  max: 28.713418
+  mean: 1.4593
+- name: RDOMESTICMIG2021
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3186
+  sample_values:
+  - '5.116522629'
+  - '3.691130282'
+  - '29.78197681'
+  - '-12.81636614'
+  - '10.82489276'
+  min: -115.3181687
+  max: 117.3302742
+  mean: 4.7174
+- name: RDOMESTICMIG2022
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3179
+  sample_values:
+  - '5.474119195'
+  - '8.590978632'
+  - '28.30384673'
+  - '10.31388314'
+  - '-14.21416001'
+  min: -374.3842365
+  max: 80.16245571
+  mean: 3.0206
+- name: RDOMESTICMIG2023
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3186
+  sample_values:
+  - '5.841063971'
+  - '8.182475864'
+  - '26.27691177'
+  - '-1.699544765'
+  - '-3.146590054'
+  min: -134.2959607
+  max: 64.2348601
+  mean: 3.3928
+- name: RDOMESTICMIG2024
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3184
+  sample_values:
+  - '4.854241917'
+  - '11.75621833'
+  - '24.80202386'
+  - '-9.593300949'
+  - '16.36965492'
+  min: -83.58208955
+  max: 57.98291222
+  mean: 2.4042
+- name: RDOMESTICMIG2025
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3184
+  sample_values:
+  - '4.510945822'
+  - '3.970955298'
+  - '22.71194701'
+  - '2.971889185'
+  - '3.236900668'
+  min: -113.8613861
+  max: 141.4141414
+  mean: 2.3089
+- name: RNETMIG2021
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3186
+  sample_values:
+  - '5.475145343'
+  - '3.945107136'
+  - '30.22200033'
+  - '-12.81636614'
+  - '10.86980933'
+  min: -114.1664267
+  max: 119.1020187
+  mean: 5.1915
+- name: RNETMIG2022
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3185
+  sample_values:
+  - '7.131285446'
+  - '9.280274373'
+  - '30.73929401'
+  - '12.18175174'
+  - '-14.03366274'
+  min: -363.9743471
+  max: 84.24044776
+  mean: 4.9041
+- name: RNETMIG2023
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3184
+  sample_values:
+  - '8.317052026'
+  - '9.878842812'
+  - '29.88644349'
+  - '-0.404653515'
+  - '-2.872973528'
+  min: -134.1072103
+  max: 75.751338
+  mean: 5.8407
+- name: RNETMIG2024
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3182
+  sample_values:
+  - '9.1538634'
+  - '13.96973225'
+  - '29.56314397'
+  - '-4.552752993'
+  - '18.1381218'
+  min: -65.67164179
+  max: 64.16291008
+  mean: 5.7028
+- name: RNETMIG2025
+  type: float
+  total_rows: 3195
+  non_empty_count: 3195
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3175
+  sample_values:
+  - '6.238616056'
+  - '5.040682032'
+  - '24.23816567'
+  - '5.658802695'
+  - '4.270910603'
+  min: -113.8613861
+  max: 141.4141414
+  mean: 3.7682

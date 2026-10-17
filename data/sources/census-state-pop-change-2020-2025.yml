@@ -145,3 +145,669 @@ location:
   latitude: 38.8468
   longitude: -76.9296
   label: U.S. Census Bureau headquarters, Suitland, MD (approximate)
+variable_names:
+- SUMLEV
+- REGION
+- DIVISION
+- STATE
+- NAME
+- ESTIMATESBASE2020
+- POPESTIMATE2020
+- POPESTIMATE2021
+- POPESTIMATE2022
+- POPESTIMATE2023
+- POPESTIMATE2024
+- POPESTIMATE2025
+- NPOPCHG_2020
+- NPOPCHG_2021
+- NPOPCHG_2022
+- NPOPCHG_2023
+- NPOPCHG_2024
+- NPOPCHG_2025
+- PPOPCHG_2020
+- PPOPCHG_2021
+- PPOPCHG_2022
+- PPOPCHG_2023
+- PPOPCHG_2024
+- PPOPCHG_2025
+- NRANK_ESTBASE2020
+- NRANK_POPEST2020
+- NRANK_POPEST2021
+- NRANK_POPEST2022
+- NRANK_POPEST2023
+- NRANK_POPEST2024
+- NRANK_POPEST2025
+- NRANK_NPCHG2020
+- NRANK_NPCHG2021
+- NRANK_NPCHG2022
+- NRANK_NPCHG2023
+- NRANK_NPCHG2024
+- NRANK_NPCHG2025
+- NRANK_PPCHG2020
+- NRANK_PPCHG2021
+- NRANK_PPCHG2022
+- NRANK_PPCHG2023
+- NRANK_PPCHG2024
+- NRANK_PPCHG2025
+variable_report:
+- name: SUMLEV
+  type: integer
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 4
+  sample_values:
+  - '010'
+  - '020'
+  - '030'
+  - '040'
+  min: 10.0
+  max: 40.0
+  mean: 36.9697
+- name: REGION
+  type: string
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 6
+  sample_values:
+  - '0'
+  - '1'
+  - '2'
+  - '3'
+  - '4'
+- name: DIVISION
+  type: string
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 11
+  sample_values:
+  - '0'
+  - '1'
+  - '2'
+  - '3'
+  - '4'
+- name: STATE
+  type: integer
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 53
+  sample_values:
+  - '00'
+  - '01'
+  - '02'
+  - '04'
+  - '05'
+  min: 0.0
+  max: 72.0
+  mean: 23.4697
+- name: NAME
+  type: string
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 66
+  sample_values:
+  - United States
+  - Northeast Region
+  - New England
+  - Middle Atlantic
+  - Midwest Region
+- name: ESTIMATESBASE2020
+  type: integer
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 66
+  sample_values:
+  - '331516113'
+  - '57617560'
+  - '15122087'
+  - '42495473'
+  - '68999462'
+  min: 576872.0
+  max: 331516113.0
+  mean: 20141671.6061
+- name: POPESTIMATE2020
+  type: integer
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 66
+  sample_values:
+  - '331578104'
+  - '57436027'
+  - '15047713'
+  - '42388314'
+  - '68979566'
+  min: 577669.0
+  max: 331578104.0
+  mean: 20145363.7424
+- name: POPESTIMATE2021
+  type: integer
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 66
+  sample_values:
+  - '332100166'
+  - '57234503'
+  - '15116021'
+  - '42118482'
+  - '68867096'
+  min: 579662.0
+  max: 332100166.0
+  mean: 20176718.1061
+- name: POPESTIMATE2022
+  type: integer
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 66
+  sample_values:
+  - '333996304'
+  - '57174375'
+  - '15178293'
+  - '41996082'
+  - '68872112'
+  min: 581742.0
+  max: 333996304.0
+  mean: 20290990.3636
+- name: POPESTIMATE2023
+  type: integer
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 66
+  sample_values:
+  - '336755052'
+  - '57458539'
+  - '15267275'
+  - '42191264'
+  - '69132050'
+  min: 584666.0
+  max: 336755052.0
+  mean: 20457939.4242
+- name: POPESTIMATE2024
+  type: integer
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 66
+  sample_values:
+  - '340003797'
+  - '57940522'
+  - '15386901'
+  - '42553621'
+  - '69518281'
+  min: 586722.0
+  max: 340003797.0
+  mean: 20654813.7727
+- name: POPESTIMATE2025
+  type: integer
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 66
+  sample_values:
+  - '341784857'
+  - '58042054'
+  - '15431980'
+  - '42610074'
+  - '69762666'
+  min: 588753.0
+  max: 341784857.0
+  mean: 20762488.8333
+- name: NPOPCHG_2020
+  type: integer
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 66
+  sample_values:
+  - '61991'
+  - '-181533'
+  - '-74374'
+  - '-107159'
+  - '-19896'
+  min: -181533.0
+  max: 191766.0
+  mean: 3692.1364
+- name: NPOPCHG_2021
+  type: integer
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 66
+  sample_values:
+  - '522062'
+  - '-201524'
+  - '68308'
+  - '-269832'
+  - '-112470'
+  min: -374881.0
+  max: 906794.0
+  mean: 31354.3636
+- name: NPOPCHG_2022
+  type: integer
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 66
+  sample_values:
+  - '1896138'
+  - '-60128'
+  - '62272'
+  - '-122400'
+  - '5016'
+  min: -122400.0
+  max: 1896138.0
+  mean: 114272.2576
+- name: NPOPCHG_2023
+  type: integer
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 66
+  sample_values:
+  - '2758748'
+  - '284164'
+  - '88982'
+  - '195182'
+  - '259938'
+  min: -16354.0
+  max: 2758748.0
+  mean: 166949.0606
+- name: NPOPCHG_2024
+  type: integer
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 66
+  sample_values:
+  - '3248745'
+  - '481983'
+  - '119626'
+  - '362357'
+  - '386231'
+  min: -2634.0
+  max: 3248745.0
+  mean: 196874.3485
+- name: NPOPCHG_2025
+  type: integer
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 66
+  sample_values:
+  - '1781060'
+  - '101532'
+  - '45079'
+  - '56453'
+  - '244385'
+  min: -17686.0
+  max: 1781060.0
+  mean: 107675.0606
+- name: PPOPCHG_2020
+  type: float
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 66
+  sample_values:
+  - '0.0186992419'
+  - '-0.315065407'
+  - '-0.491823648'
+  - '-0.252165684'
+  - '-0.028835007'
+  min: -2.695404499
+  max: 0.5548840398
+  mean: -0.0126
+- name: PPOPCHG_2021
+  type: float
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 66
+  sample_values:
+  - '0.1574476703'
+  - '-0.350866887'
+  - '0.4539427354'
+  - '-0.636571674'
+  - '-0.163048286'
+  min: -1.425868523
+  max: 3.0025501155
+  mean: 0.3078
+- name: PPOPCHG_2022
+  type: float
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 66
+  sample_values:
+  - '0.5709536441'
+  - '-0.105055512'
+  - '0.4119602639'
+  - '-0.290608764'
+  - '0.0072835945'
+  min: -1.305133644
+  max: 2.6436735078
+  mean: 0.4759
+- name: PPOPCHG_2023
+  type: float
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 66
+  sample_values:
+  - '0.8259815953'
+  - '0.4970128663'
+  - '0.5862451067'
+  - '0.4647624033'
+  - '0.3774212703'
+  min: -0.507864856
+  max: 2.2988277544
+  mean: 0.6962
+- name: PPOPCHG_2024
+  type: float
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 66
+  sample_values:
+  - '0.9647204936'
+  - '0.8388361563'
+  - '0.7835451972'
+  - '0.8588436696'
+  - '0.5586858772'
+  min: -0.185419053
+  max: 1.9509950879
+  mean: 0.8329
+- name: PPOPCHG_2025
+  type: float
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 66
+  sample_values:
+  - '0.5238353265'
+  - '0.1752348728'
+  - '0.2929699749'
+  - '0.132663211'
+  - '0.3515406257'
+  min: -0.552252429
+  max: 1.4563460464
+  mean: 0.4825
+- name: NRANK_ESTBASE2020
+  type: string
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 52
+  sample_values:
+  - X
+  - '4'
+  - '9'
+  - '3'
+  - '7'
+- name: NRANK_POPEST2020
+  type: string
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 52
+  sample_values:
+  - X
+  - '4'
+  - '9'
+  - '3'
+  - '7'
+- name: NRANK_POPEST2021
+  type: string
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 52
+  sample_values:
+  - X
+  - '4'
+  - '9'
+  - '3'
+  - '7'
+- name: NRANK_POPEST2022
+  type: string
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 52
+  sample_values:
+  - X
+  - '4'
+  - '9'
+  - '3'
+  - '7'
+- name: NRANK_POPEST2023
+  type: string
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 52
+  sample_values:
+  - X
+  - '4'
+  - '9'
+  - '5'
+  - '3'
+- name: NRANK_POPEST2024
+  type: string
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 52
+  sample_values:
+  - X
+  - '4'
+  - '9'
+  - '5'
+  - '3'
+- name: NRANK_POPEST2025
+  type: string
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 52
+  sample_values:
+  - X
+  - '4'
+  - '9'
+  - '5'
+  - '3'
+- name: NRANK_NPCHG2020
+  type: string
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 52
+  sample_values:
+  - X
+  - '4'
+  - '8'
+  - '9'
+  - '3'
+- name: NRANK_NPCHG2021
+  type: string
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 52
+  sample_values:
+  - X
+  - '4'
+  - '8'
+  - '3'
+  - '7'
+- name: NRANK_NPCHG2022
+  type: string
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 52
+  sample_values:
+  - X
+  - '4'
+  - '5'
+  - '9'
+  - '3'
+- name: NRANK_NPCHG2023
+  type: string
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 52
+  sample_values:
+  - X
+  - '3'
+  - '9'
+  - '4'
+  - '6'
+- name: NRANK_NPCHG2024
+  type: string
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 52
+  sample_values:
+  - X
+  - '3'
+  - '9'
+  - '4'
+  - '6'
+- name: NRANK_NPCHG2025
+  type: string
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 52
+  sample_values:
+  - X
+  - '4'
+  - '9'
+  - '8'
+  - '3'
+- name: NRANK_PPCHG2020
+  type: string
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 52
+  sample_values:
+  - X
+  - '4'
+  - '9'
+  - '8'
+  - '3'
+- name: NRANK_PPCHG2021
+  type: string
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 52
+  sample_values:
+  - X
+  - '4'
+  - '8'
+  - '3'
+  - '7'
+- name: NRANK_PPCHG2022
+  type: string
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 52
+  sample_values:
+  - X
+  - '4'
+  - '5'
+  - '9'
+  - '3'
+- name: NRANK_PPCHG2023
+  type: string
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 52
+  sample_values:
+  - X
+  - '2'
+  - '5'
+  - '7'
+  - '4'
+- name: NRANK_PPCHG2024
+  type: string
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 52
+  sample_values:
+  - X
+  - '2'
+  - '6'
+  - '5'
+  - '4'
+- name: NRANK_PPCHG2025
+  type: string
+  total_rows: 66
+  non_empty_count: 66
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 52
+  sample_values:
+  - X
+  - '4'
+  - '6'
+  - '8'
+  - '2'

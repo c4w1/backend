@@ -23,6 +23,8 @@ from typing import Any
 
 import yaml
 
+import manual_tags
+
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 DEFAULT_SOURCES_DIR = SCRIPT_DIR.parent / "data" / "sources"
@@ -32,7 +34,7 @@ DEFAULT_SOURCES_DIR = SCRIPT_DIR.parent / "data" / "sources"
 # words on the left are the tags that will be applied if any of the words on the right are found in the text
 TAG_RULES = {
     "Agriculture": ["agricultur", "farm", "crop", "usda", "soil", "plant species", "fruit", "vegetable",
-                    "livestock", "produce", "aquacultur", "poultry", "food distribut", "nutrition",
+                    "livestock", "produce ", "aquacultur", "poultry", "food distribut", "nutrition",
                     "plant industr", "plant ship"],
     "Business & Economy": ["business", "financial", "vendor", "commerc", "econom", "issued license",
                            "license application", "domain registration", "retail", "mobile service",
@@ -79,7 +81,7 @@ TAG_RULES = {
                             "housing code", "zoning", "community development", "housing development",
                             "architect", "homeless", "unhoused", "homeowner", "mortgage", "occupancy",
                             "encampment", "land use", "foreclos", "construct"],
-    "Labor & Workforce Development": ["labor", "workforce", "employment", "unemployment", "job", "jobs",
+    "Labor & Workforce Development": ["labor", "workforce", "employment", "unemployment", "job ", "jobs",
                                       "workplace", "worker", "coops", "apprenticeship", "pension", "career",
                                       "occupation", "wage", "hour compliance"],
     "Law & Public Safety": ["legal", "crime", "public safety", "fbi", "arrest", "offense", "police",
@@ -93,7 +95,7 @@ TAG_RULES = {
     "Parks & Recreation": ["parks", "recreation", "trail", "greenway", "playground", "park district",
                            "forest preserve", "park facilit", "swimming pool", "public pool", "park building",
                            "fishing lake", "film", "parklet", "librar", "public art", "entertainment", "dog",
-                           "activities", "play area", "zoo", "zoos", "touris"],
+                           "activities", "play area", "zoo ", "zoos", "touris"],
     "Population Data": ["population", "census", "acs", "demographic", "household", "poverty", "ethnicity",
                         "race", "gender", "birth", "mortality rate", "income", "gdp"],
     "Public Utilities": ["utility", "utilities", "electric", "water utility", "natural gas", "plumbing",
@@ -108,12 +110,12 @@ TAG_RULES = {
                        "streets", "trips", "rail", "bus", "congestion", "parking", "ridership", "pedestrian",
                        "bicycle", "bike", "cyclist", "light camera", "taxi", "scooter", "sidewalk", "commuter",
                        "street closure", "speed limit", "traveled", "motor", "stops", "right of way",
-                       "right-of-way", "pavement", "paving", "intersection", "cab", "cabs", "airport",
+                       "right-of-way", "pavement", "paving", "intersection", "airport",
                        "passenger", "commute", "air cargo", "airplane", "flight", "lanes", "striping", "walk",
                        "walking", "railroad", "park ride", "park and ride", "truck", "rest area", "aviation",
                        "crash", "collision"],
     "Wildlife & Nature": ["bird", "wildlife", "species", "ebird", "ornitholog", "habitat", "biodiversity",
-                          "observation", "flora", "fauna"],
+                          "flora", "fauna"],
 }
 
 
@@ -164,6 +166,10 @@ def process_file(path: Path, dry_run: bool) -> None:
 
     if not isinstance(data, dict):
         print("  - Skipped (YAML root is not an object)")
+        return
+
+    if manual_tags.is_manual(data, "description_tags"):
+        print("  - Skipped (description_tags set by hand; see manual_tags)")
         return
 
     text_blob = build_text_blob(data)

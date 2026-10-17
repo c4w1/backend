@@ -1,0 +1,114 @@
+# Allowed tag values for the metadata editor and the pipeline.
+# The tagging redesign edits this file together with TAG_RULES in
+# pythonscripts/tagdataset.py; pythonscripts/tests/test_tag_vocabulary.py
+# keeps them, and every data/sources/*.yml, consistent.
+description_tags:
+- Agriculture
+- Business & Economy
+- Children & Families
+- Elections & Politics
+- PreK-12 Education
+- Energy & Environment
+- Government Administration
+- Health & Social Services
+- Higher Education
+- Historic Preservation
+- Housing & Buildings
+- Labor & Workforce Development
+- Law & Public Safety
+- Parks & Recreation
+- Population Data
+- Public Utilities
+- Restaurant and Food Service
+- Transportation
+- Wildlife & Nature
+statistical_tags:
+  anova_tags:
+  - good-for-one-way-anova
+  - good-for-two-way-anova
+  - good-for-chi-square-gof
+  - good-for-chi-square-independence
+  - good-for-paired-t-test
+  association_tags:
+  - positive-correlation
+  - negative-correlation
+  - no-correlation
+  - strong-correlation
+  - moderate-correlation
+  - weak-correlation
+  - linear-relationship
+  - nonlinear-relationship
+  - curved-relationship
+  - exponential-pattern
+  automation_rules_tags:
+  - has-categorical-variable
+  - has-group-comparison-candidates
+  - has-multiple-numeric-columns
+  - has-paired-test-candidates
+  - meets-minimum-sample-size
+  central_tendency_tags:
+  - has-mode
+  - mean-median-similar
+  - mean-median-different
+  comparison_capabilities_tags:
+  - two-groups-present
+  - multiple-groups-present
+  - groups-have-different-centers
+  - groups-have-different-spreads
+  - groups-overlap-substantially
+  distribution_shape_tags:
+  - approximately-normal
+  - symmetric-distribution
+  - left-skewed-distribution
+  - right-skewed-distribution
+  - bimodal-distribution
+  - uniform-distribution
+  inference_procedures_tags:
+  - good-for-one-sample-t-test
+  - good-for-two-sample-t-test
+  - good-for-one-sample-z-test
+  - good-for-two-sample-z-test
+  - good-for-one-proportion-z-test
+  - good-for-two-proportion-z-test
+  - meets-equal-variance-assumption
+  - violates-equal-variance-assumption
+  normality_tags:
+  - passes-normality-test
+  - fails-normality-test
+  - large-enough-for-clt
+  outlier_tags:
+  - no-outliers
+  - contains-outliers
+  - extreme-outliers
+  regression_quality_tags:
+  - regression-appropriate
+  - good-linear-fit
+  - moderate-linear-fit
+  - poor-linear-fit
+  - has-influential-points
+  statistical_procedures_tags:
+  - good-for-transformation
+  structure_complexity_tags:
+  - univariate
+  - bivariate
+  - multivariate
+  - small-dataset
+  - medium-dataset
+  - large-dataset
+  two_way_table_tags:
+  - two-way-table
+  value_scale_tags:
+  - single-digit-values
+  - double-digit-values
+  - three-digit-values
+  - large-scale-values
+  variability_tags:
+  - low-variability
+  - moderate-variability
+  - high-variability
+  - restricted-range
+  - wide-range
+  variable_types_tags:
+  - all-discrete
+  - all-continuous
+  - mixed-types

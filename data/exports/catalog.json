@@ -1,6 +1,6 @@
 {
   "exportVersion": 1,
-  "sourceCount": 5,
+  "sourceCount": 6,
   "sources": [
     {
       "id": "census-annual-pop-by-age-sex-2025",
@@ -534,6 +534,273 @@
           "moderate-variability": true,
           "low-variability": true,
           "restricted-range": false,
+          "wide-range": true
+        },
+        "variable_types_tags": {
+          "all-discrete": false,
+          "all-continuous": false,
+          "mixed-types": true
+        }
+      }
+    },
+    {
+      "id": "epa-tri-basic-data-tn-2024",
+      "title": "Toxics Release Inventory Basic Data 2024 — Tennessee",
+      "version": "1.0",
+      "notes": "One row per facility and chemical. Includes facility location (county, latitude, longitude), industry codes, and on-site releases and off-site transfers in pounds. Other states, the whole U.S., and earlier years (1987 onward) are on the provider page.",
+      "provider": {
+        "name": "U.S. Environmental Protection Agency (EPA)",
+        "url": "https://www.epa.gov/toxics-release-inventory-tri-program/tri-basic-data-files-calendar-years-1987-present"
+      },
+      "download": {
+        "url": "https://data.epa.gov/efservice/downloads/tri/mv_tri_basic_download/2024_TN/csv",
+        "description": "Link downloads a CSV file of every TRI report filed by Tennessee facilities for reporting year 2024.",
+        "file_size": "1.6 MB"
+      },
+      "requires_account": false,
+      "sensitive": false,
+      "pipeline_ready": true,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "point",
+      "coverage": [
+        {
+          "level": "state",
+          "geoid": "47"
+        }
+      ],
+      "filters": {
+        "year": false,
+        "state": false,
+        "county": false,
+        "zipcode": false
+      },
+      "variables": [
+        "1. YEAR",
+        "2. TRIFD",
+        "3. FRS ID",
+        "4. FACILITY NAME",
+        "5. STREET ADDRESS",
+        "6. CITY",
+        "7. COUNTY",
+        "8. ST",
+        "9. ZIP",
+        "10. BIA",
+        "11. TRIBE",
+        "12. LATITUDE",
+        "13. LONGITUDE",
+        "14. HORIZONTAL DATUM",
+        "15. PARENT CO NAME",
+        "16. PARENT CO DB NUM",
+        "17. STANDARD PARENT CO NAME",
+        "18. FOREIGN PARENT CO NAME",
+        "19. FOREIGN PARENT CO DB NUM",
+        "20. STANDARD FOREIGN PARENT CO NAME",
+        "21. FEDERAL FACILITY",
+        "22. INDUSTRY SECTOR CODE",
+        "23. INDUSTRY SECTOR",
+        "24. PRIMARY SIC",
+        "25. SIC 2",
+        "26. SIC 3",
+        "27. SIC 4",
+        "28. SIC 5",
+        "29. SIC 6",
+        "30. PRIMARY NAICS",
+        "31. NAICS 2",
+        "32. NAICS 3",
+        "33. NAICS 4",
+        "34. NAICS 5",
+        "35. NAICS 6",
+        "36. DOC_CTRL_NUM",
+        "37. CHEMICAL",
+        "38. ELEMENTAL METAL INCLUDED",
+        "39. TRI CHEMICAL/COMPOUND ID",
+        "40. CAS#",
+        "41. SRS ID",
+        "42. CLEAN AIR ACT CHEMICAL",
+        "43. CLASSIFICATION",
+        "44. METAL",
+        "45. METAL CATEGORY",
+        "46. CARCINOGEN",
+        "47. PBT",
+        "48. PFAS",
+        "49. FORM TYPE",
+        "50. UNIT OF MEASURE",
+        "51. 5.1 - FUGITIVE AIR",
+        "52. 5.2 - STACK AIR",
+        "53. 5.3 - WATER",
+        "54. 5.4 - UNDERGROUND",
+        "55. 5.4.1 - UNDERGROUND CL I",
+        "56. 5.4.2 - UNDERGROUND C II-V",
+        "57. 5.5.1 - LANDFILLS",
+        "58. 5.5.1A - RCRA C LANDFILL",
+        "59. 5.5.1B - OTHER LANDFILLS",
+        "60. 5.5.2 - LAND TREATMENT",
+        "61. 5.5.3 - SURFACE IMPNDMNT",
+        "62. 5.5.3A - RCRA SURFACE IM",
+        "63. 5.5.3B - OTHER SURFACE I",
+        "64. 5.5.4 - OTHER DISPOSAL",
+        "65. ON-SITE RELEASE TOTAL",
+        "66. 6.1 - POTW - TRNS RLSE",
+        "67. 6.1 - POTW - TRNS TRT",
+        "68. POTW - TOTAL TRANSFERS",
+        "69. 6.2 - M10",
+        "70. 6.2 - M41",
+        "71. 6.2 - M62",
+        "72. 6.2 - M40 METAL",
+        "73. 6.2 - M61 METAL",
+        "74. 6.2 - M71",
+        "75. 6.2 - M81",
+        "76. 6.2 - M82",
+        "77. 6.2 - M72",
+        "78. 6.2 - M63",
+        "79. 6.2 - M66",
+        "80. 6.2 - M67",
+        "81. 6.2 - M64",
+        "82. 6.2 - M65",
+        "83. 6.2 - M73",
+        "84. 6.2 - M79",
+        "85. 6.2 - M90",
+        "86. 6.2 - M94",
+        "87. 6.2 - M99",
+        "88. OFF-SITE RELEASE TOTAL",
+        "89. 6.2 - M20",
+        "90. 6.2 - M24",
+        "91. 6.2 - M26",
+        "92. 6.2 - M28",
+        "93. 6.2 - M93",
+        "94. OFF-SITE RECYCLED TOTAL",
+        "95. 6.2 - M56",
+        "96. 6.2 - M92",
+        "97. OFF-SITE ENERGY RECOVERY T",
+        "98. 6.2 - M40 NON-METAL",
+        "99. 6.2 - M50",
+        "100. 6.2 - M54",
+        "101. 6.2 - M61 NON-METAL",
+        "102. 6.2 - M69",
+        "103. 6.2 - M95",
+        "104. OFF-SITE TREATED TOTAL",
+        "105. 6.2 - UNCLASSIFIED",
+        "106. 6.2 - TOTAL TRANSFER",
+        "107. TOTAL RELEASES",
+        "108. 8.1 - RELEASES",
+        "109. 8.1A - ON-SITE CONTAINED",
+        "110. 8.1B - ON-SITE OTHER",
+        "111. 8.1C - OFF-SITE CONTAIN",
+        "112. 8.1D - OFF-SITE OTHER R",
+        "113. 8.2 - ENERGY RECOVER ON",
+        "114. 8.3 - ENERGY RECOVER OF",
+        "115. 8.4 - RECYCLING ON SITE",
+        "116. 8.5 - RECYCLING OFF SIT",
+        "117. 8.6 - TREATMENT ON SITE",
+        "118. 8.7 - TREATMENT OFF SITE",
+        "119. PRODUCTION WSTE (8.1-8.7)",
+        "120. 8.8 - ONE-TIME RELEASE",
+        "121. PROD_RATIO_OR_ ACTIVITY",
+        "122. 8.9 - PRODUCTION RATIO"
+      ],
+      "description_tags": [
+        "Energy & Environment",
+        "Government Administration"
+      ],
+      "analysis_tags": {
+        "anova_tags": {
+          "good-for-one-way-anova": true,
+          "good-for-two-way-anova": false,
+          "good-for-chi-square-gof": false,
+          "good-for-chi-square-independence": true,
+          "good-for-paired-t-test": false
+        },
+        "association_tags": {
+          "positive-correlation": true,
+          "negative-correlation": true,
+          "no-correlation": false,
+          "strong-correlation": true,
+          "moderate-correlation": true,
+          "weak-correlation": true,
+          "linear-relationship": true,
+          "nonlinear-relationship": true,
+          "curved-relationship": true,
+          "exponential-pattern": true
+        },
+        "automation_rules_tags": {
+          "has-multiple-numeric-columns": true,
+          "has-categorical-variable": true,
+          "has-group-comparison-candidates": true,
+          "meets-minimum-sample-size": true,
+          "has-paired-test-candidates": false
+        },
+        "central_tendency_tags": {
+          "mean-median-similar": true,
+          "mean-median-different": true,
+          "has-mode": true
+        },
+        "comparison_capabilities_tags": {
+          "two-groups-present": true,
+          "multiple-groups-present": true,
+          "groups-have-different-centers": true,
+          "groups-have-different-spreads": true,
+          "groups-overlap-substantially": true
+        },
+        "distribution_shape_tags": {
+          "symmetric-distribution": true,
+          "right-skewed-distribution": true,
+          "left-skewed-distribution": false,
+          "approximately-normal": true,
+          "uniform-distribution": false,
+          "bimodal-distribution": true
+        },
+        "inference_procedures_tags": {
+          "good-for-one-sample-t-test": true,
+          "good-for-one-sample-z-test": true,
+          "good-for-one-proportion-z-test": false,
+          "good-for-two-sample-t-test": true,
+          "good-for-two-sample-z-test": true,
+          "good-for-two-proportion-z-test": true,
+          "meets-equal-variance-assumption": true,
+          "violates-equal-variance-assumption": true
+        },
+        "normality_tags": {
+          "passes-normality-test": false,
+          "fails-normality-test": true,
+          "large-enough-for-clt": true
+        },
+        "outlier_tags": {
+          "contains-outliers": true,
+          "no-outliers": false,
+          "extreme-outliers": true
+        },
+        "regression_quality_tags": {
+          "good-linear-fit": true,
+          "moderate-linear-fit": true,
+          "poor-linear-fit": false,
+          "has-influential-points": true,
+          "regression-appropriate": true
+        },
+        "statistical_procedures_tags": {
+          "good-for-transformation": true
+        },
+        "structure_complexity_tags": {
+          "univariate": false,
+          "bivariate": false,
+          "multivariate": true,
+          "small-dataset": false,
+          "medium-dataset": false,
+          "large-dataset": true
+        },
+        "two_way_table_tags": {
+          "two-way-table": false
+        },
+        "value_scale_tags": {
+          "single-digit-values": false,
+          "double-digit-values": false,
+          "three-digit-values": false,
+          "large-scale-values": true
+        },
+        "variability_tags": {
+          "high-variability": true,
+          "moderate-variability": true,
+          "low-variability": true,
+          "restricted-range": true,
           "wide-range": true
         },
         "variable_types_tags": {

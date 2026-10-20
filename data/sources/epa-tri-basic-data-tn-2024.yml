@@ -1,0 +1,1933 @@
+id: epa-tri-basic-data-tn-2024
+version: '1.0'
+title: "Toxics Release Inventory Basic Data 2024 \u2014 Tennessee"
+provider:
+  name: U.S. Environmental Protection Agency (EPA)
+  url: https://www.epa.gov/toxics-release-inventory-tri-program/tri-basic-data-files-calendar-years-1987-present
+filters:
+  year: false
+  state: false
+  county: false
+  zipcode: false
+requires_account: false
+download:
+  url: https://data.epa.gov/efservice/downloads/tri/mv_tri_basic_download/2024_TN/csv
+  description: Link downloads a CSV file of every TRI report filed by Tennessee facilities
+    for reporting year 2024.
+  file_size: 1.6 MB
+notes: One row per facility and chemical. Includes facility location (county, latitude,
+  longitude), industry codes, and on-site releases and off-site transfers in pounds.
+  Other states, the whole U.S., and earlier years (1987 onward) are on the provider
+  page.
+sensitive: false
+who: U.S. Environmental Protection Agency (EPA)
+how: Facility self-reporting to the Toxics Release Inventory (Form R and Form A)
+where: Tennessee
+why: null
+when: '2024'
+coverage:
+- level: state
+  fips: '47'
+geographic_granularity: point
+student_suitability: unreviewed
+description_tags:
+- Energy & Environment
+- Government Administration
+variable_names:
+- 1. YEAR
+- 2. TRIFD
+- 3. FRS ID
+- 4. FACILITY NAME
+- 5. STREET ADDRESS
+- 6. CITY
+- 7. COUNTY
+- 8. ST
+- 9. ZIP
+- 10. BIA
+- 11. TRIBE
+- 12. LATITUDE
+- 13. LONGITUDE
+- 14. HORIZONTAL DATUM
+- 15. PARENT CO NAME
+- 16. PARENT CO DB NUM
+- 17. STANDARD PARENT CO NAME
+- 18. FOREIGN PARENT CO NAME
+- 19. FOREIGN PARENT CO DB NUM
+- 20. STANDARD FOREIGN PARENT CO NAME
+- 21. FEDERAL FACILITY
+- 22. INDUSTRY SECTOR CODE
+- 23. INDUSTRY SECTOR
+- 24. PRIMARY SIC
+- 25. SIC 2
+- 26. SIC 3
+- 27. SIC 4
+- 28. SIC 5
+- 29. SIC 6
+- 30. PRIMARY NAICS
+- 31. NAICS 2
+- 32. NAICS 3
+- 33. NAICS 4
+- 34. NAICS 5
+- 35. NAICS 6
+- 36. DOC_CTRL_NUM
+- 37. CHEMICAL
+- 38. ELEMENTAL METAL INCLUDED
+- 39. TRI CHEMICAL/COMPOUND ID
+- 40. CAS#
+- 41. SRS ID
+- 42. CLEAN AIR ACT CHEMICAL
+- 43. CLASSIFICATION
+- 44. METAL
+- 45. METAL CATEGORY
+- 46. CARCINOGEN
+- 47. PBT
+- 48. PFAS
+- 49. FORM TYPE
+- 50. UNIT OF MEASURE
+- 51. 5.1 - FUGITIVE AIR
+- 52. 5.2 - STACK AIR
+- 53. 5.3 - WATER
+- 54. 5.4 - UNDERGROUND
+- 55. 5.4.1 - UNDERGROUND CL I
+- 56. 5.4.2 - UNDERGROUND C II-V
+- 57. 5.5.1 - LANDFILLS
+- 58. 5.5.1A - RCRA C LANDFILL
+- 59. 5.5.1B - OTHER LANDFILLS
+- 60. 5.5.2 - LAND TREATMENT
+- 61. 5.5.3 - SURFACE IMPNDMNT
+- 62. 5.5.3A - RCRA SURFACE IM
+- 63. 5.5.3B - OTHER SURFACE I
+- 64. 5.5.4 - OTHER DISPOSAL
+- 65. ON-SITE RELEASE TOTAL
+- 66. 6.1 - POTW - TRNS RLSE
+- 67. 6.1 - POTW - TRNS TRT
+- 68. POTW - TOTAL TRANSFERS
+- 69. 6.2 - M10
+- 70. 6.2 - M41
+- 71. 6.2 - M62
+- 72. 6.2 - M40 METAL
+- 73. 6.2 - M61 METAL
+- 74. 6.2 - M71
+- 75. 6.2 - M81
+- 76. 6.2 - M82
+- 77. 6.2 - M72
+- 78. 6.2 - M63
+- 79. 6.2 - M66
+- 80. 6.2 - M67
+- 81. 6.2 - M64
+- 82. 6.2 - M65
+- 83. 6.2 - M73
+- 84. 6.2 - M79
+- 85. 6.2 - M90
+- 86. 6.2 - M94
+- 87. 6.2 - M99
+- 88. OFF-SITE RELEASE TOTAL
+- 89. 6.2 - M20
+- 90. 6.2 - M24
+- 91. 6.2 - M26
+- 92. 6.2 - M28
+- 93. 6.2 - M93
+- 94. OFF-SITE RECYCLED TOTAL
+- 95. 6.2 - M56
+- 96. 6.2 - M92
+- 97. OFF-SITE ENERGY RECOVERY T
+- 98. 6.2 - M40 NON-METAL
+- 99. 6.2 - M50
+- 100. 6.2 - M54
+- 101. 6.2 - M61 NON-METAL
+- 102. 6.2 - M69
+- 103. 6.2 - M95
+- 104. OFF-SITE TREATED TOTAL
+- 105. 6.2 - UNCLASSIFIED
+- 106. 6.2 - TOTAL TRANSFER
+- 107. TOTAL RELEASES
+- 108. 8.1 - RELEASES
+- 109. 8.1A - ON-SITE CONTAINED
+- 110. 8.1B - ON-SITE OTHER
+- 111. 8.1C - OFF-SITE CONTAIN
+- 112. 8.1D - OFF-SITE OTHER R
+- 113. 8.2 - ENERGY RECOVER ON
+- 114. 8.3 - ENERGY RECOVER OF
+- 115. 8.4 - RECYCLING ON SITE
+- 116. 8.5 - RECYCLING OFF SIT
+- 117. 8.6 - TREATMENT ON SITE
+- 118. 8.7 - TREATMENT OFF SITE
+- 119. PRODUCTION WSTE (8.1-8.7)
+- 120. 8.8 - ONE-TIME RELEASE
+- 121. PROD_RATIO_OR_ ACTIVITY
+- 122. 8.9 - PRODUCTION RATIO
+variable_report:
+- name: 1. YEAR
+  type: integer
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1
+  sample_values:
+  - '2024'
+  min: 2024.0
+  max: 2024.0
+  mean: 2024.0
+- name: 2. TRIFD
+  type: string
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 630
+  sample_values:
+  - 3801WPRCSN2MRGA
+  - 37918GRNWY4320G
+  - 3846WTPRFD21HEL
+  - 37771QZTCR300IN
+  - 3716WTWBXX983NI
+- name: 3. FRS ID
+  type: integer
+  total_rows: 2107
+  non_empty_count: 2094
+  missing_count: 13
+  missing_pct: 0.62
+  unique_count: 623
+  sample_values:
+  - '110057770639'
+  - '110002106756'
+  - '110054862895'
+  - '110008123440'
+  - '110071732234'
+  min: 110000369850.0
+  max: 110071821104.0
+  mean: 110017396276.8811
+- name: 4. FACILITY NAME
+  type: string
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 608
+  sample_values:
+  - PRECISION COILS - TENNESSEE
+  - CORECHEM INC.
+  - TPR FEDERAL-MOGUL TENNESSEE INC.
+  - HUBBELL LENOIR CITY INC
+  - TWB
+- name: 5. STREET ADDRESS
+  type: string
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 628
+  sample_values:
+  - 200 MORGAN ST
+  - 4320 GREENWAY DR
+  - 201 HELTON DR
+  - 2911 INDUSTRIAL PARK DR
+  - 983 NISSAN DR
+- name: 6. CITY
+  type: string
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 155
+  sample_values:
+  - BROWNSVILLE
+  - KNOXVILLE
+  - LAWRENCEBURG
+  - LENOIR CITY
+  - SMYRNA
+- name: 7. COUNTY
+  type: string
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 81
+  sample_values:
+  - HAYWOOD
+  - KNOX
+  - LAWRENCE
+  - LOUDON
+  - RUTHERFORD
+- name: 8. ST
+  type: string
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1
+  sample_values:
+  - TN
+- name: 9. ZIP
+  type: integer
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 206
+  sample_values:
+  - '38012'
+  - '37918'
+  - '38464'
+  - '37771'
+  - '37167'
+  min: 37013.0
+  max: 373892327.0
+  mean: 569980.3707
+- name: 10. BIA
+  type: empty
+  total_rows: 2107
+  non_empty_count: 0
+  missing_count: 2107
+  missing_pct: 100.0
+  unique_count: 0
+  sample_values: []
+- name: 11. TRIBE
+  type: empty
+  total_rows: 2107
+  non_empty_count: 0
+  missing_count: 2107
+  missing_pct: 100.0
+  unique_count: 0
+  sample_values: []
+- name: 12. LATITUDE
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 627
+  sample_values:
+  - '35.598155'
+  - '36.032222'
+  - '35.268288'
+  - '35.783030'
+  - '35.964033'
+  min: 34.988093
+  max: 36.632258
+  mean: 35.7462
+- name: 13. LONGITUDE
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 627
+  sample_values:
+  - '-89.231227'
+  - '-83.895004'
+  - '-87.327478'
+  - '-84.269857'
+  - '-86.495132'
+  min: -90.153323
+  max: -81.881858
+  mean: -86.4472
+- name: 14. HORIZONTAL DATUM
+  type: empty
+  total_rows: 2107
+  non_empty_count: 0
+  missing_count: 2107
+  missing_pct: 100.0
+  unique_count: 0
+  sample_values: []
+- name: 15. PARENT CO NAME
+  type: string
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 314
+  sample_values:
+  - NATIONWIDE COOLING GROUP LLC
+  - NA
+  - HUBBELL INC
+  - WORTHINGTON STEEL INC
+  - DANA HOLDING CORP
+- name: 16. PARENT CO DB NUM
+  type: string
+  total_rows: 2107
+  non_empty_count: 1535
+  missing_count: 572
+  missing_pct: 27.15
+  unique_count: 291
+  sample_values:
+  - NA
+  - 001181858
+  - '119127644'
+  - '005040555'
+  - '157793639'
+- name: 17. STANDARD PARENT CO NAME
+  type: string
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 360
+  sample_values:
+  - NATIONWIDE COOLING GROUP LLC
+  - NA
+  - HUBBELL INC
+  - WORTHINGTON STEEL INC
+  - DANA INC
+- name: 18. FOREIGN PARENT CO NAME
+  type: string
+  total_rows: 2107
+  non_empty_count: 2092
+  missing_count: 15
+  missing_pct: 0.71
+  unique_count: 72
+  sample_values:
+  - NA
+  - TRADEBE GP
+  - BRENNTAG AG
+  - CEMEX SAB DE CV
+  - MAHLE GMBH
+- name: 19. FOREIGN PARENT CO DB NUM
+  type: string
+  total_rows: 2107
+  non_empty_count: 351
+  missing_count: 1756
+  missing_pct: 83.34
+  unique_count: 37
+  sample_values:
+  - 020221619
+  - '507091739'
+  - '811645654'
+  - NA
+  - '984879912'
+- name: 20. STANDARD FOREIGN PARENT CO NAME
+  type: string
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 91
+  sample_values:
+  - NA
+  - TRADEBE GP
+  - BRENNTAG AG
+  - CEMEX SAB DE CV
+  - MAHLE GMBH
+- name: 21. FEDERAL FACILITY
+  type: boolean
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 2
+  sample_values:
+  - 'NO'
+  - 'YES'
+- name: 22. INDUSTRY SECTOR CODE
+  type: integer
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 27
+  sample_values:
+  - '333'
+  - '4246'
+  - '331'
+  - '326'
+  - '332'
+  min: 311.0
+  max: 4247.0
+  mean: 708.3161
+- name: 23. INDUSTRY SECTOR
+  type: string
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 27
+  sample_values:
+  - Machinery
+  - Chemical Wholesalers
+  - Primary Metals
+  - Plastics and Rubber
+  - Fabricated Metals
+- name: 24. PRIMARY SIC
+  type: empty
+  total_rows: 2107
+  non_empty_count: 0
+  missing_count: 2107
+  missing_pct: 100.0
+  unique_count: 0
+  sample_values: []
+- name: 25. SIC 2
+  type: empty
+  total_rows: 2107
+  non_empty_count: 0
+  missing_count: 2107
+  missing_pct: 100.0
+  unique_count: 0
+  sample_values: []
+- name: 26. SIC 3
+  type: empty
+  total_rows: 2107
+  non_empty_count: 0
+  missing_count: 2107
+  missing_pct: 100.0
+  unique_count: 0
+  sample_values: []
+- name: 27. SIC 4
+  type: empty
+  total_rows: 2107
+  non_empty_count: 0
+  missing_count: 2107
+  missing_pct: 100.0
+  unique_count: 0
+  sample_values: []
+- name: 28. SIC 5
+  type: empty
+  total_rows: 2107
+  non_empty_count: 0
+  missing_count: 2107
+  missing_pct: 100.0
+  unique_count: 0
+  sample_values: []
+- name: 29. SIC 6
+  type: empty
+  total_rows: 2107
+  non_empty_count: 0
+  missing_count: 2107
+  missing_pct: 100.0
+  unique_count: 0
+  sample_values: []
+- name: 30. PRIMARY NAICS
+  type: integer
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 190
+  sample_values:
+  - '333415'
+  - '424690'
+  - '331511'
+  - '326199'
+  - '332999'
+  min: 212230.0
+  max: 928110.0
+  mean: 341695.7978
+- name: 31. NAICS 2
+  type: integer
+  total_rows: 2107
+  non_empty_count: 209
+  missing_count: 1898
+  missing_pct: 90.08
+  unique_count: 42
+  sample_values:
+  - '484230'
+  - '325180'
+  - '331314'
+  - '326299'
+  - '332813'
+  min: 311612.0
+  max: 811122.0
+  mean: 343049.6842
+- name: 32. NAICS 3
+  type: integer
+  total_rows: 2107
+  non_empty_count: 85
+  missing_count: 2022
+  missing_pct: 95.97
+  unique_count: 13
+  sample_values:
+  - '484220'
+  - '332813'
+  - '325220'
+  - '325130'
+  - '325199'
+  min: 325130.0
+  max: 484220.0
+  mean: 341841.8353
+- name: 33. NAICS 4
+  type: integer
+  total_rows: 2107
+  non_empty_count: 51
+  missing_count: 2056
+  missing_pct: 97.58
+  unique_count: 5
+  sample_values:
+  - '325199'
+  - '325220'
+  - '325130'
+  - '332322'
+  - '332420'
+  min: 325130.0
+  max: 332420.0
+  mean: 325612.8627
+- name: 34. NAICS 5
+  type: integer
+  total_rows: 2107
+  non_empty_count: 2
+  missing_count: 2105
+  missing_pct: 99.91
+  unique_count: 1
+  sample_values:
+  - '423510'
+  min: 423510.0
+  max: 423510.0
+  mean: 423510.0
+- name: 35. NAICS 6
+  type: empty
+  total_rows: 2107
+  non_empty_count: 0
+  missing_count: 2107
+  missing_pct: 100.0
+  unique_count: 0
+  sample_values: []
+- name: 36. DOC_CTRL_NUM
+  type: integer
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 2107
+  sample_values:
+  - '1324222682635'
+  - '1324222658849'
+  - '1324222483087'
+  - '1324222722237'
+  - '1324222780278'
+  min: 1324222405843.0
+  max: 1324223242621.0
+  mean: 1324222778773.4565
+- name: 37. CHEMICAL
+  type: string
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 195
+  sample_values:
+  - Manganese
+  - Ethylene glycol
+  - Styrene
+  - Lead
+  - Nitrate compounds (water dissociable; reportable only when in aqueous solution)
+- name: 38. ELEMENTAL METAL INCLUDED
+  type: boolean
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 2
+  sample_values:
+  - 'NO'
+  - 'YES'
+- name: 39. TRI CHEMICAL/COMPOUND ID
+  type: string
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 183
+  sample_values:
+  - 0007439965
+  - '0000107211'
+  - '0000100425'
+  - 0007439921
+  - N511
+- name: 40. CAS#
+  type: string
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 183
+  sample_values:
+  - 7439-96-5
+  - 107-21-1
+  - 100-42-5
+  - 7439-92-1
+  - N511
+- name: 41. SRS ID
+  type: integer
+  total_rows: 2107
+  non_empty_count: 2106
+  missing_count: 1
+  missing_pct: 0.05
+  unique_count: 182
+  sample_values:
+  - '149625'
+  - '24257'
+  - '19414'
+  - '149583'
+  - '649616'
+  min: 1008.0
+  max: 524672476.0
+  mean: 1282075.1268
+- name: 42. CLEAN AIR ACT CHEMICAL
+  type: boolean
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 2
+  sample_values:
+  - 'YES'
+  - 'NO'
+- name: 43. CLASSIFICATION
+  type: string
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3
+  sample_values:
+  - TRI
+  - PBT
+  - Dioxin
+- name: 44. METAL
+  type: boolean
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 2
+  sample_values:
+  - 'YES'
+  - 'NO'
+- name: 45. METAL CATEGORY
+  type: string
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 6
+  sample_values:
+  - Elemental metals
+  - Non_Metal
+  - May contain metal
+  - Metal complound categories
+  - Metals with qualifiers
+- name: 46. CARCINOGEN
+  type: boolean
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 2
+  sample_values:
+  - 'NO'
+  - 'YES'
+- name: 47. PBT
+  type: boolean
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 2
+  sample_values:
+  - 'NO'
+  - 'YES'
+- name: 48. PFAS
+  type: boolean
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 2
+  sample_values:
+  - 'NO'
+  - 'YES'
+- name: 49. FORM TYPE
+  type: string
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 2
+  sample_values:
+  - R
+  - A
+- name: 50. UNIT OF MEASURE
+  type: string
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 2
+  sample_values:
+  - Pounds
+  - Grams
+- name: 51. 5.1 - FUGITIVE AIR
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 659
+  sample_values:
+  - '37.100'
+  - '5.000'
+  - '0.000'
+  - '73004.000'
+  - '15311.610'
+  min: 0.0
+  max: 540164.0
+  mean: 1577.1125
+- name: 52. 5.2 - STACK AIR
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 838
+  sample_values:
+  - '0.000'
+  - '5.000'
+  - '0.543'
+  - '1748.910'
+  - '0.849'
+  min: 0.0
+  max: 2871040.0
+  mean: 7371.5961
+- name: 53. 5.3 - WATER
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 250
+  sample_values:
+  - '0.000'
+  - '0.736'
+  - '200.000'
+  - '2.670'
+  - '8.370'
+  min: 0.0
+  max: 767395.0
+  mean: 1504.9933
+- name: 54. 5.4 - UNDERGROUND
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1
+  sample_values:
+  - '0.000'
+  min: 0.0
+  max: 0.0
+  mean: 0.0
+- name: 55. 5.4.1 - UNDERGROUND CL I
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1
+  sample_values:
+  - '0.000'
+  min: 0.0
+  max: 0.0
+  mean: 0.0
+- name: 56. 5.4.2 - UNDERGROUND C II-V
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1
+  sample_values:
+  - '0.000'
+  min: 0.0
+  max: 0.0
+  mean: 0.0
+- name: 57. 5.5.1 - LANDFILLS
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1
+  sample_values:
+  - '0.000'
+  min: 0.0
+  max: 0.0
+  mean: 0.0
+- name: 58. 5.5.1A - RCRA C LANDFILL
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 17
+  sample_values:
+  - '0.000'
+  - '1.000'
+  - '144.000'
+  - '1415.000'
+  - '45.000'
+  min: 0.0
+  max: 3215.0
+  mean: 5.3927
+- name: 59. 5.5.1B - OTHER LANDFILLS
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 105
+  sample_values:
+  - '0.000'
+  - '29000.000'
+  - '530.000'
+  - '160000.000'
+  - '176.000'
+  min: 0.0
+  max: 3926471.0
+  mean: 7808.3878
+- name: 60. 5.5.2 - LAND TREATMENT
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 5
+  sample_values:
+  - '0.000'
+  - '11718.530'
+  - '4993.000'
+  - '5.000'
+  - '39819.000'
+  min: 0.0
+  max: 39819.0
+  mean: 26.8322
+- name: 61. 5.5.3 - SURFACE IMPNDMNT
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1
+  sample_values:
+  - '0.000'
+  min: 0.0
+  max: 0.0
+  mean: 0.0
+- name: 62. 5.5.3A - RCRA SURFACE IM
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1
+  sample_values:
+  - '0.000'
+  min: 0.0
+  max: 0.0
+  mean: 0.0
+- name: 63. 5.5.3B - OTHER SURFACE I
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 21
+  sample_values:
+  - '0.000'
+  - '118.810'
+  - '28049.000'
+  - '600682.000'
+  - '4.000'
+  min: 0.0
+  max: 9628922.0
+  mean: 7044.5956
+- name: 64. 5.5.4 - OTHER DISPOSAL
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 36
+  sample_values:
+  - '0.000'
+  - '5.000'
+  - '44.000'
+  - '9447.540'
+  - '226.000'
+  min: 0.0
+  max: 1776461.11
+  mean: 2582.5867
+- name: 65. ON-SITE RELEASE TOTAL
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1191
+  sample_values:
+  - '37.100'
+  - '5.000'
+  - '73004.000'
+  - '0.000'
+  - '15311.610'
+  min: 0.0
+  max: 9739841.0
+  mean: 27921.4969
+- name: 66. 6.1 - POTW - TRNS RLSE
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 275
+  sample_values:
+  - '0.000'
+  - '0.490'
+  - '15149.600'
+  - '0.689'
+  - '41.000'
+  min: 0.0
+  max: 254612.32
+  mean: 342.2793
+- name: 67. 6.1 - POTW - TRNS TRT
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 126
+  sample_values:
+  - '0.000'
+  - '22724.400'
+  - '436.000'
+  - '3.600'
+  - '0.842'
+  min: 0.0
+  max: 2928041.68
+  mean: 2106.8079
+- name: 68. POTW - TOTAL TRANSFERS
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 286
+  sample_values:
+  - '0.000'
+  - '0.490'
+  - '37874.000'
+  - '0.689'
+  - '41.000'
+  min: 0.0
+  max: 3182654.0
+  mean: 2449.0872
+- name: 69. 6.2 - M10
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 6
+  sample_values:
+  - '0.000'
+  - '494.100'
+  - '168.000'
+  - '2099.300'
+  - '9196.000'
+  min: 0.0
+  max: 11294.61
+  mean: 11.0356
+- name: 70. 6.2 - M41
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 42
+  sample_values:
+  - '0.000'
+  - '14.000'
+  - '50.400'
+  - '366.000'
+  - '10391.100'
+  min: 0.0
+  max: 151782.0
+  mean: 111.2352
+- name: 71. 6.2 - M62
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 29
+  sample_values:
+  - '0.000'
+  - '9969.000'
+  - '118.000'
+  - '94.000'
+  - '199.000'
+  min: 0.0
+  max: 76289.0
+  mean: 67.3628
+- name: 72. 6.2 - M40 METAL
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1
+  sample_values:
+  - '0.000'
+  min: 0.0
+  max: 0.0
+  mean: 0.0
+- name: 73. 6.2 - M61 METAL
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1
+  sample_values:
+  - '0.000'
+  min: 0.0
+  max: 0.0
+  mean: 0.0
+- name: 74. 6.2 - M71
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1
+  sample_values:
+  - '0.000'
+  min: 0.0
+  max: 0.0
+  mean: 0.0
+- name: 75. 6.2 - M81
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 46
+  sample_values:
+  - '0.000'
+  - '0.300'
+  - '463.400'
+  - '5.700'
+  - '0.850'
+  min: 0.0
+  max: 4498233.07
+  mean: 2184.1726
+- name: 76. 6.2 - M82
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1
+  sample_values:
+  - '0.000'
+  min: 0.0
+  max: 0.0
+  mean: 0.0
+- name: 77. 6.2 - M72
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1
+  sample_values:
+  - '0.000'
+  min: 0.0
+  max: 0.0
+  mean: 0.0
+- name: 78. 6.2 - M63
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1
+  sample_values:
+  - '0.000'
+  min: 0.0
+  max: 0.0
+  mean: 0.0
+- name: 79. 6.2 - M66
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1
+  sample_values:
+  - '0.000'
+  min: 0.0
+  max: 0.0
+  mean: 0.0
+- name: 80. 6.2 - M67
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1
+  sample_values:
+  - '0.000'
+  min: 0.0
+  max: 0.0
+  mean: 0.0
+- name: 81. 6.2 - M64
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 323
+  sample_values:
+  - '0.000'
+  - '129.900'
+  - '1950.400'
+  - '5.000'
+  - '12.000'
+  min: 0.0
+  max: 510087.13
+  mean: 2638.2342
+- name: 82. 6.2 - M65
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 93
+  sample_values:
+  - '0.000'
+  - '41014.180'
+  - '892.780'
+  - '0.010'
+  - '1467.000'
+  min: 0.0
+  max: 3225351.0
+  mean: 2093.378
+- name: 83. 6.2 - M73
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 12
+  sample_values:
+  - '0.000'
+  - '1196.300'
+  - '3.000'
+  - '56585.000'
+  - '1309.000'
+  min: 0.0
+  max: 56585.0
+  mean: 35.0705
+- name: 84. 6.2 - M79
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 18
+  sample_values:
+  - '0.000'
+  - '0.045'
+  - '0.627'
+  - '2.170'
+  - '0.632'
+  min: 0.0
+  max: 23630.0
+  mean: 11.2961
+- name: 85. 6.2 - M90
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 57
+  sample_values:
+  - '0.000'
+  - '85.340'
+  - '1.000'
+  - '130550.000'
+  - '136.230'
+  min: 0.0
+  max: 130550.0
+  mean: 280.4537
+- name: 86. 6.2 - M94
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 48
+  sample_values:
+  - '0.000'
+  - '609.000'
+  - '1300.000'
+  - '29.200'
+  - '330000.000'
+  min: 0.0
+  max: 330000.0
+  mean: 213.7043
+- name: 87. 6.2 - M99
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 71
+  sample_values:
+  - '0.000'
+  - '818.000'
+  - '866.000'
+  - '0.100'
+  - '72373.000'
+  min: 0.0
+  max: 178315.0
+  mean: 324.8174
+- name: 88. OFF-SITE RELEASE TOTAL
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 650
+  sample_values:
+  - '0.000'
+  - '818.000'
+  - '129.900'
+  - '43050.220'
+  - '5.490'
+  min: 0.0
+  max: 4498233.07
+  mean: 8313.0397
+- name: 89. 6.2 - M20
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 54
+  sample_values:
+  - '0.000'
+  - '16.400'
+  - '615.000'
+  - '35570.000'
+  - '250973.000'
+  min: 0.0
+  max: 250973.0
+  mean: 593.5412
+- name: 90. 6.2 - M24
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 269
+  sample_values:
+  - '11337.000'
+  - '0.000'
+  - '106000.000'
+  - '250.000'
+  - '26444.000'
+  min: 0.0
+  max: 4825488.0
+  mean: 20331.4972
+- name: 91. 6.2 - M26
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 114
+  sample_values:
+  - '0.000'
+  - '2.400'
+  - '545.000'
+  - '1.100'
+  - '306744.000'
+  min: 0.0
+  max: 3455602.0
+  mean: 2693.7062
+- name: 92. 6.2 - M28
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1
+  sample_values:
+  - '0.000'
+  min: 0.0
+  max: 0.0
+  mean: 0.0
+- name: 93. 6.2 - M93
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 173
+  sample_values:
+  - '0.000'
+  - '152507.000'
+  - '266097.000'
+  - '5.000'
+  - '250.000'
+  min: 0.0
+  max: 1273000.0
+  mean: 6639.4224
+- name: 94. OFF-SITE RECYCLED TOTAL
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 554
+  sample_values:
+  - '11337.000'
+  - '0.000'
+  - '2.400'
+  - '16.400'
+  - '106000.000'
+  min: 0.0
+  max: 4841375.0
+  mean: 30258.167
+- name: 95. 6.2 - M56
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 186
+  sample_values:
+  - '0.000'
+  - '1938.000'
+  - '12799.000'
+  - '16880.000'
+  - '0.645'
+  min: 0.0
+  max: 1060509.79
+  mean: 2854.3813
+- name: 96. 6.2 - M92
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 54
+  sample_values:
+  - '0.000'
+  - '13.452'
+  - '35645.730'
+  - '0.536'
+  - '1902.000'
+  min: 0.0
+  max: 330000.0
+  mean: 477.0538
+- name: 97. OFF-SITE ENERGY RECOVERY T
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 218
+  sample_values:
+  - '0.000'
+  - '1938.000'
+  - '12799.000'
+  - '16880.000'
+  - '14.097'
+  min: 0.0
+  max: 1060509.79
+  mean: 3307.0392
+- name: 98. 6.2 - M40 NON-METAL
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 21
+  sample_values:
+  - '0.000'
+  - '162.700'
+  - '1.900'
+  - '0.095'
+  - '1.800'
+  min: 0.0
+  max: 60000.0
+  mean: 72.6379
+- name: 99. 6.2 - M50
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 133
+  sample_values:
+  - '0.000'
+  - '72.000'
+  - '0.200'
+  - '20.700'
+  - '0.097'
+  min: 0.0
+  max: 461700.0
+  mean: 654.2323
+- name: 100. 6.2 - M54
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 32
+  sample_values:
+  - '0.000'
+  - '2327.000'
+  - '2062.000'
+  - '3.000'
+  - '44.000'
+  min: 0.0
+  max: 61061.0
+  mean: 73.3824
+- name: 101. 6.2 - M61 NON-METAL
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 24
+  sample_values:
+  - '0.000'
+  - '3230.000'
+  - '3.000'
+  - '14643.000'
+  - '10514.000'
+  min: 0.0
+  max: 235112.3
+  mean: 181.8698
+- name: 102. 6.2 - M69
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 12
+  sample_values:
+  - '0.000'
+  - '1033.000'
+  - '702.000'
+  - '5034.000'
+  - '499.000'
+  min: 0.0
+  max: 5034.0
+  mean: 5.7276
+- name: 103. 6.2 - M95
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 15
+  sample_values:
+  - '0.000'
+  - '233.000'
+  - '5768875.680'
+  - '172.000'
+  - '1327.000'
+  min: 0.0
+  max: 5768875.68
+  mean: 2748.1043
+- name: 104. OFF-SITE TREATED TOTAL
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 305
+  sample_values:
+  - '0.000'
+  - '72.000'
+  - '162.900'
+  - '20.700'
+  - '22724.400'
+  min: 0.0
+  max: 5768875.68
+  mean: 5842.7623
+- name: 105. 6.2 - UNCLASSIFIED
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1
+  sample_values:
+  - '0.000'
+  min: 0.0
+  max: 0.0
+  mean: 0.0
+- name: 106. 6.2 - TOTAL TRANSFER
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1101
+  sample_values:
+  - '11337.000'
+  - '818.000'
+  - '129.900'
+  - '2010.000'
+  - '0.000'
+  min: 0.0
+  max: 10267108.75
+  mean: 47745.4041
+- name: 107. TOTAL RELEASES
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1403
+  sample_values:
+  - '37.100'
+  - '823.000'
+  - '134.900'
+  - '73004.000'
+  - '0.000'
+  min: 0.0
+  max: 9739841.0
+  mean: 36234.5366
+- name: 108. 8.1 - RELEASES
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1
+  sample_values:
+  - '0.000'
+  min: 0.0
+  max: 0.0
+  mean: 0.0
+- name: 109. 8.1A - ON-SITE CONTAINED
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 107
+  sample_values:
+  - '0.000'
+  - '29000.000'
+  - '530.000'
+  - '160000.000'
+  - '176.000'
+  min: 0.0
+  max: 3926471.0
+  mean: 7813.7805
+- name: 110. 8.1B - ON-SITE OTHER
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1148
+  sample_values:
+  - '37.100'
+  - '5.000'
+  - '73004.000'
+  - '0.000'
+  - '15311.610'
+  min: 0.0
+  max: 9739841.0
+  mean: 20099.8693
+- name: 111. 8.1C - OFF-SITE CONTAIN
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 454
+  sample_values:
+  - '0.000'
+  - '129.900'
+  - '42964.880'
+  - '5.191'
+  - '0.434'
+  min: 0.0
+  max: 4498233.07
+  mean: 6934.7178
+- name: 112. 8.1D - OFF-SITE OTHER R
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 434
+  sample_values:
+  - '0.000'
+  - '818.000'
+  - '85.340'
+  - '0.299'
+  - '15149.600'
+  min: 0.0
+  max: 330000.0
+  mean: 1349.7725
+- name: 113. 8.2 - ENERGY RECOVER ON
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 48
+  sample_values:
+  - '0.000'
+  - '2708.000'
+  - '0.020'
+  - '1443666.000'
+  - '787.000'
+  min: 0.0
+  max: 3114582.0
+  mean: 4851.9075
+- name: 114. 8.3 - ENERGY RECOVER OF
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 218
+  sample_values:
+  - '0.000'
+  - '1938.000'
+  - '12799.000'
+  - '16880.000'
+  - '14.097'
+  min: 0.0
+  max: 1060509.79
+  mean: 3307.0392
+- name: 115. 8.4 - RECYCLING ON SITE
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 79
+  sample_values:
+  - '0.000'
+  - '33645879.980'
+  - '5025.000'
+  - '6523.000'
+  - '3964.000'
+  min: 0.0
+  max: 112864382.0
+  mean: 98591.9749
+- name: 116. 8.5 - RECYCLING OFF SIT
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 553
+  sample_values:
+  - '11337.000'
+  - '0.000'
+  - '2.400'
+  - '16.400'
+  - '106000.000'
+  min: 0.0
+  max: 4841375.0
+  mean: 30255.8854
+- name: 117. 8.6 - TREATMENT ON SITE
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 346
+  sample_values:
+  - '0.000'
+  - '689.000'
+  - '43005.150'
+  - '2278484.080'
+  - '17709.370'
+  min: 0.0
+  max: 18000000.0
+  mean: 61391.6563
+- name: 118. 8.7 - TREATMENT OFF SITE
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 300
+  sample_values:
+  - '0.000'
+  - '72.000'
+  - '162.900'
+  - '20.700'
+  - '22724.400'
+  min: 0.0
+  max: 5768875.68
+  mean: 5802.3603
+- name: 119. PRODUCTION WSTE (8.1-8.7)
+  type: float
+  total_rows: 2107
+  non_empty_count: 2107
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 1660
+  sample_values:
+  - '11374.100'
+  - '823.000'
+  - '134.900'
+  - '75703.000'
+  - '0.000'
+  min: 0.0
+  max: 116050656.0
+  mean: 240398.9637
+- name: 120. 8.8 - ONE-TIME RELEASE
+  type: float
+  total_rows: 2107
+  non_empty_count: 237
+  missing_count: 1870
+  missing_pct: 88.75
+  unique_count: 23
+  sample_values:
+  - '0.849'
+  - '0.000'
+  - '300.000'
+  - '34558.400'
+  - '1.000'
+  min: 0.0
+  max: 93727.0
+  mean: 868.4589
+- name: 121. PROD_RATIO_OR_ ACTIVITY
+  type: string
+  total_rows: 2107
+  non_empty_count: 1825
+  missing_count: 282
+  missing_pct: 13.38
+  unique_count: 2
+  sample_values:
+  - PRODUCTION
+  - ACTIVITY
+- name: 122. 8.9 - PRODUCTION RATIO
+  type: float
+  total_rows: 2107
+  non_empty_count: 2035
+  missing_count: 72
+  missing_pct: 3.42
+  unique_count: 163
+  sample_values:
+  - '0.800'
+  - '0.310'
+  - '1.000'
+  - '0.670'
+  - '0.940'
+  min: 0.0
+  max: 100.0
+  mean: 1.1413
+geographic_coverage:
+  available_levels:
+    state_fips: false
+    fips_code: false
+    zip_code: false
+    school_district: false
+    tract: false
+    tribal_area: true
+anova_tags:
+  good-for-one-way-anova: true
+  good-for-two-way-anova: false
+  good-for-chi-square-gof: false
+  good-for-chi-square-independence: true
+  good-for-paired-t-test: false
+association_tags:
+  positive-correlation: true
+  negative-correlation: true
+  no-correlation: false
+  strong-correlation: true
+  moderate-correlation: true
+  weak-correlation: true
+  linear-relationship: true
+  nonlinear-relationship: true
+  curved-relationship: true
+  exponential-pattern: true
+automation_rules_tags:
+  has-multiple-numeric-columns: true
+  has-categorical-variable: true
+  has-group-comparison-candidates: true
+  meets-minimum-sample-size: true
+  has-paired-test-candidates: false
+central_tendency_tags:
+  mean-median-similar: true
+  mean-median-different: true
+  has-mode: true
+comparison_capabilities_tags:
+  two-groups-present: true
+  multiple-groups-present: true
+  groups-have-different-centers: true
+  groups-have-different-spreads: true
+  groups-overlap-substantially: true
+distribution_shape_tags:
+  symmetric-distribution: true
+  right-skewed-distribution: true
+  left-skewed-distribution: false
+  approximately-normal: true
+  uniform-distribution: false
+  bimodal-distribution: true
+inference_procedures_tags:
+  good-for-one-sample-t-test: true
+  good-for-one-sample-z-test: true
+  good-for-one-proportion-z-test: false
+  good-for-two-sample-t-test: true
+  good-for-two-sample-z-test: true
+  good-for-two-proportion-z-test: true
+  meets-equal-variance-assumption: true
+  violates-equal-variance-assumption: true
+linear_regression: true
+normality_tags:
+  passes-normality-test: false
+  fails-normality-test: true
+  large-enough-for-clt: true
+outlier_tags:
+  contains-outliers: true
+  no-outliers: false
+  extreme-outliers: true
+regression_quality_tags:
+  good-linear-fit: true
+  moderate-linear-fit: true
+  poor-linear-fit: false
+  has-influential-points: true
+  regression-appropriate: true
+statistical_procedures_tags:
+  good-for-transformation: true
+structure_complexity_tags:
+  univariate: false
+  bivariate: false
+  multivariate: true
+  small-dataset: false
+  medium-dataset: false
+  large-dataset: true
+two_way_table_tags:
+  two-way-table: false
+value_scale_tags:
+  single-digit-values: false
+  double-digit-values: false
+  three-digit-values: false
+  large-scale-values: true
+variability_tags:
+  high-variability: true
+  moderate-variability: true
+  low-variability: true
+  restricted-range: true
+  wide-range: true
+variable_types_tags:
+  all-discrete: false
+  all-continuous: false
+  mixed-types: true

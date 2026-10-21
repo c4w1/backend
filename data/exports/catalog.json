@@ -1,6 +1,6 @@
 {
   "exportVersion": 1,
-  "sourceCount": 18,
+  "sourceCount": 22,
   "sources": [
     {
       "id": "census-annual-pop-by-age-sex-2025",
@@ -2455,6 +2455,164 @@
         "Government Administration",
         "Law & Public Safety"
       ]
+    },
+    {
+      "id": "knox-county-health-data",
+      "title": "Knox County Community Health Data",
+      "version": "1.0",
+      "description": "County-level health indicators for Knox County, TN, including mortality rates, chronic disease prevalence, mental health metrics, and social determinants of health. Compiled from the Tennessee Department of Health and the Robert Wood Johnson County Health Rankings.",
+      "about": "The County Health Rankings & Roadmaps program, a collaboration between the Robert Wood Johnson Foundation and the University of Wisconsin, ranks the health of nearly all counties in the nation. Knox County data is also available from the Tennessee Department of Health's County Health Profiles.\n\n## What's Included\n\n- **Health outcomes**: Premature death, poor physical health days, poor mental health days, low birthweight\n- **Health behaviors**: Adult smoking, obesity, physical inactivity, excessive drinking, uninsured rates\n- **Clinical care**: Primary care and mental health provider ratios, preventable hospital stays\n- **Social & economic factors**: High school graduation, unemployment, income inequality, child poverty\n- **Physical environment**: Air quality index, access to healthy foods, access to parks\n\n## Accessing the Data\n\nData is downloadable at **countyhealthrankings.org** as Excel/CSV files. Tennessee DOH publishes Knox County-specific reports at **tn.gov/health**.\n\n## Community Use\n\n- Identify the leading preventable causes of premature death in Knox County.\n- Compare Knox County rankings to neighboring counties and state averages.\n- Use social determinants data to target community health intervention areas.\n\n## Classroom Use\n\n- **Health disparities**: How do outcomes differ across Knox County ZIP codes and income levels?\n- **Policy analysis**: What interventions are associated with improved rankings over time?\n- **Data visualization**: Build a dashboard of Knox County health metrics using publicly available indicators.",
+      "published_date": "2024-09-15",
+      "provider": {
+        "name": "Tennessee Department of Health / County Health Rankings",
+        "url": "https://www.countyhealthrankings.org/health-data/tennessee/knox"
+      },
+      "requires_account": false,
+      "sensitive": false,
+      "pipeline_ready": false,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "county",
+      "coverage": [
+        {
+          "level": "county",
+          "geoid": "47093"
+        }
+      ],
+      "location": {
+        "latitude": 35.9931,
+        "longitude": -83.9375,
+        "label": "Knox County, TN (approximate center)"
+      },
+      "description_tags": [
+        "Health & Social Services",
+        "Population Data"
+      ],
+      "analysis_tags": {
+        "pedagogical_tags": {
+          "data-literacy": true,
+          "social-justice": true,
+          "policy-analysis": true,
+          "civic-education": true
+        }
+      }
+    },
+    {
+      "id": "knox-county-property-assessor",
+      "title": "Knox County Property Assessor Data",
+      "version": "1.0",
+      "description": "Parcel-level property records for Knox County, TN, including assessed values, ownership, land use codes, square footage, and sale history. Updated annually by the Knox County Property Assessor's Office and available as bulk CSV download or interactive map.",
+      "about": "The Knox County Property Assessor's Office maintains parcel-level records for all real property in Knox County, Tennessee.\n\n## What's Included\n\n- Parcel ID, address, and owner name\n- Assessed value (land + improvements) and tax classification\n- Land use code (residential, commercial, agricultural, etc.)\n- Building characteristics: square footage, year built, bedrooms/baths\n- Sale date and price history\n\n## Accessing the Data\n\nData can be explored via the online parcel search tool or requested as a bulk extract. The GIS office publishes shapefiles and CSV exports of the full parcel database.\n\n## Community Use\n\n- **Housing affordability**: Track assessed value trends by neighborhood to analyze displacement risk.\n- **Land use patterns**: Identify vacant lots, agricultural land, and commercial corridors.\n- **Civic research**: Cross-reference ownership records with public records on tax delinquency.\n\n## Classroom Use\n\n- Map property values across ZIP codes using QGIS or ArcGIS Online.\n- Compare land use distributions between urban and rural parts of Knox County.\n- Discuss the relationship between assessed value and local school funding.",
+      "published_date": "2024-08-01",
+      "provider": {
+        "name": "Knox County Property Assessor",
+        "url": "https://property.knoxcounty.org/"
+      },
+      "requires_account": false,
+      "sensitive": false,
+      "pipeline_ready": false,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "point",
+      "coverage": [
+        {
+          "level": "county",
+          "geoid": "47093"
+        }
+      ],
+      "location": {
+        "latitude": 35.9612,
+        "longitude": -83.9187,
+        "label": "City County Building, 400 Main St, Knoxville, TN (approximate)"
+      },
+      "description_tags": [
+        "Housing & Buildings",
+        "Government Administration"
+      ],
+      "analysis_tags": {
+        "pedagogical_tags": {
+          "civic-education": true,
+          "data-literacy": true,
+          "quantitative-methods": true
+        }
+      }
+    },
+    {
+      "id": "knox-county-schools",
+      "title": "Knox County Schools — Enrollment & Performance Data",
+      "version": "1.0",
+      "description": "School-level enrollment, graduation rates, proficiency scores, and demographic breakdowns for all Knox County Schools (KCS) campuses. Published annually by the Tennessee Department of Education and supplemented by KCS's own data portal.",
+      "about": "The Tennessee Department of Education's annual Report Card provides school- and district-level data for every public school in the state, including Knox County's 88-school district.\n\n## What's Included\n\n- Enrollment counts by grade, race/ethnicity, and economically disadvantaged status\n- Graduation and dropout rates\n- TNReady proficiency scores by subject and grade band\n- Chronic absenteeism rates\n- Teacher experience and qualification metrics\n\n## Accessing the Data\n\nThe interactive report card is at **tn.gov/education/data/report-card**. Bulk CSV downloads are available under the \"Data Downloads\" section. Knox County Schools also publishes supplementary reports at **knoxschools.org**.\n\n## Community Use\n\n- Compare proficiency trends before and after school boundary changes.\n- Identify schools with high chronic absenteeism for community support targeting.\n- Track demographic shifts in enrollment over the past decade.\n\n## Classroom Use\n\n- **Statistics**: Calculate and compare graduation rate confidence intervals across schools.\n- **Equity analysis**: Visualize achievement gaps by income and race across KCS campuses.\n- **Civic research**: How does per-pupil spending correlate with test scores in Knox County?",
+      "published_date": "2024-10-01",
+      "provider": {
+        "name": "Tennessee Department of Education / Knox County Schools",
+        "url": "https://www.tn.gov/education/data/report-card.html"
+      },
+      "requires_account": false,
+      "sensitive": false,
+      "pipeline_ready": false,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "point",
+      "coverage": [
+        {
+          "level": "county",
+          "geoid": "47093"
+        }
+      ],
+      "location": {
+        "latitude": 35.9931,
+        "longitude": -83.9375,
+        "label": "Knox County, TN (approximate center)"
+      },
+      "description_tags": [
+        "PreK-12 Education",
+        "Children & Families"
+      ],
+      "analysis_tags": {
+        "pedagogical_tags": {
+          "civic-education": true,
+          "data-literacy": true,
+          "social-justice": true,
+          "policy-analysis": true
+        }
+      }
+    },
+    {
+      "id": "knoxville-open-data",
+      "title": "City of Knoxville Open Data Portal",
+      "version": "1.0",
+      "description": "City-operated open data portal publishing datasets on public safety, infrastructure, parks, permits, and more for Knoxville, TN. Datasets are downloadable as CSV, GeoJSON, or accessible via the Socrata API.",
+      "about": "The City of Knoxville's Open Data Portal provides access to dozens of municipal datasets, updated on rolling schedules ranging from real-time to annual.\n\n## Featured Datasets\n\n- **KPD Incident Reports**: Knoxville Police Department calls for service and incident records, geocoded to block level.\n- **Building Permits**: Residential and commercial permits issued since 2010, with permit type, value, and address.\n- **Parks & Greenways**: GIS layers for park boundaries, trail networks, and recreation facilities.\n- **Street Centerlines**: Road network with classification, surface type, and maintenance district.\n- **Blight & Code Enforcement**: Properties with active or resolved code violations.\n\n## Accessing the Data\n\nAll datasets are available for download at **knoxvilletn.gov/government/opendata** in CSV and GeoJSON formats. The Socrata API provides programmatic access for developers.\n\n## Community Use\n\n- Map code enforcement complaints by neighborhood to identify blight concentration.\n- Track new building permit activity to understand where development is occurring.\n- Analyze KPD incident data to understand public safety patterns.\n\n## Classroom Use\n\n- **GIS projects**: Use the parks and street layers in QGIS to analyze accessibility by neighborhood.\n- **Data journalism**: Investigate permit trends across council districts.\n- **Public safety analysis**: Are incident rates correlated with poverty indicators from census data?",
+      "published_date": "2024-07-01",
+      "provider": {
+        "name": "City of Knoxville",
+        "url": "https://knoxvilletn.gov/government/opendata"
+      },
+      "requires_account": false,
+      "sensitive": false,
+      "pipeline_ready": false,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "point",
+      "coverage": [
+        {
+          "level": "county",
+          "geoid": "47093"
+        }
+      ],
+      "location": {
+        "latitude": 35.9612,
+        "longitude": -83.9187,
+        "label": "City County Building, 400 Main St, Knoxville, TN (approximate)"
+      },
+      "description_tags": [
+        "Government Administration",
+        "Law & Public Safety"
+      ],
+      "analysis_tags": {
+        "pedagogical_tags": {
+          "civic-education": true,
+          "data-literacy": true,
+          "quantitative-methods": true
+        }
+      }
     },
     {
       "id": "usda-milk-production",

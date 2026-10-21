@@ -1,0 +1,1 @@
+{"columns":[{"name":"Year","type":"number"},{"name":"Period","type":"text"},{"name":"Timeperiod_id","type":"number"},{"name":"Timeperiod_name","type":"text"},{"name":"Aggregation","type":"text"},{"name":"Data_item","type":"text"},{"name":"Value","type":"text"},{"name":"Units","type":"text"}]}

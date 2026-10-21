@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "sources": {
+    "census-annual-pop-by-age-sex-2025": {
+      "status": "ok",
+      "rows": 306,
+      "counties": 0,
+      "tier2": false
+    },
+    "census-annual-pop-selected-age-groups-2024": {
+      "status": "ok",
+      "rows": 19,
+      "counties": 0,
+      "tier2": false
+    },
+    "census-county-estimates-all-2025": {
+      "status": "ok",
+      "rows": 3195,
+      "counties": 3144,
+      "tier2": false
+    },
+    "census-county-population-2020-2025": {
+      "status": "none",
+      "reason": "no direct download"
+    },
+    "census-resident-pop-18plus-2025": {
+      "status": "ok",
+      "rows": 56,
+      "counties": 0,
+      "tier2": false
+    },
+    "census-state-estimates-all-2025": {
+      "status": "ok",
+      "rows": 66,
+      "counties": 0,
+      "tier2": false
+    },
+    "census-state-pop-change-2020-2025": {
+      "status": "ok",
+      "rows": 66,
+      "counties": 0,
+      "tier2": false
+    },
+    "chr-analytic-data-2025": {
+      "status": "ok",
+      "rows": 3204,
+      "counties": 3144,
+      "tier2": true
+    },
+    "ebird-observation-dataset": {
+      "status": "none",
+      "reason": "no direct download"
+    },
+    "ebird-state-summaries": {
+      "status": "none",
+      "reason": "no direct download"
+    },
+    "epa-airtoxscreen-county": {
+      "status": "none",
+      "reason": "unsupported format: zip contains no CSV (.accdb)"
+    },
+    "epa-tri-basic-data": {
+      "status": "none",
+      "reason": "no direct download"
+    },
+    "epa-tri-basic-data-tn-2024": {
+      "status": "ok",
+      "rows": 2107,
+      "counties": 81,
+      "tier2": true
+    },
+    "epa-tri-dioxin": {
+      "status": "none",
+      "reason": "no direct download"
+    },
+    "epa-tri-ez-search": {
+      "status": "none",
+      "reason": "no direct download"
+    },
+    "fbi-crime-data-explorer": {
+      "status": "none",
+      "reason": "no direct download"
+    },
+    "fbi-state-agency-data": {
+      "status": "none",
+      "reason": "no direct download"
+    },
+    "knox-county-health-data": {
+      "status": "none",
+      "reason": "no direct download"
+    },
+    "knox-county-property-assessor": {
+      "status": "none",
+      "reason": "no direct download"
+    },
+    "knox-county-schools": {
+      "status": "none",
+      "reason": "no direct download"
+    },
+    "knoxville-open-data": {
+      "status": "none",
+      "reason": "no direct download"
+    },
+    "usda-milk-production": {
+      "status": "ok",
+      "rows": 710,
+      "counties": 0,
+      "tier2": false
+    }
+  }
+}

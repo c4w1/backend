@@ -1,0 +1,40 @@
+id: ebird-observation-dataset
+version: '1.0'
+title: eBird Observation Dataset
+provider:
+  name: Cornell Lab of Ornithology
+  url: https://ebird.org/data/download/ebd
+filters:
+  year: true
+  state: true
+  county: true
+  zipcode: false
+requires_account: true
+download:
+  description: Download link will be provided after selecting year and region.
+sensitive: false
+description_tags:
+- Wildlife & Nature
+who: Cornell Lab of Ornithology
+how: Citizen science / community observation submissions
+where: Filterable to county, state level
+why: null
+when: Multiple years; filterable by year
+geographic_coverage:
+  available_levels:
+    state_fips: true
+    fips_code: true
+    zip_code: false
+    school_district: false
+    tract: false
+    tribal_area: false
+
+# Canonical geography and audience metadata (see database/schema.sql).
+coverage:
+- level: nation
+geographic_granularity: county
+student_suitability: unreviewed
+location:
+  latitude: 42.4801
+  longitude: -76.451
+  label: Cornell Lab of Ornithology, Ithaca, NY (approximate)

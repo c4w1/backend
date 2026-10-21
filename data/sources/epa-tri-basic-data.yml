@@ -1,0 +1,43 @@
+id: epa-tri-basic-data
+version: '1.0'
+title: Toxic Release Inventory Basic Data Files
+provider:
+  name: U.S. Environmental Protection Agency (EPA)
+  url: https://www.epa.gov/toxics-release-inventory-tri-program/tri-basic-data-files-calendar-years-1987-present
+filters:
+  year: true
+  state: true
+  county: false
+  zipcode: false
+requires_account: false
+download:
+  description: After selecting year and geographic information, there is a button
+    to directly download the data file.
+  file_size: varies by selection
+sensitive: false
+description_tags:
+- Energy & Environment
+- Government Administration
+who: U.S. Environmental Protection Agency (EPA)
+how: null
+where: Filterable to state level
+why: null
+when: Multiple years; filterable by year
+geographic_coverage:
+  available_levels:
+    state_fips: true
+    fips_code: false
+    zip_code: false
+    school_district: false
+    tract: false
+    tribal_area: false
+
+# Canonical geography and audience metadata (see database/schema.sql).
+coverage:
+- level: nation
+geographic_granularity: state
+student_suitability: unreviewed
+location:
+  latitude: 38.8939
+  longitude: -77.0287
+  label: EPA headquarters, Washington, DC (approximate)

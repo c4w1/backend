@@ -11,3 +11,4 @@ pythonscripts/__pycache__/
 data/sources/__pycache__/
 lib/__pycache__/
 .worktrees/
+data/.cache/

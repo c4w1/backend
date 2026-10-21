@@ -38,10 +38,15 @@ def test_sources_use_only_vocabulary_description_tags():
         assert not unknown, f"{name}: unknown description_tags {sorted(unknown)}"
 
 
+# Tag groups that are not computed statistics: topical tags (own vocabulary list),
+# the list of hand-set groups, and curated teaching tags written by people.
+NON_STATISTICAL_GROUPS = ("description_tags", "manual_tags", "pedagogical_tags")
+
+
 def check_statistical_tags(name, data, groups):
     """Assert a source's statistical tag groups are all in the vocabulary."""
     for key, value in data.items():
-        if not key.endswith("_tags") or key in ("description_tags", "manual_tags"):
+        if not key.endswith("_tags") or key in NON_STATISTICAL_GROUPS:
             continue
         if not isinstance(value, dict):
             continue
@@ -62,4 +67,10 @@ def test_manual_tags_list_is_not_a_statistical_group():
         "manual_tags": ["description_tags", "anova_tags"],
         "anova_tags": {"good-for-one-way-anova": True},
     }
+    check_statistical_tags("demo", data, groups)
+
+
+def test_curated_pedagogical_tags_are_not_a_statistical_group():
+    groups = {"anova_tags": ["good-for-one-way-anova"]}
+    data = {"pedagogical_tags": {"data-literacy": True, "civic-education": True}}
     check_statistical_tags("demo", data, groups)

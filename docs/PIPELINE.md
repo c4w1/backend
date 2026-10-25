@@ -27,6 +27,25 @@ notes: ...
 
 Downstream stages add to this same file: `description_tags`, `variable_names`, `variable_report`, `who`/`how`/`where`/`why`/`when`, `geographic_coverage`, and one `<name>_tags` block per statistical tagger (e.g. `anova_tags`, `normality_tags`).
 
+### Coverage and granularity
+
+Every source also records **which places it covers** (`coverage`) and **what one row describes** (`geographic_granularity`). The website's coverage map and community catalogs use these:
+
+```yaml
+coverage:                 # FIPS codes only; no geometry
+- level: nation           # every county
+# - level: state
+#   fips: '47'            # every county in Tennessee
+# - level: county
+#   fips: '47093'         # Knox County, TN
+geographic_granularity: county   # nation | state | county | zip | point
+```
+
+- **Valid codes:** state and county codes must be in `data/reference/geo-vocabulary.json`, the Census 2025 county list the website draws. `pythonscripts/tests/test_coverage_vocabulary.py` checks every YAML. The file is written by the web repo's `npm run geo:boundaries -- --backend ../backend`; don't edit it by hand.
+- **Not used for coverage:** `geographic_coverage.available_levels` (from `geographic_coverage.py`) is a heuristic and is not used for coverage.
+- **`where`** is free text; keep it consistent with `coverage`.
+- **Curated tags:** `pedagogical_tags` are teaching tags written by people. The website shows them first, and they are not checked against the statistical tag vocabulary.
+
 `import_sources_to_sqlite.py` sets a `pipeline_ready` flag when both `provider.url` and `download.url` are present — several stages (variable extraction, the statistical taggers) require `download.url` and will skip or fail on sources that don't have it.
 
 ## Stage order
@@ -61,6 +80,28 @@ There is no single "run everything" command — `runall.py` deliberately exclude
 
    ```bash
    python pythonscripts/import_sources_to_sqlite.py all
+   ```
+
+6. **`export_catalog.py`**: exports the database to `data/exports/catalog.json`, which the website builds from. Commit it. `--check` fails if the committed export is stale.
+
+   ```bash
+   python pythonscripts/export_catalog.py
+   ```
+
+7. **`export_previews.py`** (Python standard library only): writes the Tier 1 preview files the website's Data Preview page reads. For every source in `catalog.json` with a `download.url`, it writes `data/exports/previews/<id>/`:
+   - `manifest.json`, `variables.json`
+   - `sample.json` (first rows)
+   - `summary.json` (per-column statistics over every row)
+   - `county/<FIPS>.json` (every row for one county)
+
+   `previews/index.json` records which sources have previews and why the others don't.
+   - **Formats:** CSV, a zip with a CSV inside, and Census-style `.xlsx` tables.
+   - **County detection:** a 5-digit FIPS column, Census `STATE` + `COUNTY` codes, or county names plus a state code matched against the reference vocabulary.
+   - **Size:** every file stays under 250 KB; oversized county slices are cut short and marked `truncated`, and their source is flagged as a Tier 2 candidate.
+   - **Commit:** commit the output. Re-runs only change files whose data changed. Downloads are cached in `data/.cache/downloads/` (ignored).
+
+   ```bash
+   python pythonscripts/export_previews.py            # all; --offline uses only cached downloads
    ```
 
 Optional, not part of the standard chain:
@@ -107,7 +148,8 @@ Each downloads the dataset again and writes one `<name>_tags` block:
 
 ## Gotchas
 
-- **The extensionless source file.** `data/sources/annual-estimates-of-resident-population-by-a-single-year-of-age-and-sex-for-the-united-states` has no `.yml` extension. `import_sources_to_sqlite.py` picks it up (it globs `*.yml`/`*.yaml` *and* any extensionless file), but every other pipeline script only globs `*.yml` — so this source never gets tagged, profiled, or analyzed unless renamed.
+- **Extensionless source files.** `import_sources_to_sqlite.py` picks up extensionless files in `data/sources/` (it globs `*.yml`/`*.yaml` *and* files without an extension), but every other pipeline script only globs `*.yml`. The one such file (`annual-estimates-of-resident-population-…`, a mislabeled duplicate of `census-annual-pop-by-age-sex-2025`) was deleted in `8a946d5` and intentionally not restored.
+- **Sources without a direct download** (provider page only) are kept in the catalog: the website shows them as info only, and `export_previews.py` records "no direct download" for them. 15 such or previously unpreviewable sources were restored after `8a946d5` removed them for the old runtime preview.
 - **Two copies of `tagdataset.py` exist in the wider project.** This backend's copy is canonical; `web/backend/pythonscripts/tagdataset.py` is a separately-diverged fork used only by the web mirror's local preview, intentionally not unified (see `docs/superpowers/specs/2026-08-11-dataset-tagging-design.md`).
 - **`geographicidentifiers/community_geographic_identifiers.xlsx`** is not read by any script in this repo — treat it as a manual reference asset, not a pipeline input, unless that changes.
-- **No automated tests for the Node/HTTP layer** — only `pythonscripts/test_tagdataset.py` has pytest coverage (word-boundary matching, no-network invariant, eBird/FBI regression cases).
+- **Tests**: `python -m pytest pythonscripts -q` covers tagging, the importer, the catalog export, the tag and coverage vocabularies, and the preview exporter. There are no automated tests for the Node/HTTP layer. On Windows, a few importer tests fail when cleaning up their temporary SQLite file (the file is still open); they pass on Linux CI.

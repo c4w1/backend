@@ -37,7 +37,15 @@ python pythonscripts/export_catalog.py --check  # fails if the committed export 
 
 The website builds from `data/exports/catalog.json`, so SQLite is what the site shows.
 
-Tests: `python -m unittest discover -s pythonscripts/tests`
+Then write the static preview files the website's Data Preview page reads, and commit them too:
+
+```bash
+python pythonscripts/export_previews.py         # data/exports/previews/ (standard library only)
+```
+
+Coverage FIPS codes are checked against `data/reference/geo-vocabulary.json` (Census 2025), which the web repo's `npm run geo:boundaries -- --backend ../backend` writes.
+
+Tests: `python -m pytest pythonscripts -q`
 
 ## Server
 
@@ -70,5 +78,5 @@ Full reference: [docs/API.md](docs/API.md).
 
 ## Documentation
 
-- [docs/PIPELINE.md](docs/PIPELINE.md) — the tagging/analysis pipeline, stage by stage
+- [docs/PIPELINE.md](docs/PIPELINE.md) — the pipeline stage by stage, coverage, and the catalog and preview exports
 - [docs/API.md](docs/API.md) — full HTTP API reference

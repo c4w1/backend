@@ -1,18 +1,6 @@
 {
   "version": 1,
   "sources": {
-    "census-annual-pop-by-age-sex-2025": {
-      "status": "ok",
-      "rows": 306,
-      "counties": 0,
-      "tier2": false
-    },
-    "census-annual-pop-selected-age-groups-2024": {
-      "status": "ok",
-      "rows": 19,
-      "counties": 0,
-      "tier2": false
-    },
     "census-county-estimates-all-2025": {
       "status": "ok",
       "rows": 3195,
@@ -100,12 +88,6 @@
     "knoxville-open-data": {
       "status": "none",
       "reason": "no direct download"
-    },
-    "usda-milk-production": {
-      "status": "ok",
-      "rows": 710,
-      "counties": 0,
-      "tier2": false
     }
   }
 }

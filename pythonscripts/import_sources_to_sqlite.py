@@ -53,6 +53,7 @@ ADDED_SOURCE_COLUMNS = {
     "('nation', 'state', 'county', 'zip', 'point'))",
     "student_suitability": "TEXT NOT NULL DEFAULT 'unreviewed' CHECK (student_suitability IN "
     "('suitable', 'not_suitable', 'unreviewed'))",
+    "download_format": "TEXT",
 }
 
 GRANULARITY_LEVELS = ("nation", "state", "county", "zip", "point")
@@ -62,6 +63,12 @@ GRANULARITY_LEVELS = ("nation", "state", "county", "zip", "point")
 # once its YAML is deleted or its granularity is corrected.
 NATIONAL_ONLY_PENDING_REVIEW = {"epa-tri-dioxin"}
 STUDENT_SUITABILITY_VALUES = ("suitable", "not_suitable", "unreviewed")
+# download.format: the file download.url returns, as export_previews.py detects it.
+# A zip is written zip/<type of the file inside>.
+DOWNLOAD_FORMATS = (
+    "csv", "tsv", "xlsx", "xls", "accdb",
+    "zip/csv", "zip/tsv", "zip/xlsx", "zip/xls", "zip/accdb",
+)
 COVERAGE_FIPS_LENGTH = {"state": 2, "county": 5}
 
 
@@ -160,6 +167,18 @@ def check_scope(source_id: str, granularity: str | None) -> None:
             "national-only data is out of scope (geographic_granularity: nation); the catalog "
             "needs a state or smaller breakdown (web#42)"
         )
+
+
+def load_download_format(download: dict[str, Any]) -> str | None:
+    value = as_text(download.get("format"))
+    if value is None:
+        return None
+    value = value.lower()
+    if value not in DOWNLOAD_FORMATS:
+        raise ValueError(f"download.format must be one of {', '.join(DOWNLOAD_FORMATS)}; got {value!r}")
+    if not as_text(download.get("url")):
+        raise ValueError("download.format needs a download.url")
+    return value
 
 
 def load_student_suitability(doc: dict[str, Any]) -> str:
@@ -269,6 +288,7 @@ def import_source(
     student_suitability = load_student_suitability(doc)
     coverage = load_coverage(doc)
     location = load_location(doc)
+    download_format = load_download_format(download)
 
     delete_source_children(conn, source_id)
 
@@ -279,8 +299,9 @@ def import_source(
             provider_name, provider_agency, website_url,
             download_url, download_description, download_file_size,
             requires_account, sensitive, pipeline_ready, imported_at,
-            description, about, published_date, geographic_granularity, student_suitability
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            description, about, published_date, geographic_granularity, student_suitability,
+            download_format
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
         (
             source_id,
@@ -303,6 +324,7 @@ def import_source(
             as_text(doc.get("published_date")),
             granularity,
             student_suitability,
+            download_format,
         ),
     )
 

@@ -90,6 +90,7 @@ def _source_record(conn: sqlite3.Connection, row: sqlite3.Row) -> dict[str, Any]
                 "url": row["download_url"],
                 "description": row["download_description"],
                 "file_size": row["download_file_size"],
+                "format": row["download_format"],
             }
         ),
         "requires_account": bool(row["requires_account"]),

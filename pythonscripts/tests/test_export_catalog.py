@@ -29,6 +29,7 @@ class ExportCatalogTest(unittest.TestCase):
             title: A Source
             description: Card text.
             provider: {name: Agency, url: "https://example.gov"}
+            download: {url: "https://example.gov/a.zip", format: zip/xlsx}
             sensitive: false
             student_suitability: not_suitable
             geographic_granularity: county
@@ -53,6 +54,8 @@ class ExportCatalogTest(unittest.TestCase):
         self.assertEqual(a["location"], {"latitude": 35.99, "longitude": -83.94, "label": "Knox"})
         self.assertEqual(a["student_suitability"], "not_suitable")
         self.assertEqual(a["geographic_granularity"], "county")
+        self.assertEqual(a["download"], {"url": "https://example.gov/a.zip", "format": "zip/xlsx"})
+        self.assertNotIn("download", b)
         self.assertEqual(a["description_tags"], ["education", "housing"])
         self.assertEqual(a["analysis_tags"], {"pedagogical_tags": {"civic-education": True}})
         self.assertIs(a["sensitive"], False)

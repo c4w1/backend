@@ -25,7 +25,9 @@ CREATE TABLE IF NOT EXISTS sources (
     geographic_granularity TEXT CHECK (geographic_granularity IN ('nation', 'state', 'county', 'zip', 'point')),
     -- Student view: 'unreviewed' falls back to the legacy web heuristics.
     student_suitability TEXT NOT NULL DEFAULT 'unreviewed'
-        CHECK (student_suitability IN ('suitable', 'not_suitable', 'unreviewed'))
+        CHECK (student_suitability IN ('suitable', 'not_suitable', 'unreviewed')),
+    -- File type of download_url, e.g. 'csv', 'xlsx', 'zip/csv', 'zip/accdb' (zip/<file inside>).
+    download_format TEXT
 );
 
 CREATE TABLE IF NOT EXISTS source_filters (

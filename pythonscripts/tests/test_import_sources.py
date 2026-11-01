@@ -117,6 +117,21 @@ class ImportSourcesTest(unittest.TestCase):
         with closing(sqlite3.connect(self.db)) as conn:
             self.assertEqual(conn.execute("SELECT id FROM sources").fetchall(), [(source_id,)])
 
+    def test_download_format_is_stored(self) -> None:
+        path = self.write("z.yml", "id: z\ntitle: Z\ndownload:\n  url: https://example.gov/z.zip\n  format: ZIP/CSV\n")
+        importer.import_files([path], self.db, SCHEMA)
+        with closing(sqlite3.connect(self.db)) as conn:
+            self.assertEqual(conn.execute("SELECT download_format FROM sources").fetchone(), ("zip/csv",))
+
+    def test_invalid_download_format_skips_the_source(self) -> None:
+        paths = [
+            self.write("pdf.yml", "id: pdf\ntitle: P\ndownload:\n  url: https://example.gov/p.pdf\n  format: pdf\n"),
+            self.write("nourl.yml", "id: nourl\ntitle: N\ndownload:\n  format: csv\n"),
+        ]
+        importer.import_files(paths, self.db, SCHEMA)
+        with closing(sqlite3.connect(self.db)) as conn:
+            self.assertEqual(conn.execute("SELECT COUNT(*) FROM sources").fetchone()[0], 0)
+
     def test_reimport_replaces_children(self) -> None:
         path = self.write("s.yml", "id: s\ntitle: S\ncoverage:\n  - level: nation\n")
         self.run_import(path).close()

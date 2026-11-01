@@ -219,6 +219,19 @@ def delete_source_children(conn: sqlite3.Connection, source_id: str) -> None:
         conn.execute(f"DELETE FROM {table} WHERE source_id = ?", (source_id,))
 
 
+def prune_sources(conn: sqlite3.Connection, keep: set[str]) -> list[str]:
+    """Delete sources (and their child rows) whose id is not in `keep`; return the ids removed.
+
+    Run after a full import so a deleted or refused YAML can't reach the catalog export
+    from a stale database row.
+    """
+    stale = sorted(row[0] for row in conn.execute("SELECT id FROM sources") if row[0] not in keep)
+    for source_id in stale:
+        delete_source_children(conn, source_id)
+        conn.execute("DELETE FROM sources WHERE id = ?", (source_id,))
+    return stale
+
+
 def import_source(
     conn: sqlite3.Connection,
     path: Path,
@@ -361,7 +374,8 @@ def import_source(
     return source_id, bool(pipeline_ready)
 
 
-def import_files(paths: list[Path], db_path: Path, schema_path: Path) -> None:
+def import_files(paths: list[Path], db_path: Path, schema_path: Path, *, prune: bool = False) -> None:
+    """Import `paths`. With prune=True (a full import), also delete every other source."""
     if not paths:
         print("No YAML files found.")
         return
@@ -376,10 +390,12 @@ def import_files(paths: list[Path], db_path: Path, schema_path: Path) -> None:
         imported = 0
         pipeline_ready_count = 0
         skipped: list[str] = []
+        imported_ids: set[str] = set()
 
         for path in paths:
             try:
                 source_id, ready = import_source(conn, path, imported_at)
+                imported_ids.add(source_id)
                 imported += 1
                 if ready:
                     pipeline_ready_count += 1
@@ -388,6 +404,7 @@ def import_files(paths: list[Path], db_path: Path, schema_path: Path) -> None:
                 skipped.append(f"{path.name}: {exc}")
                 print(f"  Skipped: {path.name} — {exc}")
 
+        pruned = prune_sources(conn, imported_ids) if prune else []
         conn.commit()
 
         incomplete = imported - pipeline_ready_count
@@ -399,6 +416,8 @@ def import_files(paths: list[Path], db_path: Path, schema_path: Path) -> None:
             print(f"Skipped: {len(skipped)}")
             for item in skipped:
                 print(f"  - {item}")
+        if pruned:
+            print(f"Removed (no longer imported): {', '.join(pruned)}")
         print(f"Database: {db_path}")
     finally:
         conn.close()
@@ -420,7 +439,7 @@ def main() -> None:
         sys.exit(1)
 
     print(f"Found {len(paths)} file(s)")
-    import_files(paths, DEFAULT_DB_PATH, DEFAULT_SCHEMA_PATH)
+    import_files(paths, DEFAULT_DB_PATH, DEFAULT_SCHEMA_PATH, prune=target == "all")
     print("Done.")
 
 

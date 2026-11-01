@@ -7,6 +7,7 @@ import sys
 import tempfile
 import textwrap
 import unittest
+from contextlib import closing
 from pathlib import Path
 
 SCRIPTS = Path(__file__).resolve().parents[1]
@@ -103,6 +104,32 @@ class ImportSourcesTest(unittest.TestCase):
         path.write_text("id: s\ntitle: S\ncoverage:\n  - level: state\n    fips: '47'\n", encoding="utf-8")
         conn = self.run_import(path)
         self.assertEqual(conn.execute("SELECT level, geoid FROM source_coverage").fetchall(), [("state", "47")])
+
+    def test_full_import_removes_sources_whose_yaml_is_gone(self) -> None:
+        keep = self.write("keep.yml", "id: keep\ntitle: Keep\ncoverage:\n  - level: nation\n")
+        gone = self.write("gone.yml", "id: gone\ntitle: Gone\ncoverage:\n  - level: nation\n")
+        importer.import_files([keep, gone], self.db, SCHEMA, prune=True)
+        gone.unlink()
+        importer.import_files([keep], self.db, SCHEMA, prune=True)
+        with closing(sqlite3.connect(self.db)) as conn:
+            self.assertEqual(conn.execute("SELECT id FROM sources").fetchall(), [("keep",)])
+            self.assertEqual(conn.execute("SELECT source_id FROM source_coverage").fetchall(), [("keep",)])
+
+    def test_full_import_removes_sources_that_no_longer_import(self) -> None:
+        path = self.write("s.yml", "id: s\ntitle: S\n")
+        importer.import_files([path], self.db, SCHEMA, prune=True)
+        path.write_text("id: s\ntitle: S\ngeographic_granularity: planet\n", encoding="utf-8")
+        importer.import_files([path], self.db, SCHEMA, prune=True)
+        with closing(sqlite3.connect(self.db)) as conn:
+            self.assertEqual(conn.execute("SELECT COUNT(*) FROM sources").fetchone()[0], 0)
+
+    def test_single_file_import_keeps_other_sources(self) -> None:
+        first = self.write("a.yml", "id: a\ntitle: A\n")
+        second = self.write("b.yml", "id: b\ntitle: B\n")
+        importer.import_files([first, second], self.db, SCHEMA, prune=True)
+        importer.import_files([first], self.db, SCHEMA)
+        with closing(sqlite3.connect(self.db)) as conn:
+            self.assertEqual(conn.execute("SELECT id FROM sources ORDER BY id").fetchall(), [("a",), ("b",)])
 
     def test_existing_database_gets_new_columns(self) -> None:
         conn = sqlite3.connect(self.db)

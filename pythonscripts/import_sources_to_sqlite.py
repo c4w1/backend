@@ -56,6 +56,11 @@ ADDED_SOURCE_COLUMNS = {
 }
 
 GRANULARITY_LEVELS = ("nation", "state", "county", "zip", "point")
+# CDL is a library of local data: a source whose finest level is the nation is out of
+# scope (web#42). `nation` stays valid as a coverage level and in the schema.
+# Sources listed here are waiting on a decision and still import; remove each entry
+# once its YAML is deleted or its granularity is corrected.
+NATIONAL_ONLY_PENDING_REVIEW = {"epa-tri-dioxin"}
 STUDENT_SUITABILITY_VALUES = ("suitable", "not_suitable", "unreviewed")
 COVERAGE_FIPS_LENGTH = {"state": 2, "county": 5}
 
@@ -147,6 +152,14 @@ def load_granularity(doc: dict[str, Any]) -> str | None:
             f"geographic_granularity must be one of {', '.join(GRANULARITY_LEVELS)}; got {value!r}"
         )
     return value
+
+
+def check_scope(source_id: str, granularity: str | None) -> None:
+    if granularity == "nation" and source_id not in NATIONAL_ONLY_PENDING_REVIEW:
+        raise ValueError(
+            "national-only data is out of scope (geographic_granularity: nation); the catalog "
+            "needs a state or smaller breakdown (web#42)"
+        )
 
 
 def load_student_suitability(doc: dict[str, Any]) -> str:
@@ -252,6 +265,7 @@ def import_source(
 
     # Validate new canonical fields before touching the database.
     granularity = load_granularity(doc)
+    check_scope(source_id, granularity)
     student_suitability = load_student_suitability(doc)
     coverage = load_coverage(doc)
     location = load_location(doc)

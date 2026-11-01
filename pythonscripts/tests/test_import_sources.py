@@ -98,6 +98,25 @@ class ImportSourcesTest(unittest.TestCase):
         conn = self.run_import(*paths)
         self.assertEqual(conn.execute("SELECT COUNT(*) FROM sources").fetchone()[0], 0)
 
+    def test_national_only_granularity_skips_the_source(self) -> None:
+        path = self.write("us.yml", "id: us-totals\ntitle: US\ngeographic_granularity: nation\n")
+        importer.import_files([path], self.db, SCHEMA)
+        with closing(sqlite3.connect(self.db)) as conn:
+            self.assertEqual(conn.execute("SELECT COUNT(*) FROM sources").fetchone()[0], 0)
+
+    def test_national_coverage_with_local_granularity_imports(self) -> None:
+        path = self.write("c.yml", "id: c\ntitle: C\ngeographic_granularity: county\ncoverage:\n  - level: nation\n")
+        importer.import_files([path], self.db, SCHEMA)
+        with closing(sqlite3.connect(self.db)) as conn:
+            self.assertEqual(conn.execute("SELECT id, geographic_granularity FROM sources").fetchall(), [("c", "county")])
+
+    def test_sources_pending_review_still_import(self) -> None:
+        source_id = sorted(importer.NATIONAL_ONLY_PENDING_REVIEW)[0]
+        path = self.write("p.yml", f"id: {source_id}\ntitle: P\ngeographic_granularity: nation\n")
+        importer.import_files([path], self.db, SCHEMA)
+        with closing(sqlite3.connect(self.db)) as conn:
+            self.assertEqual(conn.execute("SELECT id FROM sources").fetchall(), [(source_id,)])
+
     def test_reimport_replaces_children(self) -> None:
         path = self.write("s.yml", "id: s\ntitle: S\ncoverage:\n  - level: nation\n")
         self.run_import(path).close()

@@ -12,6 +12,7 @@ download:
   url: https://www2.census.gov/programs-surveys/popest/tables/2020-2025/state/detail/SCPRC-EST2025-18+POP.xlsx
   description: Link downloads an XLSX file.
   file_size: 14.7 KB
+  format: xlsx
 variables:
 - Geographic Area
 - Total Resident Population

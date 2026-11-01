@@ -15,6 +15,7 @@ download:
   description: Link downloads a CSV file of every TRI report filed by Tennessee facilities
     for reporting year 2024.
   file_size: 1.6 MB
+  format: csv
 notes: One row per facility and chemical. Includes facility location (county, latitude,
   longitude), industry codes, and on-site releases and off-site transfers in pounds.
   Other states, the whole U.S., and earlier years (1987 onward) are on the provider

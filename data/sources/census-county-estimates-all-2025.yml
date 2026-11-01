@@ -10,6 +10,7 @@ download:
   url: https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/counties/totals/co-est2025-alldata.csv
   description: Link downloads a CSV file.
   file_size: 2023 KB
+  format: csv
 variables:
 - SUMLEV
 - REGION

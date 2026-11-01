@@ -15,7 +15,8 @@
       "download": {
         "url": "https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/counties/totals/co-est2025-alldata.csv",
         "description": "Link downloads a CSV file.",
-        "file_size": "2023 KB"
+        "file_size": "2023 KB",
+        "format": "csv"
       },
       "requires_account": false,
       "sensitive": false,
@@ -127,7 +128,8 @@
       "download": {
         "url": "https://www2.census.gov/programs-surveys/popest/tables/2020-2025/state/detail/SCPRC-EST2025-18+POP.xlsx",
         "description": "Link downloads an XLSX file.",
-        "file_size": "14.7 KB"
+        "file_size": "14.7 KB",
+        "format": "xlsx"
       },
       "requires_account": false,
       "sensitive": false,
@@ -275,7 +277,8 @@
       "download": {
         "url": "https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/state/totals/NST-EST2025-ALLDATA.csv",
         "description": "Link downloads a CSV file.",
-        "file_size": "52 KB"
+        "file_size": "52 KB",
+        "format": "csv"
       },
       "requires_account": false,
       "sensitive": false,
@@ -442,7 +445,8 @@
       "download": {
         "url": "https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/state/totals/NST-EST2025-POPCHG2020-2025.csv",
         "description": "Link downloads a CSV file.",
-        "file_size": "16 KB"
+        "file_size": "16 KB",
+        "format": "csv"
       },
       "requires_account": false,
       "sensitive": false,
@@ -602,7 +606,8 @@
       "download": {
         "url": "https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv",
         "description": "Link downloads a CSV file with one row per county, plus rows for each state and the United States.",
-        "file_size": "13.1 MB"
+        "file_size": "13.1 MB",
+        "format": "csv"
       },
       "requires_account": false,
       "sensitive": false,
@@ -1628,8 +1633,9 @@
       },
       "download": {
         "url": "https://www.epa.gov/system/files/other-files/2024-05/airtoxscreen_2020_emissions_county_sourcegroup.zip",
-        "description": "Link downloads a ZIP file.",
-        "file_size": "108 MB"
+        "description": "Link downloads a ZIP file containing a Microsoft Access database (.accdb).",
+        "file_size": "108 MB",
+        "format": "zip/accdb"
       },
       "requires_account": false,
       "sensitive": false,
@@ -1709,7 +1715,8 @@
       "download": {
         "url": "https://data.epa.gov/efservice/downloads/tri/mv_tri_basic_download/2024_TN/csv",
         "description": "Link downloads a CSV file of every TRI report filed by Tennessee facilities for reporting year 2024.",
-        "file_size": "1.6 MB"
+        "file_size": "1.6 MB",
+        "format": "csv"
       },
       "requires_account": false,
       "sensitive": false,

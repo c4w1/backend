@@ -16,6 +16,7 @@ download:
   description: Link downloads a CSV file with one row per county, plus rows for each
     state and the United States.
   file_size: 13.1 MB
+  format: csv
 notes: 'The file has two header rows: readable column names, then short variable codes
   (statecode, countycode, v001_rawvalue, ...), so the codes appear as the first data
   row. Rows are identified by State FIPS Code and County FIPS Code; county code 000

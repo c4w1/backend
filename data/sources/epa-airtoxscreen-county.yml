@@ -11,8 +11,9 @@ filters:
 requires_account: false
 download:
   url: https://www.epa.gov/system/files/other-files/2024-05/airtoxscreen_2020_emissions_county_sourcegroup.zip
-  description: Link downloads a ZIP file.
+  description: Link downloads a ZIP file containing a Microsoft Access database (.accdb).
   file_size: 108 MB
+  format: zip/accdb
 sensitive: false
 description_tags:
 - Energy & Environment

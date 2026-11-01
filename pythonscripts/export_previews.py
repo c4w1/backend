@@ -81,6 +81,10 @@ CODE_PATTERN = re.compile(r"^[a-z][a-z0-9_]*$")
 class UnsupportedFormat(Exception):
     """The download is not a CSV, a zip with a CSV inside, or an .xlsx workbook."""
 
+    def __init__(self, message: str, file_format: str | None = None):
+        super().__init__(message)
+        self.format = file_format  # what the download is, when known (e.g. "zip/accdb")
+
 
 # ── Downloads ────────────────────────────────────────────────────────────────
 
@@ -268,7 +272,9 @@ def read_table(data: bytes) -> tuple[str, list[str], list[str] | None, list[list
             csvs = sorted((n for n in names if n.lower().endswith((".csv", ".txt"))), key=lambda n: -archive.getinfo(n).file_size)
             if not csvs:
                 kinds = ", ".join(sorted({Path(n).suffix.lower() or n for n in names}))
-                raise UnsupportedFormat(f"zip contains no CSV ({kinds})")
+                largest = max(names, key=lambda n: archive.getinfo(n).file_size, default="")
+                inner = Path(largest).suffix.lower().lstrip(".")
+                raise UnsupportedFormat(f"zip contains no CSV ({kinds})", f"zip/{inner}" if inner else "zip")
             return ("zip/csv", *read_csv_text(decode_text(archive.read(csvs[0]))))
     head = data[:2048].lower()
     if b"<html" in head or b"<!doctype html" in head:
@@ -461,7 +467,7 @@ def build_preview(source: dict, data: bytes, out_dir: Path, vocabulary: dict) ->
     source_id = source["id"]
     fmt, header, codes, rows = read_table(data)
     if not header or not rows:
-        raise UnsupportedFormat("no rows found")
+        raise UnsupportedFormat("no rows found", fmt)
 
     target = out_dir / source_id
     if target.exists():
@@ -581,7 +587,11 @@ def main(argv: list[str] | None = None) -> int:
             path = fetch(url, cache_path(args.cache, source_id, url), offline=args.offline, refresh=args.refresh)
             manifest = build_preview(source, path.read_bytes(), args.out, vocabulary)
         except UnsupportedFormat as err:
-            entries[source_id] = {"status": "none", "reason": f"unsupported format: {err}"}
+            entries[source_id] = {
+                "status": "none",
+                **({"format": err.format} if err.format else {}),
+                "reason": f"unsupported format: {err}",
+            }
             shutil.rmtree(args.out / source_id, ignore_errors=True)
             print(f"- {source_id}: {err}")
             continue
@@ -595,6 +605,7 @@ def main(argv: list[str] | None = None) -> int:
         county = manifest["county"]
         entries[source_id] = {
             "status": "ok",
+            "format": manifest["format"],
             "rows": manifest["rows"],
             "counties": len(county["counties"]) if county else 0,
             "tier2": manifest["tier2"],

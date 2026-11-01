@@ -94,9 +94,11 @@ class ReadTableTest(unittest.TestCase):
     def test_zip_without_a_table_is_unsupported(self):
         buffer = io.BytesIO()
         with zipfile.ZipFile(buffer, "w") as archive:
+            archive.writestr("readme.pdf", b"\x00")
             archive.writestr("database.accdb", b"\x00\x01")
-        with self.assertRaisesRegex(ep.UnsupportedFormat, "accdb"):
+        with self.assertRaisesRegex(ep.UnsupportedFormat, "accdb") as caught:
             ep.read_table(buffer.getvalue())
+        self.assertEqual(caught.exception.format, "zip/accdb")  # the largest file inside
 
     def test_html_page_is_unsupported(self):
         with self.assertRaises(ep.UnsupportedFormat):
@@ -228,9 +230,10 @@ class MainTest(unittest.TestCase):
             with mock.patch("sys.stdout", io.StringIO()):
                 self.assertEqual(ep.main(args), 0)
             index = json.loads((root / "out" / "index.json").read_text(encoding="utf-8"))["sources"]
-            self.assertEqual(index["has-file"], {"status": "ok", "rows": 3, "counties": 2, "tier2": False})
+            self.assertEqual(index["has-file"], {"status": "ok", "format": "csv", "rows": 3, "counties": 2, "tier2": False})
             self.assertEqual(index["page-only"], {"status": "none", "reason": "no direct download"})
             self.assertEqual(index["access-db"]["status"], "none")
+            self.assertEqual(index["access-db"]["format"], "zip/accdb")
             self.assertIn("accdb", index["access-db"]["reason"])
             self.assertFalse((root / "out" / "removed-source").exists())
 

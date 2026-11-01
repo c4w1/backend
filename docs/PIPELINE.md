@@ -22,8 +22,11 @@ requires_account: false
 download:
   url: https://...
   description: ...
+  format: csv     # what the URL returns: csv | tsv | xlsx | xls | accdb, or zip/<file inside> (zip/csv, zip/accdb)
 notes: ...
 ```
+
+`download.format` is shown on the website's Data Preview page. Set it to what `export_previews.py` detects (it records each download's format in `previews/index.json`); `pythonscripts/tests/test_download_format.py` fails when they differ.
 
 Downstream stages add to this same file: `description_tags`, `variable_names`, `variable_report`, `who`/`how`/`where`/`why`/`when`, `geographic_coverage`, and one `<name>_tags` block per statistical tagger (e.g. `anova_tags`, `normality_tags`).
 
@@ -38,8 +41,10 @@ coverage:                 # FIPS codes only; no geometry
 #   fips: '47'            # every county in Tennessee
 # - level: county
 #   fips: '47093'         # Knox County, TN
-geographic_granularity: county   # nation | state | county | zip | point
+geographic_granularity: county   # state | county | zip | point (nation is out of scope)
 ```
+
+- **Local data only:** CDL is a library of local data, so a source whose finest level is the nation (`geographic_granularity: nation`, no state or smaller breakdown) doesn't belong in the catalog (web#42). The importer skips it, and `pythonscripts/tests/test_catalog_scope.py` fails on any such YAML. National *coverage* is fine: a county file for every U.S. county has `coverage: nation` and `geographic_granularity: county`. Sources waiting on a decision are listed in `NATIONAL_ONLY_PENDING_REVIEW` in `import_sources_to_sqlite.py` (currently `epa-tri-dioxin`).
 
 - **Valid codes:** state and county codes must be in `data/reference/geo-vocabulary.json`, the Census 2025 county list the website draws. `pythonscripts/tests/test_coverage_vocabulary.py` checks every YAML. The file is written by the web repo's `npm run geo:boundaries -- --backend ../backend`; don't edit it by hand.
 - **Not used for coverage:** `geographic_coverage.available_levels` (from `geographic_coverage.py`) is a heuristic and is not used for coverage.
@@ -76,7 +81,7 @@ There is no single "run everything" command — `runall.py` deliberately exclude
    python pythonscripts/runall.py all
    ```
 
-5. **`import_sources_to_sqlite.py`** — reads every YAML in `data/sources/`, applies `database/schema.sql`, and upserts into `database/sources.db`. **Must be re-run after any YAML edit or pipeline re-run** — nothing auto-invalidates the database, and the API will silently serve stale data (or fall back to reading YAML directly if the `.db` file is deleted).
+5. **`import_sources_to_sqlite.py`** — reads every YAML in `data/sources/`, applies `database/schema.sql`, and upserts into `database/sources.db`. A full import (`all`) also deletes every source it didn't import (its YAML was deleted, or it failed validation and was skipped), so a removed dataset can't reach the export from a stale row. **Must be re-run after any YAML edit or pipeline re-run** — nothing auto-invalidates the database, and the API will silently serve stale data (or fall back to reading YAML directly if the `.db` file is deleted).
 
    ```bash
    python pythonscripts/import_sources_to_sqlite.py all
@@ -94,8 +99,8 @@ There is no single "run everything" command — `runall.py` deliberately exclude
    - `summary.json` (per-column statistics over every row)
    - `county/<FIPS>.json` (every row for one county)
 
-   `previews/index.json` records which sources have previews and why the others don't.
-   - **Formats:** CSV, a zip with a CSV inside, and Census-style `.xlsx` tables.
+   `previews/index.json` records which sources have previews and why the others don't, and the format of every download it opened (`csv`, `xlsx`, `zip/csv`, or `zip/accdb` for a zip with no CSV).
+   - **Formats:** CSV, a zip with a CSV inside, and Census-style `.xlsx` tables. Anything else (AirToxScreen's Microsoft Access database) is recorded as unsupported, and the website shows that source as info only.
    - **County detection:** a 5-digit FIPS column, Census `STATE` + `COUNTY` codes, or county names plus a state code matched against the reference vocabulary.
    - **Size:** every file stays under 250 KB; oversized county slices are cut short and marked `truncated`, and their source is flagged as a Tier 2 candidate.
    - **Commit:** commit the output. Re-runs only change files whose data changed. Downloads are cached in `data/.cache/downloads/` (ignored).
@@ -152,4 +157,4 @@ Each downloads the dataset again and writes one `<name>_tags` block:
 - **Sources without a direct download** (provider page only) are kept in the catalog: the website shows them as info only, and `export_previews.py` records "no direct download" for them. 15 such or previously unpreviewable sources were restored after `8a946d5` removed them for the old runtime preview.
 - **Two copies of `tagdataset.py` exist in the wider project.** This backend's copy is canonical; `web/backend/pythonscripts/tagdataset.py` is a separately-diverged fork used only by the web mirror's local preview, intentionally not unified (see `docs/superpowers/specs/2026-08-11-dataset-tagging-design.md`).
 - **`geographicidentifiers/community_geographic_identifiers.xlsx`** is not read by any script in this repo — treat it as a manual reference asset, not a pipeline input, unless that changes.
-- **Tests**: `python -m pytest pythonscripts -q` covers tagging, the importer, the catalog export, the tag and coverage vocabularies, and the preview exporter. There are no automated tests for the Node/HTTP layer. On Windows, a few importer tests fail when cleaning up their temporary SQLite file (the file is still open); they pass on Linux CI.
+- **Tests**: `python -m pytest pythonscripts -q` covers tagging, the importer, the catalog export, the tag and coverage vocabularies, the catalog scope (no national-only sources), declared download formats, and the preview exporter. There are no automated tests for the Node/HTTP layer. On Windows, a few importer tests fail when cleaning up their temporary SQLite file (the file is still open); they pass on Linux CI.

@@ -1,6 +1,6 @@
 {
   "exportVersion": 1,
-  "sourceCount": 21,
+  "sourceCount": 22,
   "excludedNationalLevel": [
     "census-annual-pop-by-age-sex-2025",
     "census-annual-pop-selected-age-groups-2024",
@@ -2354,6 +2354,56 @@
           "civic-education": true,
           "data-literacy": true,
           "quantitative-methods": true
+        }
+      }
+    },
+    {
+      "id": "nanda-grocery-food-stores",
+      "title": "NaNDA: Grocery and Food Stores by Census Tract and ZCTA, 1990-2022",
+      "version": "1.0",
+      "description": "Yearly counts and density of grocery stores, supermarkets, meat and fish markets, fruit and vegetable markets, warehouse clubs, and all food stores for every U.S. census tract and ZIP Code Tabulation Area from 1990 to 2022.",
+      "about": "This NaNDA dataset counts food retailers in every U.S. census tract and ZIP Code Tabulation Area (ZCTA) for each year from 1990 to 2022. It can show how access to food stores has changed in a neighborhood over three decades.\n\n## What's Included\n\nFor grocery stores, supermarkets, meat and fish markets, fruit and vegetable markets, warehouse clubs selling food, and all food stores:\n\n- Number of establishments\n- Number of employees\n- Establishments per 1,000 people\n- Establishments per square mile\n\nThere are separate files for 2010 and 2020 tract boundaries and 2010 and 2020 ZCTA boundaries. Each row also has the year, total population, and land area.\n\n## Finding Your County\n\nIn the tract files, the first five digits of the tract code (`tract_fips10` or `tract_fips20`) are the county FIPS code. ZCTA codes do not include a county, and ZCTAs can cross county lines. ZCTAs are also not the same as ZIP codes, so use a ZIP-to-ZCTA crosswalk to match ZIP code data.\n\n## Accessing the Data\n\nOpen the study page and log in to ICPSR to download. The files are not linked directly, so this dataset has no preview on this site.\n\n## Community Use\n\n- Find neighborhoods that have lost grocery stores or supermarkets.\n- Support food access planning with long-term local trends.\n\n## Classroom Use\n\n- **Statistics**: Compare store density across tracts in your county.\n- **Social studies**: Discuss food deserts and what store counts can and can't show.\n- **Data literacy**: Compare counts, per-person rates, and per-square-mile rates for the same place.\n\n## Terms and Credit\n\nMelendez, Clary, Clarke, Noppert, and Gypin, National Neighborhood Data Archive. Licensed under [Creative Commons Attribution-NonCommercial 4.0](https://creativecommons.org/licenses/by-nc/4.0/). Distributed by ICPSR, and downloading also means agreeing to its [Terms of Use](https://www.icpsr.umich.edu/sites/icpsr/about/policies/terms-of-use). Cite the dataset using the citation on its [ICPSR study page](https://doi.org/10.3886/ICPSR209313.V2). Catalog details retrieved from ICPSR on 2026-11-03 under [ICPSR's metadata conditions](https://www.icpsr.umich.edu/sites/icpsr/about/repository-operations/accessing-metadata).",
+      "notes": "ICPSR study 209313, version V2.1 (2026-06-19), CC BY-NC 4.0. Link only: ICPSR requires a login to download, so this source has no preview. In the tract files, the first five digits of tract_fips10 or tract_fips20 are the county FIPS. ZCTA files have no county code, and ZCTAs are not the same as ZIP codes. Connecticut users of 2022 or later data should use tract_fips22.",
+      "published_date": "2026-06-19",
+      "provider": {
+        "name": "National Neighborhood Data Archive (NaNDA)",
+        "agency": "University of Michigan Institute for Social Research",
+        "url": "https://doi.org/10.3886/ICPSR209313.V2"
+      },
+      "download": {
+        "description": "Log in to ICPSR on the study page to download. Files are not linked directly. Choose one zip of CSV files or four Stata files (Tract 2010, Tract 2020, ZCTA 2010, ZCTA 2020).",
+        "file_size": "116 MB (CSV zip); Stata files 118-350 MB"
+      },
+      "requires_account": true,
+      "sensitive": false,
+      "pipeline_ready": false,
+      "student_suitability": "unreviewed",
+      "geographic_granularity": "tract",
+      "coverage": [
+        {
+          "level": "nation",
+          "geoid": "US"
+        }
+      ],
+      "location": {
+        "latitude": 42.279,
+        "longitude": -83.74,
+        "label": "University of Michigan Institute for Social Research, Ann Arbor, MI (approximate)"
+      },
+      "filters": {
+        "year": true,
+        "state": true,
+        "county": true,
+        "zipcode": true
+      },
+      "description_tags": [
+        "Business & Economy"
+      ],
+      "analysis_tags": {
+        "pedagogical_tags": {
+          "data-literacy": true,
+          "social-justice": true,
+          "policy-analysis": true
         }
       }
     },

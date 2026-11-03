@@ -100,6 +100,10 @@
       "status": "none",
       "reason": "no direct download"
     },
+    "nanda-libraries": {
+      "status": "none",
+      "reason": "no direct download"
+    },
     "nanda-voter-turnout-partisanship-by-county": {
       "status": "none",
       "reason": "no direct download"

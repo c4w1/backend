@@ -1,0 +1,87 @@
+id: nanda-libraries
+version: '1.0'
+title: 'NaNDA: Libraries by Census Tract and ZCTA, 1992-2021'
+provider:
+  name: National Neighborhood Data Archive (NaNDA)
+  agency: University of Michigan Institute for Social Research
+  url: https://doi.org/10.3886/ICPSR200038.V5
+filters:
+  year: true
+  state: true
+  county: true
+  zipcode: true
+requires_account: true
+download:
+  description: Log in to ICPSR on the study page to download. Files are not linked directly.
+    There are four Stata (.dta) files (Tract 2010, Tract 2020, ZCTA 2010, ZCTA 2020) and no CSV.
+  file_size: 28-86 MB per file
+notes: 'ICPSR study 200038, version V5.0 (2026-04-29), CC BY-NC 4.0. Link only: ICPSR requires
+  a login to download, so this source has no preview. Stata format only. Tract codes start with
+  the county FIPS. ZCTA files have no county code, and ZCTAs are not the same as ZIP codes.'
+description: Yearly counts and density of libraries for every census tract and ZIP Code
+  Tabulation Area in the U.S. and Puerto Rico from 1992 to 2021, based on the Public Libraries
+  Survey.
+sensitive: false
+published_date: '2026-04-29'
+description_tags:
+- Government Administration
+manual_tags:
+- description_tags
+pedagogical_tags:
+  civic-education: true
+  data-literacy: true
+who: National Neighborhood Data Archive (University of Michigan Institute for Social Research)
+how: Institute of Museum and Library Services Public Libraries Survey, matched to Census tract
+  and ZCTA boundaries, with Census population and land area
+where: Filterable to census tract and ZCTA; tract codes roll up to county
+why: null
+when: 1992-2021
+geographic_coverage:
+  available_levels:
+    state_fips: true
+    fips_code: true
+    zip_code: true
+    school_district: false
+    tract: true
+    tribal_area: false
+coverage:
+- level: nation
+geographic_granularity: tract
+student_suitability: unreviewed
+location:
+  latitude: 42.279
+  longitude: -83.74
+  label: University of Michigan Institute for Social Research, Ann Arbor, MI (approximate)
+about: |
+  This NaNDA dataset counts libraries in every census tract and ZIP Code Tabulation Area (ZCTA) in the United States and Puerto Rico for each year from 1992 to 2021. It is based on the Public Libraries Survey from the Institute of Museum and Library Services.
+
+  ## What's Included
+
+  - Number of libraries
+  - Libraries per person and per square mile
+  - Geographic code, year, total population, and land area
+
+  There are separate files for 2010 and 2020 tract boundaries and 2010 and 2020 ZCTA boundaries.
+
+  ## Finding Your County
+
+  The first five digits of an 11-digit census tract code are the county FIPS code. ZCTA codes do not include a county, and ZCTAs can cross county lines. ZCTAs are also not the same as ZIP codes, so use a ZIP-to-ZCTA crosswalk to match ZIP code data.
+
+  ## Accessing the Data
+
+  Open the study page and log in to ICPSR to download. The files are not linked directly, so this dataset has no preview on this site. They come only in Stata (`.dta`) format, which Stata, R, and Python can open.
+
+  ## Community Use
+
+  - See which neighborhoods have gained or lost library access since the 1990s.
+  - Compare library density with population in different parts of your county.
+
+  ## Classroom Use
+
+  - **Statistics**: Compare library density across tracts in your county.
+  - **Civics**: Who is served by public libraries, and who has to travel farther to reach one?
+  - **Data literacy**: Why might a count of libraries change when boundaries change?
+
+  ## Terms and Credit
+
+  Melendez, Clarke, Clary, Noppert, and Gypin, National Neighborhood Data Archive. Licensed under [Creative Commons Attribution-NonCommercial 4.0](https://creativecommons.org/licenses/by-nc/4.0/). Distributed by ICPSR, and downloading also means agreeing to its [Terms of Use](https://www.icpsr.umich.edu/sites/icpsr/about/policies/terms-of-use). Cite the dataset using the citation on its [ICPSR study page](https://doi.org/10.3886/ICPSR200038.V5). Catalog details retrieved from ICPSR on 2026-11-03 under [ICPSR's metadata conditions](https://www.icpsr.umich.edu/sites/icpsr/about/repository-operations/accessing-metadata).

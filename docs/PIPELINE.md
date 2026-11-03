@@ -41,10 +41,11 @@ coverage:                 # FIPS codes only; no geometry
 #   fips: '47'            # every county in Tennessee
 # - level: county
 #   fips: '47093'         # Knox County, TN
-geographic_granularity: county   # state | county | zip | point (nation is out of scope)
+geographic_granularity: county   # nation | state | county | zip | point
 ```
 
-- **Local data only:** CDL is a library of local data, so a source whose finest level is the nation (`geographic_granularity: nation`, no state or smaller breakdown) doesn't belong in the catalog (web#42). The importer skips it, and `pythonscripts/tests/test_catalog_scope.py` fails on any such YAML. National *coverage* is fine: a county file for every U.S. county has `coverage: nation` and `geographic_granularity: county`. Sources waiting on a decision are listed in `NATIONAL_ONLY_PENDING_REVIEW` in `import_sources_to_sqlite.py` (currently `epa-tri-dioxin`).
+- **Local data only:** CDL is a library of local data (web#42). A source is national-level when its `filters` show no state, county or ZIP breakdown. National-level sources stay in the YAML and SQLite, so changing a filter value reverses the decision, but `export_catalog.py` and `lib/sourceStore.mjs` leave them out. `catalog.json` lists them under `excludedNationalLevel`. `pythonscripts/catalog_scope.py` holds the rule, and `lib/catalogScope.mjs` is the same rule in JavaScript.
+- **`filters` is required:** a source with no `filters` makes the import exit 1 and stops the export. Base the values on the actual file. Sources in `FILTERS_PENDING_REVIEW` in `catalog_scope.py` stay in the catalog with a warning until their values are decided (currently the four Knox sources). `pythonscripts/tests/test_catalog_scope.py` also fails if `geographic_granularity: nation` and the filters disagree, or if the list of national-level sources changes. National *coverage* is fine: a county file for every U.S. county has `coverage: nation`, `geographic_granularity: county` and county filters.
 
 - **Valid codes:** state and county codes must be in `data/reference/geo-vocabulary.json`, the Census 2025 county list the website draws. `pythonscripts/tests/test_coverage_vocabulary.py` checks every YAML. The file is written by the web repo's `npm run geo:boundaries -- --backend ../backend`; don't edit it by hand.
 - **Not used for coverage:** `geographic_coverage.available_levels` (from `geographic_coverage.py`) is a heuristic and is not used for coverage.
@@ -87,7 +88,7 @@ There is no single "run everything" command — `runall.py` deliberately exclude
    python pythonscripts/import_sources_to_sqlite.py all
    ```
 
-6. **`export_catalog.py`**: exports the database to `data/exports/catalog.json`, which the website builds from. Commit it. `--check` fails if the committed export is stale.
+6. **`export_catalog.py`**: exports the database to `data/exports/catalog.json`, which the website builds from. Commit it. National-level sources are left out. `--check` fails if the committed export is stale.
 
    ```bash
    python pythonscripts/export_catalog.py
@@ -157,4 +158,4 @@ Each downloads the dataset again and writes one `<name>_tags` block:
 - **Sources without a direct download** (provider page only) are kept in the catalog: the website shows them as info only, and `export_previews.py` records "no direct download" for them. 15 such or previously unpreviewable sources were restored after `8a946d5` removed them for the old runtime preview.
 - **Two copies of `tagdataset.py` exist in the wider project.** This backend's copy is canonical; `web/backend/pythonscripts/tagdataset.py` is a separately-diverged fork used only by the web mirror's local preview, intentionally not unified (see `docs/superpowers/specs/2026-08-11-dataset-tagging-design.md`).
 - **`geographicidentifiers/community_geographic_identifiers.xlsx`** is not read by any script in this repo — treat it as a manual reference asset, not a pipeline input, unless that changes.
-- **Tests**: `python -m pytest pythonscripts -q` covers tagging, the importer, the catalog export, the tag and coverage vocabularies, the catalog scope (no national-only sources), declared download formats, and the preview exporter. There are no automated tests for the Node/HTTP layer. On Windows, a few importer tests fail when cleaning up their temporary SQLite file (the file is still open); they pass on Linux CI.
+- **Tests**: `python -m pytest pythonscripts -q` covers tagging, the importer, the catalog export, the tag and coverage vocabularies, the catalog scope (the national-level rule and every source's filters), declared download formats, and the preview exporter. There are no automated tests for the Node/HTTP layer. On Windows, a few importer tests fail when cleaning up their temporary SQLite file (the file is still open); they pass on Linux CI.

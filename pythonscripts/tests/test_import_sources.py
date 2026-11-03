@@ -94,6 +94,9 @@ class ImportSourcesTest(unittest.TestCase):
             ("bad-gran.yml", "geographic_granularity: planet"),
             ("bad-fips.yml", "coverage:\n  - level: county\n    fips: '4793'"),
             ("bad-loc.yml", "location:\n  latitude: 200\n  longitude: 0"),
+            ("bad-hr0.yml", "download: {url: 'https://x.gov/a.xlsx', header_row: 0}"),
+            ("bad-hr-text.yml", "download: {url: 'https://x.gov/a.xlsx', header_row: four}"),
+            ("bad-sheet.yml", "download: {url: 'https://x.gov/a.xlsx', sheet: -1}"),
         ]
         paths = [self.write(name, f"id: {name[:-4]}\ntitle: T\n{extra}\n") for name, extra in bad]
         conn = self.run_import(*paths)
@@ -136,6 +139,25 @@ class ImportSourcesTest(unittest.TestCase):
         importer.import_files(paths, self.db, SCHEMA)
         with closing(sqlite3.connect(self.db)) as conn:
             self.assertEqual(conn.execute("SELECT COUNT(*) FROM sources").fetchone()[0], 0)
+
+    def test_excel_layout_fields_are_stored(self) -> None:
+        conn = self.run_import(self.write("x.yml", """
+            id: x
+            title: X
+            download: {url: "https://x.gov/a.xlsx", sheet: Data, header_row: 4}
+        """))
+        self.assertEqual(
+            conn.execute("SELECT download_sheet, download_header_row FROM sources").fetchone(),
+            ("Data", 4),
+        )
+
+    def test_numeric_sheet_index_is_stored_as_text(self) -> None:
+        conn = self.run_import(self.write("x.yml", """
+            id: x
+            title: X
+            download: {url: "https://x.gov/a.xlsx", sheet: 1}
+        """))
+        self.assertEqual(conn.execute("SELECT download_sheet FROM sources").fetchone(), ("1",))
 
     def test_reimport_replaces_children(self) -> None:
         path = self.write("s.yml", "id: s\ntitle: S\ncoverage:\n  - level: nation\n")
@@ -185,6 +207,8 @@ class ImportSourcesTest(unittest.TestCase):
         self.assertEqual(
             conn.execute("SELECT student_suitability FROM sources").fetchone(), ("not_suitable",)
         )
+        columns = {row[1] for row in conn.execute("PRAGMA table_info(sources)")}
+        self.assertLessEqual({"download_sheet", "download_header_row"}, columns)
 
 
 if __name__ == "__main__":

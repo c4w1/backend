@@ -7,8 +7,8 @@ provider:
   url: https://www.countyhealthrankings.org/health-data/methodology-and-sources/data-documentation
 filters:
   year: false
-  state: false
-  county: false
+  state: true
+  county: true
   zipcode: false
 requires_account: false
 download:

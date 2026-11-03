@@ -6,9 +6,9 @@ provider:
   url: https://www.epa.gov/toxics-release-inventory-tri-program/tri-basic-data-files-calendar-years-1987-present
 filters:
   year: false
-  state: false
-  county: false
-  zipcode: false
+  state: true
+  county: true
+  zipcode: true
 requires_account: false
 download:
   url: https://data.epa.gov/efservice/downloads/tri/mv_tri_basic_download/2024_TN/csv

@@ -646,8 +646,8 @@
       ],
       "filters": {
         "year": false,
-        "state": false,
-        "county": false,
+        "state": true,
+        "county": true,
         "zipcode": false
       },
       "variables": [
@@ -1755,9 +1755,9 @@
       ],
       "filters": {
         "year": false,
-        "state": false,
-        "county": false,
-        "zipcode": false
+        "state": true,
+        "county": true,
+        "zipcode": true
       },
       "variables": [
         "1. YEAR",
@@ -2010,7 +2010,7 @@
       "sensitive": false,
       "pipeline_ready": false,
       "student_suitability": "unreviewed",
-      "geographic_granularity": "nation",
+      "geographic_granularity": "point",
       "coverage": [
         {
           "level": "nation",
@@ -2024,8 +2024,8 @@
       },
       "filters": {
         "year": true,
-        "state": false,
-        "county": false,
+        "state": true,
+        "county": true,
         "zipcode": false
       },
       "description_tags": [

@@ -59,9 +59,6 @@ ADDED_SOURCE_COLUMNS = {
 GRANULARITY_LEVELS = ("nation", "state", "county", "zip", "point")
 # CDL is a library of local data: a source whose finest level is the nation is out of
 # scope (web#42). `nation` stays valid as a coverage level and in the schema.
-# Sources listed here are waiting on a decision and still import; remove each entry
-# once its YAML is deleted or its granularity is corrected.
-NATIONAL_ONLY_PENDING_REVIEW = {"epa-tri-dioxin"}
 STUDENT_SUITABILITY_VALUES = ("suitable", "not_suitable", "unreviewed")
 # download.format: the file download.url returns, as export_previews.py detects it.
 # A zip is written zip/<type of the file inside>.
@@ -162,7 +159,7 @@ def load_granularity(doc: dict[str, Any]) -> str | None:
 
 
 def check_scope(source_id: str, granularity: str | None) -> None:
-    if granularity == "nation" and source_id not in NATIONAL_ONLY_PENDING_REVIEW:
+    if granularity == "nation":
         raise ValueError(
             "national-only data is out of scope (geographic_granularity: nation); the catalog "
             "needs a state or smaller breakdown (web#42)"

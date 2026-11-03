@@ -5,8 +5,8 @@ provider:
   name: U.S. Environmental Protection Agency (EPA)
 filters:
   year: true
-  state: false
-  county: false
+  state: true
+  county: true
   zipcode: false
 requires_account: false
 download:
@@ -33,7 +33,7 @@ geographic_coverage:
 # Canonical geography and audience metadata (see database/schema.sql).
 coverage:
 - level: nation
-geographic_granularity: nation
+geographic_granularity: point
 student_suitability: unreviewed
 location:
   latitude: 38.8939

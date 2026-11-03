@@ -90,6 +90,10 @@ def _source_record(conn: sqlite3.Connection, row: sqlite3.Row) -> dict[str, Any]
                 "url": row["download_url"],
                 "description": row["download_description"],
                 "file_size": row["download_file_size"],
+                "sheet": int(row["download_sheet"])
+                if row["download_sheet"] and row["download_sheet"].isdigit()
+                else row["download_sheet"],
+                "header_row": row["download_header_row"],
             }
         ),
         "requires_account": bool(row["requires_account"]),

@@ -60,6 +60,29 @@ class ExportCatalogTest(unittest.TestCase):
         self.assertNotIn("coverage", b)
         self.assertNotIn("location", b)
 
+    def test_export_sheet_and_header_row(self) -> None:
+        named = self.dir / "c.yml"
+        named.write_text(
+            'id: c-source\ntitle: C\ndownload: {url: "https://x.gov/a.xlsx", sheet: Data, header_row: 4}\n',
+            encoding="utf-8",
+        )
+        indexed = self.dir / "d.yml"
+        indexed.write_text(
+            'id: d-source\ntitle: D\ndownload: {url: "https://x.gov/a.xlsx", sheet: 1}\n', encoding="utf-8"
+        )
+        unset = self.dir / "e.yml"
+        unset.write_text('id: e-source\ntitle: E\ndownload: {url: "https://x.gov/a.csv"}\n', encoding="utf-8")
+        importer.import_files([named, indexed, unset], self.db, SCHEMA)
+        by_id = {s["id"]: s for s in export_catalog.build_export(self.db)["sources"]}
+        self.assertEqual(by_id["c-source"]["download"]["sheet"], "Data")
+        self.assertIs(type(by_id["c-source"]["download"]["header_row"]), int)
+        self.assertEqual(by_id["c-source"]["download"]["header_row"], 4)
+        self.assertEqual(by_id["d-source"]["download"]["sheet"], 1)
+        self.assertIs(type(by_id["d-source"]["download"]["sheet"]), int)
+        self.assertNotIn("header_row", by_id["d-source"]["download"])
+        self.assertNotIn("sheet", by_id["e-source"]["download"])
+        self.assertNotIn("header_row", by_id["e-source"]["download"])
+
     def test_export_is_deterministic(self) -> None:
         first = export_catalog.render(export_catalog.build_export(self.db))
         second = export_catalog.render(export_catalog.build_export(self.db))

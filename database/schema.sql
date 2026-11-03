@@ -12,6 +12,9 @@ CREATE TABLE IF NOT EXISTS sources (
     download_url TEXT,
     download_description TEXT,
     download_file_size TEXT,
+    -- Optional Excel defaults: sheet name or 0-based index (stored as text); 1-based header row.
+    download_sheet TEXT,
+    download_header_row INTEGER CHECK (download_header_row >= 1),
     requires_account INTEGER NOT NULL DEFAULT 0,
     sensitive INTEGER NOT NULL DEFAULT 0,
     pipeline_ready INTEGER NOT NULL DEFAULT 0,

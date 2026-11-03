@@ -53,7 +53,7 @@ Single source by id (URL-decoded path segment after `/api/sources/`).
   "provider": { "name": "...", "agency": "...", "url": "..." },
   "filters": { "year": true, "state": true, "county": false, "zipcode": false },
   "requires_account": false,
-  "download": { "url": "...", "description": "...", "file_size": "..." },
+  "download": { "url": "...", "description": "...", "file_size": "...", "sheet": "Data", "header_row": 4 },
   "sensitive": false,
   "variables": ["column_a", "column_b", "..."],
   "variable_report": [ { "name": "column_a", "type": "float", "missing_pct": 0.0, "...": "..." } ],
@@ -65,6 +65,15 @@ Single source by id (URL-decoded path segment after `/api/sources/`).
   "normality_tags": { "...": true },
   "...": "one block per statistical tagger — see PIPELINE.md"
 }
+```
+
+Optional Excel defaults, set in the source YAML under `download:` (omitted from the object when unset; blank = auto-detect):
+
+```yaml
+download:
+  url: https://example.gov/data.xlsx
+  sheet: Data      # sheet name, or a 0-based index (e.g. 1); blank = first sheet
+  header_row: 4    # 1-based row holding column names (integer >= 1); blank = auto-detect
 ```
 
 ## Environment variables

@@ -53,6 +53,8 @@ ADDED_SOURCE_COLUMNS = {
     "('nation', 'state', 'county', 'zip', 'point'))",
     "student_suitability": "TEXT NOT NULL DEFAULT 'unreviewed' CHECK (student_suitability IN "
     "('suitable', 'not_suitable', 'unreviewed'))",
+    "download_sheet": "TEXT",
+    "download_header_row": "INTEGER CHECK (download_header_row >= 1)",
 }
 
 GRANULARITY_LEVELS = ("nation", "state", "county", "zip", "point")
@@ -149,6 +151,20 @@ def load_granularity(doc: dict[str, Any]) -> str | None:
     return value
 
 
+def load_download_layout(download: dict[str, Any]) -> tuple[str | None, int | None]:
+    sheet = download.get("sheet")
+    if isinstance(sheet, bool) or not isinstance(sheet, (str, int, type(None))):
+        raise ValueError(f"download.sheet must be a name or 0-based index; got {sheet!r}")
+    if isinstance(sheet, int) and sheet < 0:
+        raise ValueError(f"download.sheet index must be >= 0; got {sheet!r}")
+    header_row = download.get("header_row")
+    if header_row is not None and (
+        isinstance(header_row, bool) or not isinstance(header_row, int) or header_row < 1
+    ):
+        raise ValueError(f"download.header_row must be an integer >= 1; got {header_row!r}")
+    return as_text(sheet), header_row
+
+
 def load_student_suitability(doc: dict[str, Any]) -> str:
     value = as_text(doc.get("student_suitability")) or "unreviewed"
     if value not in STUDENT_SUITABILITY_VALUES:
@@ -240,6 +256,7 @@ def import_source(
     # Validate new canonical fields before touching the database.
     granularity = load_granularity(doc)
     student_suitability = load_student_suitability(doc)
+    download_sheet, download_header_row = load_download_layout(download)
     coverage = load_coverage(doc)
     location = load_location(doc)
 
@@ -251,9 +268,10 @@ def import_source(
             id, yml_filename, version, title, notes,
             provider_name, provider_agency, website_url,
             download_url, download_description, download_file_size,
+            download_sheet, download_header_row,
             requires_account, sensitive, pipeline_ready, imported_at,
             description, about, published_date, geographic_granularity, student_suitability
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
         (
             source_id,
@@ -267,6 +285,8 @@ def import_source(
             download_url,
             as_text(download.get("description")),
             as_text(download.get("file_size")),
+            download_sheet,
+            download_header_row,
             1 if doc.get("requires_account") else 0,
             1 if doc.get("sensitive") else 0,
             pipeline_ready,

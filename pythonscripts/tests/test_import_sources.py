@@ -9,8 +9,9 @@ import textwrap
 import unittest
 from contextlib import closing
 from pathlib import Path
+from unittest.mock import patch
 
-SCRIPTS = Path(__file__).resolve().parents[1]
+SCRIPTS =Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(SCRIPTS))
 
 import import_sources_to_sqlite as importer  # noqa: E402
@@ -98,11 +99,27 @@ class ImportSourcesTest(unittest.TestCase):
         conn = self.run_import(*paths)
         self.assertEqual(conn.execute("SELECT COUNT(*) FROM sources").fetchone()[0], 0)
 
-    def test_national_only_granularity_skips_the_source(self) -> None:
-        path = self.write("us.yml", "id: us-totals\ntitle: US\ngeographic_granularity: nation\n")
-        importer.import_files([path], self.db, SCHEMA)
+    def test_national_level_sources_stay_in_sqlite(self) -> None:
+        path = self.write("us.yml", "id: us-totals\ntitle: US\ngeographic_granularity: nation\nfilters: {year: true}\n")
+        self.assertEqual(importer.import_files([path], self.db, SCHEMA), [])
         with closing(sqlite3.connect(self.db)) as conn:
-            self.assertEqual(conn.execute("SELECT COUNT(*) FROM sources").fetchone()[0], 0)
+            self.assertEqual(conn.execute("SELECT id FROM sources").fetchall(), [("us-totals",)])
+
+    def test_a_source_without_filters_is_reported(self) -> None:
+        path = self.write("n.yml", "id: no-filters\ntitle: N\n")
+        self.assertEqual(importer.import_files([path], self.db, SCHEMA), ["no-filters"])
+
+    def test_a_source_pending_review_is_not_reported(self) -> None:
+        source_id = sorted(importer.FILTERS_PENDING_REVIEW)[0]
+        path = self.write("p.yml", f"id: {source_id}\ntitle: P\n")
+        self.assertEqual(importer.import_files([path], self.db, SCHEMA), [])
+
+    def test_full_import_fails_on_missing_filters(self) -> None:
+        self.write("n.yml", "id: no-filters\ntitle: N\n")
+        with patch.object(importer, "DEFAULT_SOURCES_DIR", self.dir), patch.object(importer, "DEFAULT_DB_PATH", self.db):
+            with patch.object(sys, "argv", ["import", "all"]), self.assertRaises(SystemExit) as stopped:
+                importer.main()
+        self.assertEqual(stopped.exception.code, 1)
 
     def test_national_coverage_with_local_granularity_imports(self) -> None:
         path = self.write("c.yml", "id: c\ntitle: C\ngeographic_granularity: county\ncoverage:\n  - level: nation\n")

@@ -3,16 +3,19 @@
 from __future__ import annotations
 
 import json
+import sqlite3
 import sys
 import tempfile
 import textwrap
 import unittest
+from contextlib import closing
 from pathlib import Path
 
 SCRIPTS = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(SCRIPTS))
 
 import export_catalog  # noqa: E402
+from catalog_scope import FILTERS_PENDING_REVIEW  # noqa: E402
 import import_sources_to_sqlite as importer  # noqa: E402
 
 SCHEMA = SCRIPTS.parent / "database" / "schema.sql"
@@ -29,6 +32,7 @@ class ExportCatalogTest(unittest.TestCase):
             title: A Source
             description: Card text.
             provider: {name: Agency, url: "https://example.gov"}
+            filters: {year: false, state: true, county: true, zipcode: false}
             download: {url: "https://example.gov/a.zip", format: zip/xlsx}
             sensitive: false
             student_suitability: not_suitable
@@ -39,7 +43,7 @@ class ExportCatalogTest(unittest.TestCase):
             pedagogical_tags: {civic-education: true}
         """), encoding="utf-8")
         plain = self.dir / "b.yml"
-        plain.write_text("id: b-source\ntitle: B Source\n", encoding="utf-8")
+        plain.write_text("id: b-source\ntitle: B Source\nfilters: {zipcode: true}\n", encoding="utf-8")
         importer.import_files([yml, plain], self.db, SCHEMA)
 
     def tearDown(self) -> None:
@@ -69,6 +73,34 @@ class ExportCatalogTest(unittest.TestCase):
         self.assertEqual(first, second)
         self.assertNotIn("imported_at", first)
         json.loads(first)
+
+    def add_source(self, body: str) -> None:
+        path = self.dir / "extra.yml"
+        path.write_text(body, encoding="utf-8")
+        importer.import_files([path], self.db, SCHEMA)
+
+    def test_national_level_sources_are_left_out_but_stay_in_sqlite(self) -> None:
+        self.add_source("id: us-totals\ntitle: US\nfilters: {year: true, state: false, county: false, zipcode: false}\n")
+        export = export_catalog.build_export(self.db)
+        self.assertEqual([s["id"] for s in export["sources"]], ["a-source", "b-source"])
+        self.assertEqual(export["sourceCount"], 2)
+        self.assertEqual(export["excludedNationalLevel"], ["us-totals"])
+        with closing(sqlite3.connect(self.db)) as conn:
+            self.assertEqual(conn.execute("SELECT id FROM sources WHERE id = 'us-totals'").fetchone(), ("us-totals",))
+
+    def test_a_source_without_filters_stops_the_export(self) -> None:
+        self.add_source("id: no-filters\ntitle: N\n")
+        with self.assertRaisesRegex(ValueError, "no-filters"):
+            export_catalog.build_export(self.db)
+
+    def test_a_source_pending_review_is_exported_and_flagged(self) -> None:
+        source_id = sorted(FILTERS_PENDING_REVIEW)[0]
+        self.add_source(f"id: {source_id}\ntitle: P\n")
+        export = export_catalog.build_export(self.db)
+        pending = next(s for s in export["sources"] if s["id"] == source_id)
+        self.assertIs(pending["filters_pending_review"], True)
+        self.assertNotIn("filters", pending)
+        self.assertNotIn("filters_pending_review", export["sources"][0])
 
 
 if __name__ == "__main__":

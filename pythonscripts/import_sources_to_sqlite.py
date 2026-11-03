@@ -18,8 +18,10 @@ from typing import Any
 
 import yaml
 
+from catalog_scope import FILTERS_PENDING_REVIEW, is_national_level, missing_filters_message
 
-SCRIPT_DIR = Path(__file__).resolve().parent
+
+SCRIPT_DIR =Path(__file__).resolve().parent
 DEFAULT_SOURCES_DIR = SCRIPT_DIR.parent / "data" / "sources"
 DEFAULT_DB_PATH = SCRIPT_DIR.parent / "database" / "sources.db"
 DEFAULT_SCHEMA_PATH = SCRIPT_DIR.parent / "database" / "schema.sql"
@@ -57,8 +59,6 @@ ADDED_SOURCE_COLUMNS = {
 }
 
 GRANULARITY_LEVELS = ("nation", "state", "county", "zip", "point")
-# CDL is a library of local data: a source whose finest level is the nation is out of
-# scope (web#42). `nation` stays valid as a coverage level and in the schema.
 STUDENT_SUITABILITY_VALUES = ("suitable", "not_suitable", "unreviewed")
 # download.format: the file download.url returns, as export_previews.py detects it.
 # A zip is written zip/<type of the file inside>.
@@ -156,14 +156,6 @@ def load_granularity(doc: dict[str, Any]) -> str | None:
             f"geographic_granularity must be one of {', '.join(GRANULARITY_LEVELS)}; got {value!r}"
         )
     return value
-
-
-def check_scope(source_id: str, granularity: str | None) -> None:
-    if granularity == "nation":
-        raise ValueError(
-            "national-only data is out of scope (geographic_granularity: nation); the catalog "
-            "needs a state or smaller breakdown (web#42)"
-        )
 
 
 def load_download_format(download: dict[str, Any]) -> str | None:
@@ -281,7 +273,6 @@ def import_source(
 
     # Validate new canonical fields before touching the database.
     granularity = load_granularity(doc)
-    check_scope(source_id, granularity)
     student_suitability = load_student_suitability(doc)
     coverage = load_coverage(doc)
     location = load_location(doc)
@@ -407,11 +398,19 @@ def import_source(
     return source_id, bool(pipeline_ready)
 
 
-def import_files(paths: list[Path], db_path: Path, schema_path: Path, *, prune: bool = False) -> None:
-    """Import `paths`. With prune=True (a full import), also delete every other source."""
+def filters_by_source(conn: sqlite3.Connection) -> dict[str, dict[str, int]]:
+    rows = conn.execute("SELECT source_id, state, county, zipcode FROM source_filters")
+    return {row[0]: {"state": row[1], "county": row[2], "zipcode": row[3]} for row in rows}
+
+
+def import_files(paths: list[Path], db_path: Path, schema_path: Path, *, prune: bool = False) -> list[str]:
+    """Import `paths`. With prune=True (a full import), also delete every other source.
+
+    Returns the imported sources that have no filters and aren't pending review.
+    """
     if not paths:
         print("No YAML files found.")
-        return
+        return []
 
     db_path.parent.mkdir(parents=True, exist_ok=True)
     imported_at = datetime.now(timezone.utc).isoformat()
@@ -440,6 +439,12 @@ def import_files(paths: list[Path], db_path: Path, schema_path: Path, *, prune: 
         pruned = prune_sources(conn, imported_ids) if prune else []
         conn.commit()
 
+        filters = filters_by_source(conn)
+        no_filters = sorted(imported_ids - filters.keys())
+        missing = [source_id for source_id in no_filters if source_id not in FILTERS_PENDING_REVIEW]
+        pending = [source_id for source_id in no_filters if source_id in FILTERS_PENDING_REVIEW]
+        national = sorted(s for s in imported_ids & filters.keys() if is_national_level(filters[s]))
+
         incomplete = imported - pipeline_ready_count
         print()
         print(f"Imported: {imported}")
@@ -451,7 +456,14 @@ def import_files(paths: list[Path], db_path: Path, schema_path: Path, *, prune: 
                 print(f"  - {item}")
         if pruned:
             print(f"Removed (no longer imported): {', '.join(pruned)}")
+        if national:
+            print(f"National-level, left out of the catalog export: {', '.join(national)}")
+        if pending:
+            print(f"WARNING: no filters yet, pending review: {', '.join(pending)}")
+        if missing:
+            print(f"ERROR: {missing_filters_message(missing)}")
         print(f"Database: {db_path}")
+        return missing
     finally:
         conn.close()
 
@@ -472,7 +484,9 @@ def main() -> None:
         sys.exit(1)
 
     print(f"Found {len(paths)} file(s)")
-    import_files(paths, DEFAULT_DB_PATH, DEFAULT_SCHEMA_PATH, prune=target == "all")
+    missing = import_files(paths, DEFAULT_DB_PATH, DEFAULT_SCHEMA_PATH, prune=target == "all")
+    if missing:
+        sys.exit(1)
     print("Done.")
 
 

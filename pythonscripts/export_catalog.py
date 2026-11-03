@@ -8,6 +8,10 @@ site shows. Run after importing:
     python import_sources_to_sqlite.py all
     python export_catalog.py
 
+National-level sources stay in SQLite but not in the export, which lists their ids
+under excludedNationalLevel. A source without filters stops the export, unless it is
+pending review; see catalog_scope.py.
+
 Output is deterministic (sorted, no timestamps), so re-running without data
 changes produces no diff. Use --check in CI to fail when the committed export
 is out of date with the database.
@@ -22,7 +26,9 @@ import sys
 from pathlib import Path
 from typing import Any
 
-SCRIPT_DIR = Path(__file__).resolve().parent
+from catalog_scope import FILTERS_PENDING_REVIEW, is_national_level, missing_filters_message
+
+SCRIPT_DIR =Path(__file__).resolve().parent
 DEFAULT_DB_PATH = SCRIPT_DIR.parent / "database" / "sources.db"
 DEFAULT_OUT_PATH = SCRIPT_DIR.parent / "data" / "exports" / "catalog.json"
 EXPORT_VERSION = 1
@@ -103,6 +109,7 @@ def _source_record(conn: sqlite3.Connection, row: sqlite3.Row) -> dict[str, Any]
         "filters": {k: bool(filters[k]) for k in ("year", "state", "county", "zipcode")}
         if filters
         else None,
+        "filters_pending_review": True if not filters and source_id in FILTERS_PENDING_REVIEW else None,
         "variables": variables,
         "description_tags": description_tags,
         "analysis_tags": analysis_tags,
@@ -116,10 +123,22 @@ def build_export(db_path: Path) -> dict[str, Any]:
     conn.row_factory = sqlite3.Row
     try:
         rows = conn.execute("SELECT * FROM sources ORDER BY id").fetchall()
-        sources = [_source_record(conn, row) for row in rows]
+        records = [_source_record(conn, row) for row in rows]
     finally:
         conn.close()
-    return {"exportVersion": EXPORT_VERSION, "sourceCount": len(sources), "sources": sources}
+
+    missing = [r["id"] for r in records if "filters" not in r and "filters_pending_review" not in r]
+    if missing:
+        raise ValueError(missing_filters_message(missing))
+
+    excluded = [r["id"] for r in records if "filters" in r and is_national_level(r["filters"])]
+    sources = [r for r in records if r["id"] not in excluded]
+    return {
+        "exportVersion": EXPORT_VERSION,
+        "sourceCount": len(sources),
+        "excludedNationalLevel": excluded,
+        "sources": sources,
+    }
 
 
 def render(export: dict[str, Any]) -> str:
@@ -136,7 +155,11 @@ def main() -> None:
     if not args.db.exists():
         sys.exit(f"Database not found: {args.db}\nRun: python import_sources_to_sqlite.py all")
 
-    text = render(build_export(args.db))
+    try:
+        export = build_export(args.db)
+    except ValueError as exc:
+        sys.exit(f"ERROR: {exc}")
+    text = render(export)
 
     if args.check:
         current = args.out.read_text(encoding="utf-8").replace("\r\n", "\n") if args.out.exists() else ""
@@ -147,7 +170,7 @@ def main() -> None:
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(text, encoding="utf-8", newline="\n")
-    print(f"Exported {build_export(args.db)['sourceCount']} source(s) -> {args.out}")
+    print(f"Exported {export['sourceCount']} source(s) -> {args.out}")
 
 
 if __name__ == "__main__":

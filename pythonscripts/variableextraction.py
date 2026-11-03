@@ -145,6 +145,8 @@ def load_data(url: str) -> tuple[list, list]:
     filename = url.split("?")[0].lower()
     if is_zip(raw) and not is_xlsx(raw):
         raw, filename = pick_file_from_zip(raw)
+    if raw[:8] == b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1":
+        raise ValueError("XLS files are not supported; save the workbook as .xlsx or CSV")
     if filename.endswith(".xlsx") or is_xlsx(raw):
         print("  Format: XLSX")
         return read_xlsx(raw)

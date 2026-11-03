@@ -101,7 +101,7 @@ There is no single "run everything" command — `runall.py` deliberately exclude
    - `county/<FIPS>.json` (every row for one county)
 
    `previews/index.json` records which sources have previews and why the others don't, and the format of every download it opened (`csv`, `xlsx`, `zip/csv`, or `zip/accdb` for a zip with no CSV).
-   - **Formats:** CSV, a zip with a CSV inside, and Census-style `.xlsx` tables. Anything else (AirToxScreen's Microsoft Access database) is recorded as unsupported, and the website shows that source as info only.
+   - **Formats:** CSV, `.xlsx` workbooks (first sheet, with Census-style headers handled), and a zip with either inside. Legacy `.xls` is recognized and reported as `xls`, but not read. Anything else (AirToxScreen's Microsoft Access database) is recorded as unsupported, and the website shows that source as info only.
    - **County detection:** a 5-digit FIPS column, Census `STATE` + `COUNTY` codes, or county names plus a state code matched against the reference vocabulary.
    - **Size:** every file stays under 250 KB; oversized county slices are cut short and marked `truncated`, and their source is flagged as a Tier 2 candidate.
    - **Commit:** commit the output. Re-runs only change files whose data changed. Downloads are cached in `data/.cache/downloads/` (ignored).

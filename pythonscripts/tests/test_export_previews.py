@@ -100,6 +100,40 @@ class ReadTableTest(unittest.TestCase):
             ep.read_table(buffer.getvalue())
         self.assertEqual(caught.exception.format, "zip/accdb")  # the largest file inside
 
+    def test_zip_with_xlsx(self):
+        buffer = io.BytesIO()
+        with zipfile.ZipFile(buffer, "w") as archive:
+            archive.writestr("table.xlsx", xlsx_bytes())
+            archive.writestr("readme.pdf", b"\x00")
+        fmt, header, _, rows = ep.read_table(buffer.getvalue())
+        self.assertEqual(fmt, "zip/xlsx")
+        self.assertEqual(header[0], "Area")
+        self.assertEqual(rows[1][0], "Knox County")
+
+    def test_legacy_xls_is_unsupported_not_read_as_csv(self):
+        with self.assertRaisesRegex(ep.UnsupportedFormat, "xls") as caught:
+            ep.read_table(ep.OLE2_MAGIC + b"\x00" * 64)
+        self.assertEqual(caught.exception.format, "xls")
+
+    def test_first_sheet_follows_the_workbook_order(self):
+        buffer = io.BytesIO()
+        with zipfile.ZipFile(buffer, "w") as book:
+            book.writestr("xl/workbook.xml", (
+                '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"'
+                ' xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
+                '<sheets><sheet name="Second" r:id="rId2"/><sheet name="First" r:id="rId1"/></sheets></workbook>'
+            ))
+            book.writestr("xl/_rels/workbook.xml.rels", (
+                '<Relationships><Relationship Id="rId1" Target="worksheets/sheet1.xml"/>'
+                '<Relationship Id="rId2" Target="worksheets/sheet2.xml"/></Relationships>'
+            ))
+            for name, label in (("sheet1", 1), ("sheet2", 2)):
+                book.writestr(f"xl/worksheets/{name}.xml", (
+                    '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>'
+                    f'<row r="1"><c r="A1"><v>{label}</v></c></row></sheetData></worksheet>'
+                ))
+        self.assertEqual(ep.read_xlsx_grid(buffer.getvalue()), [["2"]])
+
     def test_html_page_is_unsupported(self):
         with self.assertRaises(ep.UnsupportedFormat):
             ep.read_table(b"<!DOCTYPE html><html><body>Pick a state</body></html>")

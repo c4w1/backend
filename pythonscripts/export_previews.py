@@ -75,11 +75,12 @@ DOWNLOAD_TIMEOUT_SECONDS = 300
 USER_AGENT = "community-data-libraries-preview-export/1.0 (+https://github.com/community-data-libraries)"
 
 XLSX_NS = {"m": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
+OLE2_MAGIC = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"  # how a legacy Excel .xls file starts
 CODE_PATTERN = re.compile(r"^[a-z][a-z0-9_]*$")
 
 
 class UnsupportedFormat(Exception):
-    """The download is not a CSV, a zip with a CSV inside, or an .xlsx workbook."""
+    """The download is not a CSV, an .xlsx workbook, or a zip with one of those inside."""
 
     def __init__(self, message: str, file_format: str | None = None):
         super().__init__(message)
@@ -170,6 +171,19 @@ def format_number(text: str) -> str:
     return repr(number)
 
 
+def first_sheet_name(book: zipfile.ZipFile) -> str:
+    """The first sheet in the workbook's own order, which need not be sheet1.xml."""
+    names = book.namelist()
+    if "xl/_rels/workbook.xml.rels" in names:
+        rel_id = "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id"
+        sheet = ET.fromstring(book.read("xl/workbook.xml")).find("m:sheets/m:sheet", XLSX_NS)
+        for rel in ET.fromstring(book.read("xl/_rels/workbook.xml.rels")):
+            if sheet is not None and rel.get("Id") == sheet.get(rel_id):
+                target = rel.get("Target", "")
+                return target[1:] if target.startswith("/") else f"xl/{target}"
+    return sorted(n for n in names if re.match(r"xl/worksheets/sheet\d+\.xml$", n))[0]
+
+
 def read_xlsx_grid(data: bytes) -> list[list[str]]:
     """First worksheet as a grid of strings, with merged cells filled across."""
     with zipfile.ZipFile(io.BytesIO(data)) as book:
@@ -177,8 +191,7 @@ def read_xlsx_grid(data: bytes) -> list[list[str]]:
         if "xl/sharedStrings.xml" in book.namelist():
             for item in ET.fromstring(book.read("xl/sharedStrings.xml")).findall("m:si", XLSX_NS):
                 shared.append("".join(t.text or "" for t in item.iter(f"{{{XLSX_NS['m']}}}t")))
-        sheet = sorted(n for n in book.namelist() if re.match(r"xl/worksheets/sheet\d+\.xml$", n))[0]
-        root = ET.fromstring(book.read(sheet))
+        root = ET.fromstring(book.read(first_sheet_name(book)))
 
     cells: dict[tuple[int, int], str] = {}
     for row in root.findall(".//m:sheetData/m:row", XLSX_NS):
@@ -270,12 +283,17 @@ def read_table(data: bytes) -> tuple[str, list[str], list[str] | None, list[list
             if "xl/workbook.xml" in names:
                 return ("xlsx", *read_xlsx(data))
             csvs = sorted((n for n in names if n.lower().endswith((".csv", ".txt"))), key=lambda n: -archive.getinfo(n).file_size)
+            workbooks = sorted((n for n in names if n.lower().endswith(".xlsx")), key=lambda n: -archive.getinfo(n).file_size)
+            if not csvs and workbooks:
+                return ("zip/xlsx", *read_xlsx(archive.read(workbooks[0])))
             if not csvs:
                 kinds = ", ".join(sorted({Path(n).suffix.lower() or n for n in names}))
                 largest = max(names, key=lambda n: archive.getinfo(n).file_size, default="")
                 inner = Path(largest).suffix.lower().lstrip(".")
                 raise UnsupportedFormat(f"zip contains no CSV ({kinds})", f"zip/{inner}" if inner else "zip")
             return ("zip/csv", *read_csv_text(decode_text(archive.read(csvs[0]))))
+    if data[:8] == OLE2_MAGIC:
+        raise UnsupportedFormat("legacy Excel .xls workbook", "xls")
     head = data[:2048].lower()
     if b"<html" in head or b"<!doctype html" in head:
         raise UnsupportedFormat("the download URL returned a web page, not a data file")

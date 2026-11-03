@@ -7,6 +7,11 @@ provider:
   name: U.S. Census Bureau
   agency: U.S. Department of Commerce
   url: https://www.census.gov/data/datasets/time-series/demo/popest/2020s-national-detail.html
+filters:
+  year: false
+  state: true
+  county: false
+  zipcode: false
 requires_account: false
 download:
   url: https://www2.census.gov/programs-surveys/popest/tables/2020-2025/state/detail/SCPRC-EST2025-18+POP.xlsx

@@ -34,6 +34,12 @@
         "longitude": -76.9296,
         "label": "U.S. Census Bureau headquarters, Suitland, MD (approximate)"
       },
+      "filters": {
+        "year": false,
+        "state": true,
+        "county": true,
+        "zipcode": false
+      },
       "variables": [
         "SUMLEV",
         "REGION",
@@ -146,6 +152,12 @@
         "latitude": 38.8468,
         "longitude": -76.9296,
         "label": "U.S. Census Bureau headquarters, Suitland, MD (approximate)"
+      },
+      "filters": {
+        "year": false,
+        "state": true,
+        "county": false,
+        "zipcode": false
       },
       "variables": [
         "Geographic Area",
@@ -295,6 +307,12 @@
         "latitude": 38.8468,
         "longitude": -76.9296,
         "label": "U.S. Census Bureau headquarters, Suitland, MD (approximate)"
+      },
+      "filters": {
+        "year": false,
+        "state": true,
+        "county": false,
+        "zipcode": false
       },
       "variables": [
         "SUMLEV",
@@ -463,6 +481,12 @@
         "latitude": 38.8468,
         "longitude": -76.9296,
         "label": "U.S. Census Bureau headquarters, Suitland, MD (approximate)"
+      },
+      "filters": {
+        "year": false,
+        "state": true,
+        "county": false,
+        "zipcode": false
       },
       "variables": [
         "SUMLEV",

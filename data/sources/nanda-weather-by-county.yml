@@ -1,0 +1,83 @@
+id: nanda-weather-by-county
+version: '1.0'
+title: 'NaNDA: Weather by County, 2003-2016'
+provider:
+  name: National Neighborhood Data Archive (NaNDA)
+  agency: University of Michigan Institute for Social Research
+  url: https://doi.org/10.3886/ICPSR38858.v1
+filters:
+  year: true
+  state: true
+  county: true
+  zipcode: false
+requires_account: true
+download:
+  description: Log in to ICPSR on the study page to download. Files are not linked directly,
+    and each weather condition has one file per year.
+  file_size: 112 files; the Average Temperature files are about 780 MB each
+notes: 'ICPSR study 38858, version V1 (2023-09-14). Link only: ICPSR requires a login to
+  download and its terms bar redistribution without written agreement, so this source has no
+  preview. Each file has one row per day per county, identified by STCOFIPS10 (2010 county
+  FIPS). Covers the contiguous U.S. and DC; Alaska, Hawaii and the territories are excluded.'
+description: Daily weather for counties in the contiguous U.S. from 2003 to 2016, including
+  average temperature, freezing, cold and hot days, rain, and snow, compiled from NOAA weather
+  station records.
+sensitive: false
+published_date: '2023-09-14'
+description_tags:
+- Energy & Environment
+manual_tags:
+- description_tags
+pedagogical_tags:
+  data-literacy: true
+  quantitative-methods: true
+who: National Neighborhood Data Archive (University of Michigan Institute for Social Research)
+how: Compiled from NOAA Global Historical Climatology Network - Daily station records, joined
+  to 2010 county boundaries
+where: Filterable to county level; contiguous U.S. and DC
+why: Compiled to link weather to other county-level data
+when: 2003-2016
+geographic_coverage:
+  available_levels:
+    state_fips: true
+    fips_code: true
+    zip_code: false
+    school_district: false
+    tract: false
+    tribal_area: false
+coverage:
+- level: nation
+geographic_granularity: county
+student_suitability: unreviewed
+location:
+  latitude: 42.279
+  longitude: -83.74
+  label: University of Michigan Institute for Social Research, Ann Arbor, MI (approximate)
+about: |
+  NaNDA's weather files give one row per day for each county in the contiguous United States and Washington, DC, from 2003 to 2016. The values come from NOAA's Global Historical Climatology Network - Daily weather stations, matched to 2010 county boundaries.
+
+  ## What's Included
+
+  - Eight weather conditions, each with one file per year (112 files), including average temperature, freezing days, cold days, hot days, rainy days, and snowy days
+  - County FIPS code (`STCOFIPS10`) and date of observation on every row
+
+  Alaska, Hawaii, and U.S. territories are not included, and the data stop at 2016.
+
+  ## Accessing the Data
+
+  Open the study page and log in to ICPSR to download. The files are not linked directly, so this dataset has no preview on this site.
+
+  ## Community Use
+
+  - See how many very hot or freezing days your county had each year.
+  - Line up heat or snow days with local events, school closures, or energy use.
+
+  ## Classroom Use
+
+  - **Statistics**: Compare the spread of daily temperatures across seasons or counties.
+  - **Earth science**: Look for changes in hot and freezing days between 2003 and 2016.
+  - **Data literacy**: Discuss what a county value means when it comes from only a few weather stations.
+
+  ## Terms and Credit
+
+  Data come from the National Neighborhood Data Archive, distributed by ICPSR under its [Terms of Use](https://www.icpsr.umich.edu/sites/icpsr/about/policies/terms-of-use). Cite the dataset using the citation on its [ICPSR study page](https://doi.org/10.3886/ICPSR38858.v1). Catalog details retrieved from ICPSR on 2026-11-03 under [ICPSR's metadata conditions](https://www.icpsr.umich.edu/sites/icpsr/about/repository-operations/accessing-metadata).

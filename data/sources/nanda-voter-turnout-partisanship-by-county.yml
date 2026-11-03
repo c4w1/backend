@@ -1,0 +1,111 @@
+id: nanda-voter-turnout-partisanship-by-county
+version: '1.0'
+title: 'NaNDA: Voter Registration, Turnout, and Partisanship by County, 2004-2022'
+provider:
+  name: National Neighborhood Data Archive (NaNDA)
+  agency: University of Michigan Institute for Social Research
+  url: https://doi.org/10.3886/ICPSR38506.v2
+filters:
+  year: true
+  state: true
+  county: true
+  zipcode: false
+requires_account: true
+download:
+  description: Log in to ICPSR on the study page to download. Files are not linked directly.
+    ICPSR offers Delimited, SAS, SPSS, Stata, R and ASCII versions.
+  file_size: 28.8 MB
+notes: 'ICPSR study 38506, version V2 (2024-10-14). Link only: ICPSR requires a login to
+  download and its terms bar redistribution without written agreement, so this source has no
+  preview. Rows are identified by STCOFIPS10 (county FIPS) and YEAR. Alaska and the territories
+  are excluded. Marked sensitive because the file includes party vote shares and partisanship
+  indices.'
+description: County voter registration and turnout for general elections from 2004 to 2022,
+  with Democratic and Republican vote shares and partisanship indices built from presidential
+  and Senate results.
+variables:
+- County FIPS code
+- Year
+- Registered voters
+- Ballots cast
+- Citizen voting age population
+- Percent of eligible voters registered
+- Percent of eligible voters casting ballots
+- Percent of registered voters casting ballots
+- Democratic presidential votes
+- Republican presidential votes
+- Democratic presidential vote share
+- Republican presidential vote share
+- Democratic Senate votes
+- Republican Senate votes
+- Democratic Senate vote share
+- Republican Senate vote share
+- Democratic partisanship index
+- Republican partisanship index
+sensitive: true
+published_date: '2024-10-14'
+description_tags:
+- Elections & Politics
+manual_tags:
+- description_tags
+pedagogical_tags:
+  civic-education: true
+  data-literacy: true
+  policy-analysis: true
+who: National Neighborhood Data Archive (University of Michigan Institute for Social Research)
+how: Built from the Election Administration and Voting Survey, Census citizen voting age
+  population, and MIT and Harvard election results
+where: Filterable to county level; U.S. excluding Alaska and the territories
+why: Created to explore links between voter engagement, partisan leanings, community health,
+  and public policy
+when: 2004-2022
+geographic_coverage:
+  available_levels:
+    state_fips: true
+    fips_code: true
+    zip_code: false
+    school_district: false
+    tract: false
+    tribal_area: false
+coverage:
+- level: nation
+geographic_granularity: county
+student_suitability: not_suitable
+location:
+  latitude: 42.279
+  longitude: -83.74
+  label: University of Michigan Institute for Social Research, Ann Arbor, MI (approximate)
+about: |
+  This NaNDA dataset tracks voter registration and turnout in U.S. counties from 2004 to 2022. It also measures how each county has voted, using Democratic and Republican partisanship indices for 2006 to 2022.
+
+  ## What's Included
+
+  - Registered voters, ballots cast, and citizen voting age population
+  - Registration rate, turnout among eligible voters, and turnout among registered voters
+  - Democratic and Republican presidential and Senate vote counts and shares
+  - Partisanship indices averaged over the current and previous elections
+
+  Rows are identified by county FIPS code and year. Alaska and U.S. territories are not included.
+
+  ## Accessing the Data
+
+  Open the study page and log in to ICPSR to download. The file is not linked directly, so this dataset has no preview on this site.
+
+  ## Why It Is Marked Sensitive
+
+  These are county totals, not records about individual voters. The file does include party vote shares and partisanship indices, so it is kept out of the student view by default. Turnout and registration can be used without the party measures.
+
+  ## Community Use
+
+  - Compare your county's registration and turnout with its neighbors over time.
+  - See how turnout differs between presidential and midterm years.
+
+  ## Classroom Use
+
+  - **Civics**: Why might turnout among eligible voters differ from turnout among registered voters?
+  - **Statistics**: Graph turnout trends across election years.
+  - **Data literacy**: Discuss how a partisanship index is built and what it leaves out.
+
+  ## Terms and Credit
+
+  Data come from the National Neighborhood Data Archive, distributed by ICPSR under its [Terms of Use](https://www.icpsr.umich.edu/sites/icpsr/about/policies/terms-of-use). Cite the dataset using the citation on its [ICPSR study page](https://doi.org/10.3886/ICPSR38506.v2). Catalog details retrieved from ICPSR on 2026-11-03 under [ICPSR's metadata conditions](https://www.icpsr.umich.edu/sites/icpsr/about/repository-operations/accessing-metadata).

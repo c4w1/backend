@@ -12,7 +12,7 @@ import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from catalog_scope import FILTERS_PENDING_REVIEW, is_national_level  # noqa: E402
+from catalog_scope import is_national_level  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCES_DIR = ROOT / "data" / "sources"
@@ -40,20 +40,12 @@ def test_missing_filters_are_refused(filters):
 
 
 @pytest.mark.parametrize("source_id,doc", sorted(load_sources().items()))
-def test_source_has_filters_unless_pending_review(source_id, doc):
-    assert doc.get("filters") or source_id in FILTERS_PENDING_REVIEW, f"{source_id}: add a filters block"
-
-
-def test_pending_review_entries_are_still_needed():
-    sources = load_sources()
-    resolved = {s for s in FILTERS_PENDING_REVIEW if s not in sources or sources[s].get("filters")}
-    assert not resolved, f"remove from FILTERS_PENDING_REVIEW: {', '.join(sorted(resolved))}"
+def test_source_has_filters(source_id, doc):
+    assert doc.get("filters"), f"{source_id}: add a filters block"
 
 
 @pytest.mark.parametrize("source_id,doc", sorted(load_sources().items()))
 def test_granularity_agrees_with_filters(source_id, doc):
-    if not doc.get("filters"):
-        pytest.skip("no filters to compare")
     national = is_national_level(doc["filters"])
     assert (doc.get("geographic_granularity") == "nation") == national, (
         f"{source_id}: geographic_granularity {doc.get('geographic_granularity')!r} and filters disagree"
@@ -62,7 +54,7 @@ def test_granularity_agrees_with_filters(source_id, doc):
 
 def test_the_national_level_sources_are_the_expected_ones():
     # A filter edit that changes this list adds or removes a dataset: update it on purpose.
-    national = {s for s, doc in load_sources().items() if doc.get("filters") and is_national_level(doc["filters"])}
+    national = {s for s, doc in load_sources().items() if is_national_level(doc["filters"])}
     assert national == {
         "census-annual-pop-by-age-sex-2025",
         "census-annual-pop-selected-age-groups-2024",

@@ -15,7 +15,6 @@ SCRIPTS = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(SCRIPTS))
 
 import export_catalog  # noqa: E402
-from catalog_scope import FILTERS_PENDING_REVIEW  # noqa: E402
 import import_sources_to_sqlite as importer  # noqa: E402
 
 SCHEMA = SCRIPTS.parent / "database" / "schema.sql"
@@ -92,15 +91,6 @@ class ExportCatalogTest(unittest.TestCase):
         self.add_source("id: no-filters\ntitle: N\n")
         with self.assertRaisesRegex(ValueError, "no-filters"):
             export_catalog.build_export(self.db)
-
-    def test_a_source_pending_review_is_exported_and_flagged(self) -> None:
-        source_id = sorted(FILTERS_PENDING_REVIEW)[0]
-        self.add_source(f"id: {source_id}\ntitle: P\n")
-        export = export_catalog.build_export(self.db)
-        pending = next(s for s in export["sources"] if s["id"] == source_id)
-        self.assertIs(pending["filters_pending_review"], True)
-        self.assertNotIn("filters", pending)
-        self.assertNotIn("filters_pending_review", export["sources"][0])
 
 
 if __name__ == "__main__":

@@ -2202,7 +2202,12 @@
         "longitude": -83.9375,
         "label": "Knox County, TN (approximate center)"
       },
-      "filters_pending_review": true,
+      "filters": {
+        "year": false,
+        "state": false,
+        "county": true,
+        "zipcode": false
+      },
       "description_tags": [
         "Health & Social Services",
         "Population Data"
@@ -2243,7 +2248,12 @@
         "longitude": -83.9187,
         "label": "City County Building, 400 Main St, Knoxville, TN (approximate)"
       },
-      "filters_pending_review": true,
+      "filters": {
+        "year": false,
+        "state": false,
+        "county": true,
+        "zipcode": false
+      },
       "description_tags": [
         "Housing & Buildings",
         "Government Administration"
@@ -2283,7 +2293,12 @@
         "longitude": -83.9375,
         "label": "Knox County, TN (approximate center)"
       },
-      "filters_pending_review": true,
+      "filters": {
+        "year": false,
+        "state": false,
+        "county": true,
+        "zipcode": false
+      },
       "description_tags": [
         "PreK-12 Education",
         "Children & Families"
@@ -2324,7 +2339,12 @@
         "longitude": -83.9187,
         "label": "City County Building, 400 Main St, Knoxville, TN (approximate)"
       },
-      "filters_pending_review": true,
+      "filters": {
+        "year": false,
+        "state": false,
+        "county": true,
+        "zipcode": false
+      },
       "description_tags": [
         "Government Administration",
         "Law & Public Safety"

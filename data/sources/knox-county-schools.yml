@@ -4,6 +4,11 @@ title: Knox County Schools — Enrollment & Performance Data
 provider:
   name: Tennessee Department of Education / Knox County Schools
   url: https://www.tn.gov/education/data/report-card.html
+filters:
+  year: false
+  state: false
+  county: true
+  zipcode: false
 requires_account: false
 sensitive: false
 description: School-level enrollment, graduation rates, proficiency scores, and demographic breakdowns

@@ -109,11 +109,6 @@ class ImportSourcesTest(unittest.TestCase):
         path = self.write("n.yml", "id: no-filters\ntitle: N\n")
         self.assertEqual(importer.import_files([path], self.db, SCHEMA), ["no-filters"])
 
-    def test_a_source_pending_review_is_not_reported(self) -> None:
-        source_id = sorted(importer.FILTERS_PENDING_REVIEW)[0]
-        path = self.write("p.yml", f"id: {source_id}\ntitle: P\n")
-        self.assertEqual(importer.import_files([path], self.db, SCHEMA), [])
-
     def test_full_import_fails_on_missing_filters(self) -> None:
         self.write("n.yml", "id: no-filters\ntitle: N\n")
         with patch.object(importer, "DEFAULT_SOURCES_DIR", self.dir), patch.object(importer, "DEFAULT_DB_PATH", self.db):

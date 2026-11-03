@@ -9,8 +9,8 @@ site shows. Run after importing:
     python export_catalog.py
 
 National-level sources stay in SQLite but not in the export, which lists their ids
-under excludedNationalLevel. A source without filters stops the export, unless it is
-pending review; see catalog_scope.py.
+under excludedNationalLevel. A source without filters stops the export; see
+catalog_scope.py.
 
 Output is deterministic (sorted, no timestamps), so re-running without data
 changes produces no diff. Use --check in CI to fail when the committed export
@@ -26,7 +26,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from catalog_scope import FILTERS_PENDING_REVIEW, is_national_level, missing_filters_message
+from catalog_scope import is_national_level, missing_filters_message
 
 SCRIPT_DIR =Path(__file__).resolve().parent
 DEFAULT_DB_PATH = SCRIPT_DIR.parent / "database" / "sources.db"
@@ -109,7 +109,6 @@ def _source_record(conn: sqlite3.Connection, row: sqlite3.Row) -> dict[str, Any]
         "filters": {k: bool(filters[k]) for k in ("year", "state", "county", "zipcode")}
         if filters
         else None,
-        "filters_pending_review": True if not filters and source_id in FILTERS_PENDING_REVIEW else None,
         "variables": variables,
         "description_tags": description_tags,
         "analysis_tags": analysis_tags,
@@ -127,11 +126,11 @@ def build_export(db_path: Path) -> dict[str, Any]:
     finally:
         conn.close()
 
-    missing = [r["id"] for r in records if "filters" not in r and "filters_pending_review" not in r]
+    missing = [r["id"] for r in records if "filters" not in r]
     if missing:
         raise ValueError(missing_filters_message(missing))
 
-    excluded = [r["id"] for r in records if "filters" in r and is_national_level(r["filters"])]
+    excluded = [r["id"] for r in records if is_national_level(r["filters"])]
     sources = [r for r in records if r["id"] not in excluded]
     return {
         "exportVersion": EXPORT_VERSION,

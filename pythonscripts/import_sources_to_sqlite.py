@@ -18,7 +18,7 @@ from typing import Any
 
 import yaml
 
-from catalog_scope import FILTERS_PENDING_REVIEW, is_national_level, missing_filters_message
+from catalog_scope import is_national_level, missing_filters_message
 
 
 SCRIPT_DIR =Path(__file__).resolve().parent
@@ -406,7 +406,7 @@ def filters_by_source(conn: sqlite3.Connection) -> dict[str, dict[str, int]]:
 def import_files(paths: list[Path], db_path: Path, schema_path: Path, *, prune: bool = False) -> list[str]:
     """Import `paths`. With prune=True (a full import), also delete every other source.
 
-    Returns the imported sources that have no filters and aren't pending review.
+    Returns the imported sources that have no filters.
     """
     if not paths:
         print("No YAML files found.")
@@ -440,9 +440,7 @@ def import_files(paths: list[Path], db_path: Path, schema_path: Path, *, prune: 
         conn.commit()
 
         filters = filters_by_source(conn)
-        no_filters = sorted(imported_ids - filters.keys())
-        missing = [source_id for source_id in no_filters if source_id not in FILTERS_PENDING_REVIEW]
-        pending = [source_id for source_id in no_filters if source_id in FILTERS_PENDING_REVIEW]
+        missing = sorted(imported_ids - filters.keys())
         national = sorted(s for s in imported_ids & filters.keys() if is_national_level(filters[s]))
 
         incomplete = imported - pipeline_ready_count
@@ -458,8 +456,6 @@ def import_files(paths: list[Path], db_path: Path, schema_path: Path, *, prune: 
             print(f"Removed (no longer imported): {', '.join(pruned)}")
         if national:
             print(f"National-level, left out of the catalog export: {', '.join(national)}")
-        if pending:
-            print(f"WARNING: no filters yet, pending review: {', '.join(pending)}")
         if missing:
             print(f"ERROR: {missing_filters_message(missing)}")
         print(f"Database: {db_path}")

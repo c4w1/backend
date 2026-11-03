@@ -4,6 +4,11 @@ title: City of Knoxville Open Data Portal
 provider:
   name: City of Knoxville
   url: https://knoxvilletn.gov/government/opendata
+filters:
+  year: false
+  state: false
+  county: true
+  zipcode: false
 requires_account: false
 sensitive: false
 description: City-operated open data portal publishing datasets on public safety, infrastructure, parks,

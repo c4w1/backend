@@ -16,16 +16,6 @@ from typing import Any
 
 BREAKDOWN_FILTERS = ("state", "county", "zipcode")
 
-# These have no filters yet and stay in the catalog, flagged, until someone decides
-# their values. Any other source without filters stops the import and the export.
-# A test fails once an entry is no longer needed.
-FILTERS_PENDING_REVIEW = {
-    "knox-county-health-data",
-    "knox-county-property-assessor",
-    "knox-county-schools",
-    "knoxville-open-data",
-}
-
 
 def is_national_level(filters: Mapping[str, Any] | None) -> bool:
     """True when `filters` show no local breakdown. Refuses to judge missing filters."""

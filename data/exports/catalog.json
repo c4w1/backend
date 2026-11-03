@@ -1,7 +1,11 @@
 {
   "exportVersion": 1,
   "sourceCount": 19,
-  "excludedNationalLevel": [],
+  "excludedNationalLevel": [
+    "census-annual-pop-by-age-sex-2025",
+    "census-annual-pop-selected-age-groups-2024",
+    "usda-milk-production"
+  ],
   "sources": [
     {
       "id": "census-county-estimates-all-2025",

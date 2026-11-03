@@ -58,3 +58,13 @@ def test_granularity_agrees_with_filters(source_id, doc):
     assert (doc.get("geographic_granularity") == "nation") == national, (
         f"{source_id}: geographic_granularity {doc.get('geographic_granularity')!r} and filters disagree"
     )
+
+
+def test_the_national_level_sources_are_the_expected_ones():
+    # A filter edit that changes this list adds or removes a dataset: update it on purpose.
+    national = {s for s, doc in load_sources().items() if doc.get("filters") and is_national_level(doc["filters"])}
+    assert national == {
+        "census-annual-pop-by-age-sex-2025",
+        "census-annual-pop-selected-age-groups-2024",
+        "usda-milk-production",
+    }

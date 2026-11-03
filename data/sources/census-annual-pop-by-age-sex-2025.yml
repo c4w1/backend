@@ -1,0 +1,304 @@
+id: census-annual-pop-by-age-sex-2025
+version: '1.0'
+title: 'Annual Estimates of the Resident Population by Single Year of Age and Sex
+  for the United States: April 1 2020 to July 1 2025'
+provider:
+  name: U.S. Census Bureau
+  agency: U.S. Department of Commerce
+  url: https://www.census.gov/data/datasets/time-series/demo/popest/2020s-national-detail.html
+filters:
+  year: false
+  state: false
+  county: false
+  zipcode: false
+requires_account: false
+download:
+  url: https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/national/asrh/nc-est2025-agesex-res.csv
+  description: Link downloads a CSV file.
+  file_size: 17.9 KB
+variables:
+- SEX
+- AGE
+- ESTIMATESBASE2020
+- POPESTIMATE2020
+- POPESTIMATE2021
+- POPESTIMATE2022
+- POPESTIMATE2023
+- POPESTIMATE2024
+- POPESTIMATE2025
+notes: 'SEX codes: 0 = Total, 1 = Male, 2 = Female. AGE 999 = total population across
+  all ages.'
+sensitive: false
+description_tags:
+- Business & Economy
+- Population Data
+who: U.S. Census Bureau (U.S. Department of Commerce)
+how: Statistical estimation from administrative records and surveys
+where: National
+why: null
+when: 2020-2025
+anova_tags:
+  good-for-one-way-anova: true
+  good-for-two-way-anova: false
+  good-for-chi-square-gof: true
+  good-for-chi-square-independence: false
+  good-for-paired-t-test: false
+association_tags:
+  positive-correlation: true
+  negative-correlation: false
+  no-correlation: false
+  strong-correlation: true
+  moderate-correlation: false
+  weak-correlation: false
+  linear-relationship: true
+  nonlinear-relationship: false
+  curved-relationship: false
+  exponential-pattern: false
+automation_rules_tags:
+  has-multiple-numeric-columns: true
+  has-categorical-variable: true
+  has-group-comparison-candidates: true
+  meets-minimum-sample-size: true
+  has-paired-test-candidates: false
+central_tendency_tags:
+  mean-median-similar: true
+  mean-median-different: false
+  has-mode: true
+comparison_capabilities_tags:
+  two-groups-present: false
+  multiple-groups-present: true
+  groups-have-different-centers: false
+  groups-have-different-spreads: false
+  groups-overlap-substantially: true
+distribution_shape_tags:
+  symmetric-distribution: true
+  right-skewed-distribution: true
+  left-skewed-distribution: false
+  approximately-normal: false
+  uniform-distribution: false
+  bimodal-distribution: true
+geographic_coverage:
+  available_levels:
+    state_fips: true
+    fips_code: true
+    zip_code: true
+    school_district: false
+    tract: true
+    tribal_area: false
+  url_template:
+    state: https://api.census.gov/data/{year}/{dataset}?get={variables}&for=state:{state_fips}&key={api_key}
+    county: https://api.census.gov/data/{year}/{dataset}?get={variables}&for=county:{county_fips}&in=state:{state_fips}&key={api_key}
+    zip: https://api.census.gov/data/{year}/{dataset}?get={variables}&for=zip%20code%20tabulation%20area:{zip_code}&key={api_key}
+    tract: https://api.census.gov/data/{year}/{dataset}?get={variables}&for=tract:*&in=state:{state_fips}%20county:{county_fips}&key={api_key}
+inference_procedures_tags:
+  good-for-one-sample-t-test: true
+  good-for-one-sample-z-test: true
+  good-for-one-proportion-z-test: false
+  good-for-two-sample-t-test: false
+  good-for-two-sample-z-test: false
+  good-for-two-proportion-z-test: false
+  meets-equal-variance-assumption: false
+  violates-equal-variance-assumption: false
+normality_tags:
+  passes-normality-test: false
+  fails-normality-test: true
+  large-enough-for-clt: true
+outlier_tags:
+  contains-outliers: true
+  no-outliers: false
+  extreme-outliers: true
+regression_quality_tags:
+  good-linear-fit: true
+  moderate-linear-fit: false
+  poor-linear-fit: false
+  has-influential-points: true
+  regression-appropriate: true
+statistical_procedures_tags:
+  good-for-transformation: true
+structure_complexity_tags:
+  univariate: false
+  bivariate: false
+  multivariate: true
+  small-dataset: false
+  medium-dataset: false
+  large-dataset: true
+two_way_table_tags:
+  two-way-table: false
+value_scale_tags:
+  single-digit-values: false
+  double-digit-values: false
+  three-digit-values: false
+  large-scale-values: true
+variability_tags:
+  high-variability: true
+  moderate-variability: false
+  low-variability: false
+  restricted-range: true
+  wide-range: true
+variable_types_tags:
+  all-discrete: true
+  all-continuous: false
+  mixed-types: false
+
+# Canonical geography and audience metadata (see database/schema.sql).
+coverage:
+- level: nation
+geographic_granularity: nation
+student_suitability: unreviewed
+location:
+  latitude: 38.8468
+  longitude: -76.9296
+  label: U.S. Census Bureau headquarters, Suitland, MD (approximate)
+variable_names:
+- SEX
+- AGE
+- ESTIMATESBASE2020
+- POPESTIMATE2020
+- POPESTIMATE2021
+- POPESTIMATE2022
+- POPESTIMATE2023
+- POPESTIMATE2024
+- POPESTIMATE2025
+variable_report:
+- name: SEX
+  type: integer
+  total_rows: 306
+  non_empty_count: 306
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 3
+  sample_values:
+  - '0'
+  - '1'
+  - '2'
+  min: 0.0
+  max: 2.0
+  mean: 1.0
+- name: AGE
+  type: integer
+  total_rows: 306
+  non_empty_count: 306
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 102
+  sample_values:
+  - '0'
+  - '1'
+  - '2'
+  - '3'
+  - '4'
+  min: 0.0
+  max: 999.0
+  mean: 59.3039
+- name: ESTIMATESBASE2020
+  type: integer
+  total_rows: 306
+  non_empty_count: 306
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 306
+  sample_values:
+  - '3719470'
+  - '3764281'
+  - '3841150'
+  - '3916585'
+  - '3984785'
+  min: 11944.0
+  max: 331516113.0
+  mean: 4333543.9608
+- name: POPESTIMATE2020
+  type: integer
+  total_rows: 306
+  non_empty_count: 306
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 306
+  sample_values:
+  - '3691723'
+  - '3750601'
+  - '3826776'
+  - '3888055'
+  - '3976772'
+  min: 12189.0
+  max: 331578104.0
+  mean: 4334354.3007
+- name: POPESTIMATE2021
+  type: integer
+  total_rows: 306
+  non_empty_count: 306
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 306
+  sample_values:
+  - '3572165'
+  - '3697247'
+  - '3756935'
+  - '3832978'
+  - '3894042'
+  min: 12093.0
+  max: 332100166.0
+  mean: 4341178.6405
+- name: POPESTIMATE2022
+  type: integer
+  total_rows: 306
+  non_empty_count: 306
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 306
+  sample_values:
+  - '3680529'
+  - '3602579'
+  - '3727216'
+  - '3786311'
+  - '3861295'
+  min: 14147.0
+  max: 333996304.0
+  mean: 4365964.7582
+- name: POPESTIMATE2023
+  type: integer
+  total_rows: 306
+  non_empty_count: 306
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 306
+  sample_values:
+  - '3653453'
+  - '3719819'
+  - '3642279'
+  - '3766965'
+  - '3824021'
+  min: 15269.0
+  max: 336755052.0
+  mean: 4402026.8235
+- name: POPESTIMATE2024
+  type: integer
+  total_rows: 306
+  non_empty_count: 306
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 306
+  sample_values:
+  - '3617221'
+  - '3700305'
+  - '3766783'
+  - '3689270'
+  - '3811156'
+  min: 17256.0
+  max: 340003797.0
+  mean: 4444494.0784
+- name: POPESTIMATE2025
+  type: integer
+  total_rows: 306
+  non_empty_count: 306
+  missing_count: 0
+  missing_pct: 0.0
+  unique_count: 306
+  sample_values:
+  - '3618898'
+  - '3642657'
+  - '3725891'
+  - '3791993'
+  - '3712428'
+  min: 18663.0
+  max: 341784857.0
+  mean: 4467775.9085

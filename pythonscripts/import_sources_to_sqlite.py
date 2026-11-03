@@ -52,7 +52,7 @@ ADDED_SOURCE_COLUMNS = {
     "about": "TEXT",
     "published_date": "TEXT",
     "geographic_granularity": "TEXT CHECK (geographic_granularity IN "
-    "('nation', 'state', 'county', 'zip', 'point'))",
+    "('nation', 'state', 'county', 'tract', 'zip', 'point'))",
     "student_suitability": "TEXT NOT NULL DEFAULT 'unreviewed' CHECK (student_suitability IN "
     "('suitable', 'not_suitable', 'unreviewed'))",
     "download_format": "TEXT",
@@ -60,7 +60,7 @@ ADDED_SOURCE_COLUMNS = {
     "download_header_row": "INTEGER CHECK (download_header_row >= 1)",
 }
 
-GRANULARITY_LEVELS = ("nation", "state", "county", "zip", "point")
+GRANULARITY_LEVELS = ("nation", "state", "county", "tract", "zip", "point")
 STUDENT_SUITABILITY_VALUES = ("suitable", "not_suitable", "unreviewed")
 # download.format: the file download.url returns, as export_previews.py detects it.
 # A zip is written zip/<type of the file inside>.
@@ -77,6 +77,28 @@ def apply_schema(conn: sqlite3.Connection, schema_path: Path) -> None:
     for column, definition in ADDED_SOURCE_COLUMNS.items():
         if column not in existing:
             conn.execute(f"ALTER TABLE sources ADD COLUMN {column} {definition}")
+    allow_tract_granularity(conn)
+
+
+def allow_tract_granularity(conn: sqlite3.Connection) -> None:
+    """SQLite can't alter a CHECK, so an older database file rebuilds `sources` to accept 'tract'."""
+    sql = conn.execute("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'sources'").fetchone()[0]
+    if "'tract'" in sql:
+        return
+    rebuilt = sql.replace("CREATE TABLE sources", "CREATE TABLE sources_rebuilt", 1).replace(
+        "'county', 'zip'", "'county', 'tract', 'zip'"
+    )
+    conn.commit()
+    conn.executescript(
+        f"""
+        BEGIN;
+        {rebuilt};
+        INSERT INTO sources_rebuilt SELECT * FROM sources;
+        DROP TABLE sources;
+        ALTER TABLE sources_rebuilt RENAME TO sources;
+        COMMIT;
+        """
+    )
 
 
 def as_bool(value: Any) -> int | None:

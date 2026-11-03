@@ -192,6 +192,26 @@ class ImportSourcesTest(unittest.TestCase):
         with closing(sqlite3.connect(self.db)) as conn:
             self.assertEqual(conn.execute("SELECT id FROM sources ORDER BY id").fetchall(), [("a",), ("b",)])
 
+    def test_existing_database_accepts_tract_granularity(self) -> None:
+        old_schema = SCHEMA.read_text(encoding="utf-8").replace("'county', 'tract', 'zip'", "'county', 'zip'")
+        with closing(sqlite3.connect(self.db)) as conn:
+            conn.executescript(old_schema)
+            conn.execute(
+                "INSERT INTO sources (id, yml_filename, geographic_granularity, imported_at) "
+                "VALUES ('old', 'old.yml', 'county', 'then')"
+            )
+            conn.execute("INSERT INTO source_coverage (source_id, level, geoid) VALUES ('old', 'nation', 'US')")
+            conn.commit()
+        path = self.write("t.yml", "id: t\ntitle: T\ngeographic_granularity: tract\n")
+        importer.import_files([path], self.db, SCHEMA)
+        importer.import_files([path], self.db, SCHEMA)
+        with closing(sqlite3.connect(self.db)) as conn:
+            self.assertEqual(
+                conn.execute("SELECT id, geographic_granularity FROM sources ORDER BY id").fetchall(),
+                [("old", "county"), ("t", "tract")],
+            )
+            self.assertEqual(conn.execute("SELECT source_id FROM source_coverage").fetchall(), [("old",)])
+
     def test_existing_database_gets_new_columns(self) -> None:
         conn = sqlite3.connect(self.db)
         conn.execute(

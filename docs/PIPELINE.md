@@ -41,7 +41,7 @@ coverage:                 # FIPS codes only; no geometry
 #   fips: '47'            # every county in Tennessee
 # - level: county
 #   fips: '47093'         # Knox County, TN
-geographic_granularity: county   # nation | state | county | zip | point
+geographic_granularity: county   # nation | state | county | tract | zip | point
 ```
 
 - **Local data only:** CDL is a library of local data (web#42). A source is national-level when its `filters` show no state, county or ZIP breakdown. National-level sources stay in the YAML and SQLite, so changing a filter value reverses the decision, but `export_catalog.py` and `lib/sourceStore.mjs` leave them out. `catalog.json` lists them under `excludedNationalLevel`. `pythonscripts/catalog_scope.py` holds the rule, and `lib/catalogScope.mjs` is the same rule in JavaScript.

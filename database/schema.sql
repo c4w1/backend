@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS sources (
     about TEXT,
     published_date TEXT,
     -- Finest geographic level the data resolves to (not the download filter).
-    geographic_granularity TEXT CHECK (geographic_granularity IN ('nation', 'state', 'county', 'zip', 'point')),
+    geographic_granularity TEXT CHECK (geographic_granularity IN ('nation', 'state', 'county', 'tract', 'zip', 'point')),
     -- Student view: 'unreviewed' falls back to the legacy web heuristics.
     student_suitability TEXT NOT NULL DEFAULT 'unreviewed'
         CHECK (student_suitability IN ('suitable', 'not_suitable', 'unreviewed')),

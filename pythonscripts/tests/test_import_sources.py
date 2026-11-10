@@ -97,10 +97,51 @@ class ImportSourcesTest(unittest.TestCase):
             ("bad-hr0.yml", "download: {url: 'https://x.gov/a.xlsx', header_row: 0}"),
             ("bad-hr-text.yml", "download: {url: 'https://x.gov/a.xlsx', header_row: four}"),
             ("bad-sheet.yml", "download: {url: 'https://x.gov/a.xlsx', sheet: -1}"),
+            ("bad-tract.yml", "coverage:\n  - level: tract\n    fips: '4709300460'"),
+            ("bad-zip-key.yml", "coverage:\n  - level: zip\n    fips: '37919'"),
+            ("bad-zip.yml", "coverage:\n  - level: zip\n    zcta: '3791'"),
+            ("bad-level.yml", "coverage:\n  - level: block\n    fips: '47'"),
         ]
         paths = [self.write(name, f"id: {name[:-4]}\ntitle: T\n{extra}\n") for name, extra in bad]
         conn = self.run_import(*paths)
         self.assertEqual(conn.execute("SELECT COUNT(*) FROM sources").fetchone()[0], 0)
+
+    def test_tract_and_zip_coverage_is_stored(self) -> None:
+        path = self.write("sub.yml", """
+            id: sub-county
+            title: Sub-county
+            geographic_granularity: zip
+            coverage:
+              - level: tract
+                fips: "47093004600"
+              - level: zip
+                zcta: "37801"
+        """)
+        with closing(self.run_import(path)) as conn:
+            coverage = conn.execute("SELECT level, geoid FROM source_coverage ORDER BY level").fetchall()
+        self.assertEqual(coverage, [("tract", "47093004600"), ("zip", "37801")])
+
+    def test_existing_database_accepts_tract_and_zip_coverage(self) -> None:
+        old_schema = SCHEMA.read_text(encoding="utf-8").replace(
+            "'state', 'county', 'tract', 'zip')", "'state', 'county')"
+        )
+        with closing(sqlite3.connect(self.db)) as conn:
+            conn.executescript(old_schema)
+            conn.execute(
+                "INSERT INTO sources (id, yml_filename, imported_at) VALUES ('old', 'old.yml', 'then')"
+            )
+            conn.execute("INSERT INTO source_coverage (source_id, level, geoid) VALUES ('old', 'county', '47093')")
+            conn.commit()
+        path = self.write("z.yml", "id: z\ntitle: Z\ncoverage:\n  - level: zip\n    zcta: '37919'\n")
+        importer.import_files([path], self.db, SCHEMA)
+        importer.import_files([path], self.db, SCHEMA)
+        with closing(sqlite3.connect(self.db)) as conn:
+            self.assertEqual(
+                conn.execute("SELECT source_id, level, geoid FROM source_coverage ORDER BY source_id").fetchall(),
+                [("old", "county", "47093"), ("z", "zip", "37919")],
+            )
+            indexes = {row[1] for row in conn.execute("PRAGMA index_list(source_coverage)")}
+            self.assertIn("idx_source_coverage_source_id", indexes)
 
     def test_national_level_sources_stay_in_sqlite(self) -> None:
         path = self.write("us.yml", "id: us-totals\ntitle: US\ngeographic_granularity: nation\nfilters: {year: true}\n")

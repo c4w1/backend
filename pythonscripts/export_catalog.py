@@ -15,6 +15,12 @@ catalog_scope.py.
 Output is deterministic (sorted, no timestamps), so re-running without data
 changes produces no diff. Use --check in CI to fail when the committed export
 is out of date with the database.
+
+Tract and zip (ZCTA) coverage entries also list the counties they lie in, so the
+website can match them to community libraries without a crosswalk of its own:
+a tract's county is the first 5 digits of its GEOID, and a ZCTA's counties come
+from data/reference/zcta-county.json (see build_zcta_county.py). A ZCTA that is
+not in that file stops the export.
 """
 
 from __future__ import annotations
@@ -31,6 +37,7 @@ from catalog_scope import is_national_level, missing_filters_message
 SCRIPT_DIR =Path(__file__).resolve().parent
 DEFAULT_DB_PATH = SCRIPT_DIR.parent / "database" / "sources.db"
 DEFAULT_OUT_PATH = SCRIPT_DIR.parent / "data" / "exports" / "catalog.json"
+DEFAULT_ZCTA_PATH = SCRIPT_DIR.parent / "data" / "reference" / "zcta-county.json"
 EXPORT_VERSION = 1
 
 
@@ -38,7 +45,26 @@ def _drop_empty(record: dict[str, Any]) -> dict[str, Any]:
     return {key: value for key, value in record.items() if value not in (None, "", [], {})}
 
 
-def _source_record(conn: sqlite3.Connection, row: sqlite3.Row) -> dict[str, Any]:
+def load_zcta_counties(path: Path = DEFAULT_ZCTA_PATH) -> dict[str, list[str]]:
+    return json.loads(path.read_text(encoding="utf-8"))["zctas"]
+
+
+def coverage_entry(level: str, geoid: str, zcta_counties: dict[str, list[str]]) -> dict[str, Any]:
+    """One exported coverage entry; tract and zip entries carry the counties they lie in."""
+    entry: dict[str, Any] = {"level": level, "geoid": geoid}
+    if level == "tract":
+        entry["counties"] = [geoid[:5]]
+    elif level == "zip":
+        counties = zcta_counties.get(geoid)
+        if not counties:
+            raise ValueError(f"ZCTA {geoid} is not in data/reference/zcta-county.json")
+        entry["counties"] = counties
+    return entry
+
+
+def _source_record(
+    conn: sqlite3.Connection, row: sqlite3.Row, zcta_counties: dict[str, list[str]]
+) -> dict[str, Any]:
     source_id = row["id"]
 
     filters = conn.execute(
@@ -69,7 +95,7 @@ def _source_record(conn: sqlite3.Connection, row: sqlite3.Row) -> dict[str, Any]
         analysis_tags.setdefault(r["tag_set"], {})[r["tag_name"]] = bool(r["value"])
 
     coverage = [
-        {"level": r["level"], "geoid": r["geoid"]}
+        coverage_entry(r["level"], r["geoid"], zcta_counties)
         for r in conn.execute(
             "SELECT level, geoid FROM source_coverage WHERE source_id = ? ORDER BY level, geoid",
             (source_id,),
@@ -121,12 +147,13 @@ def _source_record(conn: sqlite3.Connection, row: sqlite3.Row) -> dict[str, Any]
     return {k: v for k, v in record.items() if isinstance(v, bool) or v not in (None, "", [], {})}
 
 
-def build_export(db_path: Path) -> dict[str, Any]:
+def build_export(db_path: Path, zcta_path: Path = DEFAULT_ZCTA_PATH) -> dict[str, Any]:
+    zcta_counties = load_zcta_counties(zcta_path)
     conn = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
     conn.row_factory = sqlite3.Row
     try:
         rows = conn.execute("SELECT * FROM sources ORDER BY id").fetchall()
-        records = [_source_record(conn, row) for row in rows]
+        records = [_source_record(conn, row, zcta_counties) for row in rows]
     finally:
         conn.close()
 

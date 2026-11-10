@@ -110,6 +110,30 @@ class ExportCatalogTest(unittest.TestCase):
         with closing(sqlite3.connect(self.db)) as conn:
             self.assertEqual(conn.execute("SELECT id FROM sources WHERE id = 'us-totals'").fetchone(), ("us-totals",))
 
+    def test_tract_and_zip_coverage_lists_their_counties(self) -> None:
+        self.add_source(
+            "id: sub-county\ntitle: S\nfilters: {zipcode: true}\ngeographic_granularity: zip\n"
+            "coverage:\n  - {level: tract, fips: '47093004600'}\n  - {level: zip, zcta: '37801'}\n"
+        )
+        by_id = {s["id"]: s for s in export_catalog.build_export(self.db)["sources"]}
+        self.assertEqual(
+            by_id["sub-county"]["coverage"],
+            [
+                {"level": "tract", "geoid": "47093004600", "counties": ["47093"]},
+                # ZCTA 37801 (Maryville, TN) crosses from Blount County into Monroe County.
+                {"level": "zip", "geoid": "37801", "counties": ["47009", "47123"]},
+            ],
+        )
+
+    def test_county_coverage_has_no_county_list(self) -> None:
+        a = export_catalog.build_export(self.db)["sources"][0]
+        self.assertNotIn("counties", a["coverage"][0])
+
+    def test_unknown_zcta_stops_the_export(self) -> None:
+        self.add_source("id: z\ntitle: Z\nfilters: {zipcode: true}\ncoverage:\n  - {level: zip, zcta: '00000'}\n")
+        with self.assertRaisesRegex(ValueError, "ZCTA 00000"):
+            export_catalog.build_export(self.db)
+
     def test_a_source_without_filters_stops_the_export(self) -> None:
         self.add_source("id: no-filters\ntitle: N\n")
         with self.assertRaisesRegex(ValueError, "no-filters"):

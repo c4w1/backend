@@ -68,7 +68,11 @@ DOWNLOAD_FORMATS = (
     "csv", "tsv", "xlsx", "xls", "accdb",
     "zip/csv", "zip/tsv", "zip/xlsx", "zip/xls", "zip/accdb",
 )
-COVERAGE_FIPS_LENGTH = {"state": 2, "county": 5}
+# Coverage levels below nation: the YAML key that holds the code, and its length.
+# tract: 11-digit Census tract GEOID (its first 5 digits are the county).
+# zip: 5-digit ZIP Code Tabulation Area (ZCTA), matched to counties via data/reference/zcta-county.json.
+COVERAGE_CODES = {"state": ("fips", 2), "county": ("fips", 5), "tract": ("fips", 11), "zip": ("zcta", 5)}
+COVERAGE_LEVELS = ("nation", *COVERAGE_CODES)
 
 
 def apply_schema(conn: sqlite3.Connection, schema_path: Path) -> None:
@@ -78,6 +82,7 @@ def apply_schema(conn: sqlite3.Connection, schema_path: Path) -> None:
         if column not in existing:
             conn.execute(f"ALTER TABLE sources ADD COLUMN {column} {definition}")
     allow_tract_granularity(conn)
+    allow_sub_county_coverage(conn)
 
 
 def allow_tract_granularity(conn: sqlite3.Connection) -> None:
@@ -96,6 +101,30 @@ def allow_tract_granularity(conn: sqlite3.Connection) -> None:
         INSERT INTO sources_rebuilt SELECT * FROM sources;
         DROP TABLE sources;
         ALTER TABLE sources_rebuilt RENAME TO sources;
+        COMMIT;
+        """
+    )
+
+
+def allow_sub_county_coverage(conn: sqlite3.Connection) -> None:
+    """Rebuild an older `source_coverage` table so its level CHECK accepts 'tract' and 'zip'."""
+    sql = conn.execute(
+        "SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'source_coverage'"
+    ).fetchone()[0]
+    if "'zip'" in sql:
+        return
+    rebuilt = sql.replace("CREATE TABLE source_coverage", "CREATE TABLE source_coverage_rebuilt", 1).replace(
+        "'state', 'county')", "'state', 'county', 'tract', 'zip')"
+    )
+    conn.commit()
+    conn.executescript(
+        f"""
+        BEGIN;
+        {rebuilt};
+        INSERT INTO source_coverage_rebuilt SELECT * FROM source_coverage;
+        DROP TABLE source_coverage;
+        ALTER TABLE source_coverage_rebuilt RENAME TO source_coverage;
+        CREATE INDEX IF NOT EXISTS idx_source_coverage_source_id ON source_coverage(source_id);
         COMMIT;
         """
     )
@@ -218,7 +247,10 @@ def load_student_suitability(doc: dict[str, Any]) -> str:
 
 
 def load_coverage(doc: dict[str, Any]) -> list[tuple[str, str]]:
-    """Return (level, geoid) rows. YAML: coverage: [{level: nation} | {level: state|county, fips: ".."}]."""
+    """Return (level, geoid) rows.
+
+    YAML: coverage: [{level: nation} | {level: state|county|tract, fips: ".."} | {level: zip, zcta: ".."}].
+    """
     entries = doc.get("coverage")
     if entries is None:
         return []
@@ -232,13 +264,13 @@ def load_coverage(doc: dict[str, Any]) -> list[tuple[str, str]]:
         if level == "nation":
             rows.append(("nation", "US"))
             continue
-        if level not in COVERAGE_FIPS_LENGTH:
-            raise ValueError(f"coverage level must be nation, state, or county; got {level!r}")
-        fips = as_text(entry.get("fips"))
-        expected = COVERAGE_FIPS_LENGTH[level]
-        if not fips or not fips.isdigit() or len(fips) != expected:
-            raise ValueError(f"{level} coverage needs a {expected}-digit FIPS code; got {fips!r}")
-        rows.append((level, fips))
+        if level not in COVERAGE_CODES:
+            raise ValueError(f"coverage level must be one of {', '.join(COVERAGE_LEVELS)}; got {level!r}")
+        key, expected = COVERAGE_CODES[level]
+        code = as_text(entry.get(key))
+        if not code or not code.isdigit() or len(code) != expected:
+            raise ValueError(f"{level} coverage needs a {expected}-digit `{key}` code; got {code!r}")
+        rows.append((level, code))
     return rows
 
 

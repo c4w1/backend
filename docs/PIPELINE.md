@@ -35,19 +35,28 @@ Downstream stages add to this same file: `description_tags`, `variable_names`, `
 Every source also records **which places it covers** (`coverage`) and **what one row describes** (`geographic_granularity`). The website's coverage map and community catalogs use these:
 
 ```yaml
-coverage:                 # FIPS codes only; no geometry
+coverage:                 # codes only; no geometry
 - level: nation           # every county
 # - level: state
 #   fips: '47'            # every county in Tennessee
 # - level: county
 #   fips: '47093'         # Knox County, TN
+# - level: tract
+#   fips: '47093004600'   # one census tract (first 5 digits: its county)
+# - level: zip
+#   zcta: '37919'         # one ZIP Code Tabulation Area, not a USPS ZIP code
 geographic_granularity: county   # nation | state | county | tract | zip | point
 ```
+
+- **Tract and zip coverage** are for data about only some tracts or ZCTAs. Data for every tract in the U.S. is still `coverage: nation` with `geographic_granularity: tract`.
+- **`zip` means ZCTA.** USPS ZIP codes are mail routes with no boundary; convert one to its ZCTA before adding it.
+- **Matching to counties:** `export_catalog.py` adds `counties` to each tract and zip entry in `catalog.json`. A tract's county is its first 5 digits. A ZCTA's counties come from `data/reference/zcta-county.json`, every county that holds at least 1% of the ZCTA's land, largest first. The website matches libraries on those counties.
+- **`zcta-county.json`** is built by `python pythonscripts/build_zcta_county.py` from the Census 2020 ZCTA-to-county relationship file. Connecticut is matched to its 2022 planning regions using the Census 2022 town-to-ZCTA file. Don't edit it by hand; the script's docstring lists the source URLs.
 
 - **Local data only:** CDL is a library of local data (web#42). A source is national-level when its `filters` show no state, county or ZIP breakdown. National-level sources stay in the YAML and SQLite, so changing a filter value reverses the decision, but `export_catalog.py` and `lib/sourceStore.mjs` leave them out. `catalog.json` lists them under `excludedNationalLevel`. `pythonscripts/catalog_scope.py` holds the rule, and `lib/catalogScope.mjs` is the same rule in JavaScript.
 - **`filters` is required:** a source with no `filters` makes the import exit 1 and stops the export. Base the values on the actual file. `pythonscripts/tests/test_catalog_scope.py` also fails if `geographic_granularity: nation` and the filters disagree, or if the list of national-level sources changes. National *coverage* is fine: a county file for every U.S. county has `coverage: nation`, `geographic_granularity: county` and county filters.
 
-- **Valid codes:** state and county codes must be in `data/reference/geo-vocabulary.json`, the Census 2025 county list the website draws. `pythonscripts/tests/test_coverage_vocabulary.py` checks every YAML. The file is written by the web repo's `npm run geo:boundaries -- --backend ../backend`; don't edit it by hand.
+- **Valid codes:** state and county codes, and the county part of tract codes, must be in `data/reference/geo-vocabulary.json`, the Census 2025 county list the website draws (so Connecticut tracts use 2022 or later codes). ZCTAs must be in `data/reference/zcta-county.json`. `pythonscripts/tests/test_coverage_vocabulary.py` checks every YAML. The file is written by the web repo's `npm run geo:boundaries -- --backend ../backend`; don't edit it by hand.
 - **Not used for coverage:** `geographic_coverage.available_levels` (from `geographic_coverage.py`) is a heuristic and is not used for coverage.
 - **`where`** is free text; keep it consistent with `coverage`.
 - **Curated tags:** `pedagogical_tags` are teaching tags written by people. The website shows them first, and they are not checked against the statistical tag vocabulary.

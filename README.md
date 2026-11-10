@@ -45,7 +45,7 @@ Then write the static preview files the website's Data Preview page reads, and c
 python pythonscripts/export_previews.py         # data/exports/previews/ (standard library only)
 ```
 
-Coverage FIPS codes are checked against `data/reference/geo-vocabulary.json` (Census 2025), which the web repo's `npm run geo:boundaries -- --backend ../backend` writes.
+Coverage FIPS codes are checked against `data/reference/geo-vocabulary.json` (Census 2025), which the web repo's `npm run geo:boundaries -- --backend ../backend` writes. ZIP coverage uses ZCTAs, checked against `data/reference/zcta-county.json`, which `python pythonscripts/build_zcta_county.py` writes.
 
 Tests: `python -m pytest pythonscripts -q`
 

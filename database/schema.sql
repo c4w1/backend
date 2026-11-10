@@ -83,11 +83,12 @@ CREATE TABLE IF NOT EXISTS analysis_tags (
     UNIQUE (source_id, tag_set, tag_name)
 );
 
--- Places a dataset describes. geoid: 'US' (nation), 2-digit state FIPS, 5-digit county FIPS.
+-- Places a dataset describes. geoid: 'US' (nation), 2-digit state FIPS, 5-digit county FIPS,
+-- 11-digit census tract GEOID, or 5-digit ZCTA (level 'zip').
 CREATE TABLE IF NOT EXISTS source_coverage (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     source_id TEXT NOT NULL REFERENCES sources(id) ON DELETE CASCADE,
-    level TEXT NOT NULL CHECK (level IN ('nation', 'state', 'county')),
+    level TEXT NOT NULL CHECK (level IN ('nation', 'state', 'county', 'tract', 'zip')),
     geoid TEXT NOT NULL,
     UNIQUE (source_id, level, geoid)
 );
